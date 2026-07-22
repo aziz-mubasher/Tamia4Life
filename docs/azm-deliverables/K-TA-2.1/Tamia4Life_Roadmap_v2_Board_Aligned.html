@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tamia4Life — Venture Roadmap v2 (Board-Aligned)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1f2e2c; --ink-soft:#4a5b58; --ink-faint:#7d8c88;
+    --paper:#f3f0ea; --card:#fff; --line:#e2ddd3; --line-soft:#ece8df;
+    --teal:#0f6d68; --teal-deep:#0a4f4b; --teal-bright:#0d9488; --teal-wash:#e7f0ee;
+    --amber:#e7a13a; --amber-deep:#cf871e; --amber-wash:#f9edd8; --clay:#c56a52;
+    --danger:#b4442f;
+    /* six-stage growth ramp: seed → grove */
+    --p1:#0a4f4b; --p2:#0f6d68; --p3:#2f8a6e; --p4:#5e9b48; --p5:#9aa832; --p6:#cf871e;
+    --font-d:"Fraunces",Georgia,serif;
+    --font-ui:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{background:var(--paper);color:var(--ink);font-family:var(--font-ui);line-height:1.5;
+    -webkit-font-smoothing:antialiased;padding:44px 24px 60px;}
+  .sheet{max-width:1080px;margin:0 auto;background:var(--card);border:1px solid var(--line);
+    border-radius:22px;box-shadow:0 18px 54px rgba(31,46,44,.10);overflow:hidden;}
+
+  .head{padding:38px 46px 30px;border-bottom:1px solid var(--line-soft);
+    background:radial-gradient(120% 140% at 100% 0%, rgba(231,161,58,.10), transparent 55%),linear-gradient(180deg,#fbfaf7,#fff);
+    display:flex;justify-content:space-between;align-items:flex-start;gap:26px;flex-wrap:wrap;}
+  .brand{display:flex;align-items:center;gap:15px;}
+  .mark{width:52px;height:52px;flex:none;}
+  .kicker{font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--teal);font-weight:700;margin:0 0 3px;}
+  .brand-txt h1{font-family:var(--font-d);font-size:29px;font-weight:600;margin:0;letter-spacing:-.01em;}
+  .head-right{text-align:right;max-width:400px;}
+  .head-right .lead{font-family:var(--font-d);font-size:16px;font-style:italic;color:var(--teal-deep);margin:0 0 6px;line-height:1.4;}
+  .head-right p{font-size:12.5px;color:var(--ink-soft);margin:0;line-height:1.5;}
+  .head-right b{color:var(--clay);font-weight:600;}
+
+  /* correction banner */
+  .corr{display:flex;gap:13px;align-items:flex-start;padding:15px 46px;background:var(--amber-wash);border-bottom:1px solid var(--line-soft);}
+  .corr svg{flex:none;margin-top:2px;}
+  .corr p{margin:0;font-size:12.5px;color:var(--ink);line-height:1.5;}
+  .corr b{color:var(--amber-deep);font-weight:700;}
+
+  .arcband{display:flex;align-items:center;gap:12px;padding:15px 46px;background:var(--teal-wash);border-bottom:1px solid var(--line-soft);flex-wrap:wrap;}
+  .arcband .dot{width:9px;height:9px;border-radius:50%;flex:none;}
+  .arcband .txt{font-size:12px;color:var(--teal-deep);font-weight:500;}
+  .arcband .txt b{font-weight:700;}
+
+  .body{padding:14px 46px 8px;}
+  .phase{position:relative;display:grid;grid-template-columns:148px 1fr;gap:26px;padding:26px 0;border-bottom:1px dashed var(--line);}
+  .phase:last-of-type{border-bottom:none;}
+  .rail{position:relative;}
+  .stage{display:flex;flex-direction:column;align-items:center;text-align:center;}
+  .glyph{width:74px;height:74px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    background:var(--card);border:2px solid var(--pc);box-shadow:0 6px 18px rgba(31,46,44,.08);margin-bottom:11px;}
+  .pnum{font-family:var(--font-d);font-size:11.5px;font-weight:700;letter-spacing:.13em;color:var(--pc);text-transform:uppercase;}
+  .dur{margin-top:6px;font-size:10.5px;color:var(--ink-faint);background:var(--line-soft);padding:3px 10px;border-radius:20px;font-weight:500;}
+  .rail::before{content:"";position:absolute;left:50%;top:84px;bottom:-26px;width:2px;transform:translateX(-50%);
+    background:linear-gradient(180deg,var(--pc),var(--pc-next));opacity:.4;}
+  .phase:last-of-type .rail::before{display:none;}
+
+  .pc-head{display:flex;align-items:baseline;gap:11px;margin:2px 0 4px;flex-wrap:wrap;}
+  .pc-head h2{font-family:var(--font-d);font-size:20px;font-weight:600;margin:0;letter-spacing:-.01em;}
+  .stagetag{font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--pc);}
+  .goal{font-size:13px;color:var(--ink-soft);margin:0 0 12px;}
+  .goal b{color:var(--ink);font-weight:600;}
+
+  .moves{list-style:none;padding:0;margin:0 0 12px;display:grid;gap:6px;}
+  .moves li{position:relative;padding-left:19px;font-size:12.5px;color:var(--ink);line-height:1.45;}
+  .moves li::before{content:"";position:absolute;left:0;top:7px;width:8px;height:8px;border-radius:2px;background:var(--pc);transform:rotate(45deg);}
+  .moves li b{font-weight:600;color:var(--teal-deep);}
+
+  .langtag{display:inline-flex;align-items:center;gap:6px;background:var(--teal-wash);border-radius:999px;padding:4px 12px;font-size:11.5px;color:var(--teal-deep);font-weight:600;margin-bottom:11px;}
+
+  .gate{display:flex;gap:10px;align-items:flex-start;background:var(--amber-wash);border-left:3px solid var(--amber-deep);padding:10px 14px;border-radius:0 10px 10px 0;}
+  .gate .lbl{font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;font-weight:700;color:var(--amber-deep);white-space:nowrap;padding-top:1px;}
+  .gate .val{font-size:12.3px;color:var(--ink);line-height:1.45;}
+  .gate .val b{color:var(--teal-deep);}
+
+  /* mapping table */
+  .sec{padding:30px 46px;border-top:1px solid var(--line-soft);}
+  .eyebrow{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--amber-deep);font-weight:700;margin:0 0 6px;}
+  .sec h2{font-family:var(--font-d);font-size:21px;font-weight:600;margin:0 0 4px;letter-spacing:-.01em;}
+  .sec .sub{font-size:12.8px;color:var(--ink-soft);margin:0 0 18px;max-width:760px;}
+  table.map{width:100%;border-collapse:collapse;font-size:12.3px;}
+  table.map thead th{text-align:left;font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-faint);font-weight:700;padding:0 12px 9px;border-bottom:1.5px solid var(--line);}
+  table.map tbody td{padding:10px 12px;border-bottom:1px solid var(--line-soft);vertical-align:top;line-height:1.4;}
+  table.map tbody tr:last-child td{border-bottom:none;}
+  .old{color:var(--danger);font-weight:600;white-space:nowrap;}
+  .new{color:var(--teal-deep);font-weight:600;white-space:nowrap;}
+  .arrow{color:var(--ink-faint);text-align:center;width:1%;}
+
+  .guard{padding:24px 46px 32px;background:#fbfaf7;border-top:1px solid var(--line-soft);}
+  .guard h3{font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--teal);font-weight:700;margin:0 0 14px;}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;}
+  .grail{background:var(--card);border:1px solid var(--line-soft);border-radius:12px;padding:13px 15px;}
+  .grail .gt{font-family:var(--font-d);font-size:13.5px;font-weight:600;color:var(--teal-deep);margin:0 0 4px;}
+  .grail .gd{font-size:11.3px;color:var(--ink-soft);margin:0;line-height:1.45;}
+  .foot{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:20px;padding-top:16px;border-top:1px solid var(--line-soft);flex-wrap:wrap;}
+  .foot .note{font-size:11px;color:var(--ink-faint);font-style:italic;max-width:640px;line-height:1.5;}
+  .foot .tag{font-size:11px;color:var(--ink-faint);font-weight:500;}
+
+  @media (max-width:760px){
+    body{padding:20px 12px 40px;}
+    .head,.corr,.arcband,.body,.sec,.guard{padding-left:22px;padding-right:22px;}
+    .phase{grid-template-columns:1fr;gap:15px;}
+    .rail::before{display:none;}
+    .stage{flex-direction:row;justify-content:flex-start;gap:14px;}
+    .glyph{margin-bottom:0;}
+    .grid{grid-template-columns:1fr 1fr;}
+    .head-right{text-align:left;}
+  }
+  @media print{
+    body{background:#fff;padding:0;}
+    .sheet{box-shadow:none;border:none;border-radius:0;max-width:none;}
+    .phase,.grail{break-inside:avoid;}
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <!-- HEADER -->
+  <div class="head">
+    <div class="brand">
+      <svg class="mark" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-label="Tamia4Life mark">
+        <circle cx="32" cy="47" r="4.2" fill="#e7a13a"/>
+        <path d="M32 47 C 31.2 42 32.8 40 32 36" stroke="#0f6d68" stroke-width="3" stroke-linecap="round" fill="none"/>
+        <path d="M32 43 C 30.5 33 25 26 15.5 21.5 C 17.5 31 22.5 38.5 32 43 Z" fill="#0d9488"/>
+        <path d="M32 43 C 33.5 29 41 20 51.5 15 C 49 27 43 37.5 32 43 Z" fill="#0f6d68"/>
+        <path d="M32 43 C 35 34 41 25 48 18.5" stroke="#ccfbf1" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+        <path d="M32 43 C 29.5 35 25 29 19 24" stroke="#ccfbf1" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+      </svg>
+      <div class="brand-txt">
+        <p class="kicker">Venture Roadmap · v2 · Board-aligned</p>
+        <h1>Tamia4Life</h1>
+      </div>
+    </div>
+    <div class="head-right">
+      <p class="lead">From surviving to growing — one phase at a time.</p>
+      <p>Preventive, non-clinical emotional wellness for immigrants and international professionals in Italy, delivered in their <b>mother tongue</b>, scaling across the EU.</p>
+    </div>
+  </div>
+
+  <!-- CORRECTION BANNER -->
+  <div class="corr">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#cf871e" stroke-width="1.7"/><path d="M12 8v5M12 16h.01" stroke="#cf871e" stroke-width="1.9" stroke-linecap="round"/></svg>
+    <p><b>Supersedes Roadmap v1.</b> v1 used a self-invented Phase 0–4 scheme that did not exist on the AZM Startup board. This version conforms to the canonical <b>Phase 1–6</b>. Content and sequencing are unchanged in substance — only the phase structure and labels are corrected. See the mapping table below to translate any v1 reference.</p>
+  </div>
+
+  <!-- ARC -->
+  <div class="arcband">
+    <span class="dot" style="background:var(--p1)"></span>
+    <span class="dot" style="background:var(--p2)"></span>
+    <span class="dot" style="background:var(--p3)"></span>
+    <span class="dot" style="background:var(--p4)"></span>
+    <span class="dot" style="background:var(--p5)"></span>
+    <span class="dot" style="background:var(--p6)"></span>
+    <span class="txt">The roadmap climbs the arc the product promises its members — <b>seed → sprout → sapling → young tree → flowering → grove</b>. Language waves are marked per phase.</span>
+  </div>
+
+  <!-- PHASES -->
+  <div class="body">
+
+    <!-- PHASE 1 -->
+    <div class="phase" style="--pc:var(--p1);--pc-next:var(--p2)">
+      <div class="rail"><div class="stage">
+        <div class="glyph"><svg width="32" height="32" viewBox="0 0 40 40" fill="none"><ellipse cx="20" cy="22" rx="7" ry="9" fill="#0a4f4b"/><path d="M20 22 C 20 16 20 13 20 10" stroke="#0a4f4b" stroke-width="2" stroke-linecap="round"/><path d="M14 30 h12" stroke="#cf871e" stroke-width="2" stroke-linecap="round" opacity=".7"/></svg></div>
+        <div class="pnum">Phase 1</div><div class="dur">1–2 months</div>
+      </div></div>
+      <div>
+        <div class="pc-head"><h2>Discovery &amp; Problem Validation</h2><span class="stagetag">Seed</span></div>
+        <p class="goal"><b>Goal:</b> prove the problem is real, costly and unserved — before designing anything.</p>
+        <ul class="moves">
+          <li><b>Customer discovery interviews</b> across three tracks: end users, employer buyers, facilitators <em>(S TA 1.1)</em>.</li>
+          <li>Test the load-bearing assumptions — recurring strain, language as the barrier, a named and costed employer pain with a budget owner.</li>
+          <li><b>Facilitator sourcing pilot</b> in the Wave 1 language communities — prove they can be recruited and vetted.</li>
+          <li>Confirm the space between “I'm fine” and “I need a psychiatrist” is real to members.</li>
+        </ul>
+        <div class="gate"><span class="lbl">Exit Gate</span><span class="val">Demand validated · at least a few employers with a costed pain and a <b>letter of intent</b> · a plausible facilitator supply signal.</span></div>
+      </div>
+    </div>
+
+    <!-- PHASE 2 -->
+    <div class="phase" style="--pc:var(--p2);--pc-next:var(--p3)">
+      <div class="rail"><div class="stage">
+        <div class="glyph"><svg width="32" height="32" viewBox="0 0 40 40" fill="none"><path d="M20 32 L20 18" stroke="#0f6d68" stroke-width="2.4" stroke-linecap="round"/><path d="M20 22 C 16 20 12 16 10 12 C 15 13 19 16 20 22 Z" fill="#0d9488"/><path d="M20 20 C 24 18 28 15 30 11 C 25 12 21 14 20 20 Z" fill="#0f6d68"/><circle cx="20" cy="33" r="2.4" fill="#e7a13a"/></svg></div>
+        <div class="pnum">Phase 2</div><div class="dur">1–2 months</div>
+      </div></div>
+      <div>
+        <div class="pc-head"><h2>MVP Definition &amp; Design</h2><span class="stagetag">Sprout</span></div>
+        <p class="goal"><b>Goal:</b> decide exactly what to build, and prove the design works before code.</p>
+        <span class="langtag">Wave 1 · Arabic + Romanian</span>
+        <ul class="moves">
+          <li><b>Community &amp; Language Strategy</b> — ten target communities, language/script mapping, EU scope <em>(S TA 2.B)</em>.</li>
+          <li><b>Build-vs-configure</b> decisions and the tech stack; GDPR groundwork and EU-hosted infrastructure.</li>
+          <li><b>Design system</b> with multilingual script coverage from day one, never retrofitted.</li>
+          <li><b>Clickable prototype</b> of the three priority screens, usability-tested <b>in members' own languages</b>.</li>
+          <li><b>Matching engine v1 spec</b> and the MVP build backlog.</li>
+        </ul>
+        <div class="gate"><span class="lbl">Exit Gate</span><span class="val">Validated screens, a locked stack, and a <b>sized backlog</b> the team can build from.</span></div>
+      </div>
+    </div>
+
+    <!-- PHASE 3 -->
+    <div class="phase" style="--pc:var(--p3);--pc-next:var(--p4)">
+      <div class="rail"><div class="stage">
+        <div class="glyph"><svg width="32" height="32" viewBox="0 0 40 40" fill="none"><path d="M20 34 L20 14" stroke="#2f8a6e" stroke-width="2.6" stroke-linecap="round"/><path d="M20 22 C 14 20 9 16 6 11 C 13 12 18 15 20 22 Z" fill="#2f8a6e"/><path d="M20 18 C 26 16 31 12 34 7 C 27 8 22 11 20 18 Z" fill="#0f6d68"/><path d="M20 28 C 15 27 11 24 9 21 C 14 21 18 23 20 28 Z" fill="#0d9488"/><circle cx="20" cy="35" r="2.2" fill="#e7a13a"/></svg></div>
+        <div class="pnum">Phase 3</div><div class="dur">3–4 months</div>
+      </div></div>
+      <div>
+        <div class="pc-head"><h2>MVP Build</h2><span class="stagetag">Sapling</span></div>
+        <p class="goal"><b>Goal:</b> a working product that delivers real sessions.</p>
+        <span class="langtag">Wave 1 live</span>
+        <ul class="moves">
+          <li>The three priority screens: <b>language/culture onboarding</b>, <b>“My Journey”</b>, <b>facilitator match &amp; booking</b>.</li>
+          <li><b>Session space</b> — rented video SDK inside a branded, warm, private room.</li>
+          <li><b>Facilitator Portal v1</b> — profile, availability, session access, private notes.</li>
+          <li>Starter content library, resilience &amp; productivity check-in, Stripe freemium + paid.</li>
+          <li>Configure the commodity, <b>build the moat</b>: matching, the check-in index, the in-language journey.</li>
+        </ul>
+        <div class="gate"><span class="lbl">Exit Gate</span><span class="val">A member can onboard in their mother tongue, get matched with a reason, <b>pay for and complete a real session</b>, and check in.</span></div>
+      </div>
+    </div>
+
+    <!-- PHASE 4 -->
+    <div class="phase" style="--pc:var(--p4);--pc-next:var(--p5)">
+      <div class="rail"><div class="stage">
+        <div class="glyph"><svg width="32" height="32" viewBox="0 0 40 40" fill="none"><path d="M20 35 L20 18" stroke="#5e9b48" stroke-width="2.8" stroke-linecap="round"/><ellipse cx="20" cy="13" rx="11" ry="9" fill="#5e9b48"/><ellipse cx="12" cy="18" rx="6.5" ry="5.5" fill="#2f8a6e"/><ellipse cx="28" cy="18" rx="6.5" ry="5.5" fill="#0f6d68"/><circle cx="20" cy="36" r="2" fill="#e7a13a"/></svg></div>
+        <div class="pnum">Phase 4</div><div class="dur">2–3 months</div>
+      </div></div>
+      <div>
+        <div class="pc-head"><h2>Private Beta &amp; Validation</h2><span class="stagetag">Young tree</span></div>
+        <p class="goal"><b>Goal:</b> run it for real, with real members, before opening the doors.</p>
+        <ul class="moves">
+          <li>Launch with the <b>pilot employer</b> or a single language community — chosen for workforce overlap with Wave 1.</li>
+          <li>First paying members; measure completion, repeat bookings and early <b>retention</b>.</li>
+          <li>Tune the <b>matching weights</b> against real usage — the config-not-code decision pays off here.</li>
+          <li>Harden privacy, accessibility and RTL parity; prove the <b>clinical referral path</b> works.</li>
+        </ul>
+        <div class="gate"><span class="lbl">Exit Gate</span><span class="val">A working service with <b>real retention data</b> and a repeatable facilitator supply.</span></div>
+      </div>
+    </div>
+
+    <!-- PHASE 5 -->
+    <div class="phase" style="--pc:var(--p5);--pc-next:var(--p6)">
+      <div class="rail"><div class="stage">
+        <div class="glyph"><svg width="32" height="32" viewBox="0 0 40 40" fill="none"><path d="M20 35 L20 19" stroke="#7a8a2e" stroke-width="2.8" stroke-linecap="round"/><ellipse cx="20" cy="14" rx="12" ry="10" fill="#9aa832"/><ellipse cx="11" cy="18" rx="6.5" ry="6" fill="#5e9b48"/><ellipse cx="29" cy="18" rx="6.5" ry="6" fill="#2f8a6e"/><circle cx="15" cy="11" r="2.4" fill="#e7a13a"/><circle cx="25" cy="12" r="2" fill="#cf871e"/></svg></div>
+        <div class="pnum">Phase 5</div><div class="dur">3–4 months</div>
+      </div></div>
+      <div>
+        <div class="pc-head"><h2>Public Launch</h2><span class="stagetag">Flowering</span></div>
+        <p class="goal"><b>Goal:</b> switch on the revenue engine — the employer layer — and open generally.</p>
+        <span class="langtag">Wave 2 · Bengali + Urdu + Punjabi</span>
+        <ul class="moves">
+          <li><b>Employer / HR portal</b> with anonymised, aggregate wellbeing insights — never individual data.</li>
+          <li>Per-seat billing, employer onboarding and activation, <b>SSO</b>.</li>
+          <li>Wave 2 languages live — the South Asian bloc, three new scripts including <b>Nastaliq</b>.</li>
+          <li>Group programs and masterclasses; public go-to-market.</li>
+        </ul>
+        <div class="gate"><span class="lbl">Exit Gate</span><span class="val">Two to three paying <b>employer contracts</b> and a repeatable B2B onboarding motion.</span></div>
+      </div>
+    </div>
+
+    <!-- PHASE 6 -->
+    <div class="phase" style="--pc:var(--p6);--pc-next:var(--p6)">
+      <div class="rail"><div class="stage">
+        <div class="glyph"><svg width="32" height="32" viewBox="0 0 40 40" fill="none"><path d="M13 36 L13 24 M27 36 L27 22" stroke="#7a5a1e" stroke-width="2.4" stroke-linecap="round"/><ellipse cx="13" cy="19" rx="9" ry="8" fill="#9aa832"/><ellipse cx="27" cy="17" rx="10" ry="8.5" fill="#5e9b48"/><ellipse cx="20" cy="11" rx="8" ry="7" fill="#cf871e" opacity=".85"/><circle cx="10" cy="17" r="2" fill="#e7a13a"/><circle cx="31" cy="16" r="1.8" fill="#e7a13a"/></svg></div>
+        <div class="pnum">Phase 6</div><div class="dur">Ongoing</div>
+      </div></div>
+      <div>
+        <div class="pc-head"><h2>Growth &amp; Iterate</h2><span class="stagetag">Grove</span></div>
+        <p class="goal"><b>Goal:</b> scale reach, prove impact, and become durable infrastructure.</p>
+        <span class="langtag">Wave 3 · Ukrainian, Albanian, Tagalog, Hindi</span>
+        <ul class="moves">
+          <li>Native <b>mobile apps</b>; broader language and facilitator coverage.</li>
+          <li>Formal <b>outcome measurement</b> — wellbeing plus productivity and retention — to prove employer ROI.</li>
+          <li><b>EU expansion</b>: Spain, Germany, Poland/Czechia, France/Benelux. Language assets travel; nothing hard-codes Italy.</li>
+          <li>Public, municipal and <b>EU-funded</b> integration partnerships — revenue and validation.</li>
+          <li>Continuous iteration on the moat: matching quality, facilitator supply, measured impact.</li>
+        </ul>
+        <div class="gate"><span class="lbl">Horizon</span><span class="val">A durable, credible institution — <b>not a product that plateaus</b>.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAPPING -->
+  <div class="sec">
+    <p class="eyebrow">Translating v1 references</p>
+    <h2>Legacy phase mapping</h2>
+    <p class="sub">Roadmap v1 and every artifact produced under it used a Phase 0–4 scheme. Use this table to translate. Note the mapping is <b>not one-to-one</b> — two v1 phases each split across two board phases, which is precisely why the correction matters.</p>
+    <table class="map">
+      <thead><tr><th>Roadmap v1 (retired)</th><th></th><th>Canonical board phase</th><th>What moved</th></tr></thead>
+      <tbody>
+        <tr><td class="old">Phase 0 · Foundation &amp; Validation</td><td class="arrow">→</td><td class="new">Phase 1 + Phase 2</td><td>Split: discovery and interviews to Phase 1; design system, prototype and build-vs-configure to Phase 2.</td></tr>
+        <tr><td class="old">Phase 1 · MVP</td><td class="arrow">→</td><td class="new">Phase 3 + Phase 4</td><td>Split: the build itself to Phase 3; pilot launch, first paying members and retention to Phase 4.</td></tr>
+        <tr><td class="old">Phase 2 · Employer (B2B) Layer</td><td class="arrow">→</td><td class="new">Phase 5</td><td>Employer portal and general availability now sit with Public Launch.</td></tr>
+        <tr><td class="old">Phase 3 · Scale &amp; Prove Impact</td><td class="arrow">→</td><td class="new">Phase 6</td><td>Merged into Growth &amp; Iterate.</td></tr>
+        <tr><td class="old">Phase 4 · Institutional &amp; Expansion</td><td class="arrow">→</td><td class="new">Phase 6</td><td>Merged into Growth &amp; Iterate.</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:12px;color:var(--ink-soft);margin:15px 0 0;line-height:1.55;"><b>Artifacts still carrying v1 labels</b> and needing re-labelling: the Portals &amp; Digital Assets Build Plan, the MVP Build Backlog (“Phase 1”), the Design System (“Phase 0”), both prototypes, and the Matching Engine v1 spec. The <em>content</em> of each remains valid — only the phase label is wrong.</p>
+  </div>
+
+  <!-- GUARDRAILS -->
+  <div class="guard">
+    <h3>Guardrails — true in every phase</h3>
+    <div class="grid">
+      <div class="grail"><p class="gt">Mother tongue first</p><p class="gd">The signature moment. Never let it slip into a settings menu.</p></div>
+      <div class="grail"><p class="gt">Preventive, not clinical</p><p class="gd">Growth and resilience language, with clean referral paths when clinical care is needed.</p></div>
+      <div class="grail"><p class="gt">Productivity as the throughline</p><p class="gd">Every feature ties back to focus, energy, balance and performance.</p></div>
+      <div class="grail"><p class="gt">Privacy as trust</p><p class="gd">Visible confidentiality is a feature, not fine print. Employers see aggregates only.</p></div>
+    </div>
+    <div class="foot">
+      <span class="note">Durations are illustrative and overlap is expected. Language waves are set by the Community &amp; Language Strategy (S TA 2.B): Wave 1 Arabic + Romanian, Wave 2 Bengali + Urdu + Punjabi, Wave 3 Ukrainian, Albanian, Tagalog, Hindi.</span>
+      <span class="tag">Tamia4Life · AZM Venture Portfolio</span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
