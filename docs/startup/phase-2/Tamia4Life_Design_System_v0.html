@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tamia4Life — Design System v0 (Phase 0)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Noto+Sans:wght@400;500;600;700&family=Noto+Kufi+Arabic:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  /* =========================================================
+     TAMIA4LIFE — DESIGN TOKENS  (canonical source of truth)
+     Phase 0 · Foundation & Validation
+     ========================================================= */
+  :root{
+    /* — brand color: primary (pine/teal) — */
+    --t4l-teal:#0f6d68;          /* primary */
+    --t4l-teal-deep:#0a4f4b;     /* primary pressed / deep */
+    --t4l-teal-bright:#0d9488;   /* leaf highlight */
+    --t4l-teal-wash:#e7f0ee;     /* tint surface */
+
+    /* — brand color: accent (amber, the seed) — */
+    --t4l-amber:#e7a13a;         /* accent */
+    --t4l-amber-deep:#cf871e;    /* accent pressed */
+    --t4l-amber-wash:#f9edd8;    /* tint surface */
+
+    /* — brand color: clay (human warmth, sparing) — */
+    --t4l-clay:#c56a52;
+
+    /* — growth ramp: seed → canopy (phases, progress, data) — */
+    --t4l-grow-0:#0a4f4b;
+    --t4l-grow-1:#0f6d68;
+    --t4l-grow-2:#2f8a6e;
+    --t4l-grow-3:#7ba33f;
+    --t4l-grow-4:#cf871e;
+
+    /* — neutrals — */
+    --t4l-ink:#1f2e2c;           /* primary text */
+    --t4l-ink-soft:#4a5b58;      /* secondary text */
+    --t4l-ink-faint:#7d8c88;     /* tertiary / captions */
+    --t4l-paper:#f3f0ea;         /* app background (warm) */
+    --t4l-card:#ffffff;          /* surface */
+    --t4l-line:#e2ddd3;          /* border */
+    --t4l-line-soft:#ece8df;     /* hairline */
+
+    /* — semantic — */
+    --t4l-success:#2f8a6e;
+    --t4l-warning:#cf871e;
+    --t4l-danger:#b4442f;
+    --t4l-info:#0f6d68;
+
+    /* — type: display (Latin headings, used with restraint) — */
+    --t4l-font-display:"Fraunces",Georgia,"Times New Roman",serif;
+    /* — type: UI/body — Noto-first for full script coverage (Arabic, CJK, Cyrillic) — */
+    --t4l-font-ui:"Inter","Noto Sans","Noto Kufi Arabic","Noto Sans SC",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+
+    /* — type scale (1.25 major-third-ish, tuned) — */
+    --t4l-size-display:34px;
+    --t4l-size-h1:26px;
+    --t4l-size-h2:20px;
+    --t4l-size-h3:16px;
+    --t4l-size-body:14px;
+    --t4l-size-small:12.5px;
+    --t4l-size-caption:11px;
+
+    /* — spacing scale (4px base) — */
+    --t4l-space-1:4px;  --t4l-space-2:8px;  --t4l-space-3:12px;
+    --t4l-space-4:16px; --t4l-space-5:24px; --t4l-space-6:32px;
+    --t4l-space-7:48px; --t4l-space-8:64px;
+
+    /* — radius — */
+    --t4l-radius-sm:8px; --t4l-radius-md:12px; --t4l-radius-lg:16px;
+    --t4l-radius-xl:22px; --t4l-radius-pill:999px;
+
+    /* — elevation — */
+    --t4l-elev-1:0 2px 8px rgba(31,46,44,.06);
+    --t4l-elev-2:0 8px 24px rgba(31,46,44,.10);
+    --t4l-elev-3:0 18px 54px rgba(31,46,44,.12);
+  }
+
+  /* =========================================================
+     PAGE CHROME (this reference doc only)
+     ========================================================= */
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--t4l-paper);color:var(--t4l-ink);
+    font-family:var(--t4l-font-ui);line-height:1.5;padding:44px 24px 70px;
+    -webkit-font-smoothing:antialiased;
+  }
+  .sheet{max-width:1060px;margin:0 auto;background:var(--t4l-card);
+    border:1px solid var(--t4l-line);border-radius:var(--t4l-radius-xl);
+    box-shadow:var(--t4l-elev-3);overflow:hidden;}
+
+  .head{padding:38px 46px 30px;border-bottom:1px solid var(--t4l-line-soft);
+    background:radial-gradient(120% 140% at 100% 0%, rgba(231,161,58,.10), transparent 55%),linear-gradient(180deg,#fbfaf7,#fff);
+    display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap;}
+  .brand{display:flex;align-items:center;gap:15px;}
+  .mark{width:52px;height:52px;flex:none;}
+  .kicker{font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--t4l-teal);font-weight:700;margin:0 0 3px;}
+  .brand-txt h1{font-family:var(--t4l-font-display);font-size:27px;font-weight:600;margin:0;letter-spacing:-.01em;}
+  .head-right{text-align:right;max-width:360px;}
+  .head-right .lead{font-family:var(--t4l-font-display);font-size:15px;font-style:italic;color:var(--t4l-teal-deep);margin:0 0 6px;}
+  .head-right p{font-size:12.5px;color:var(--t4l-ink-soft);margin:0;}
+
+  .sec{padding:34px 46px;border-bottom:1px solid var(--t4l-line-soft);}
+  .sec:last-child{border-bottom:none;}
+  .eyebrow{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--t4l-amber-deep);font-weight:700;margin:0 0 6px;}
+  .sec h2{font-family:var(--t4l-font-display);font-size:22px;font-weight:600;margin:0 0 4px;letter-spacing:-.01em;}
+  .sec .sub{font-size:13px;color:var(--t4l-ink-soft);margin:0 0 22px;max-width:720px;}
+
+  /* color swatches */
+  .swatches{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+  .sw{border:1px solid var(--t4l-line-soft);border-radius:var(--t4l-radius-md);overflow:hidden;background:#fff;}
+  .sw .chip{height:64px;}
+  .sw .meta{padding:9px 11px;}
+  .sw .nm{font-size:12px;font-weight:600;margin:0;}
+  .sw .hx{font-size:11px;color:var(--t4l-ink-faint);margin:2px 0 0;font-family:ui-monospace,"SF Mono",Menlo,monospace;}
+  .sw .tk{font-size:10px;color:var(--t4l-ink-faint);margin:1px 0 0;font-family:ui-monospace,"SF Mono",Menlo,monospace;}
+  .ramp{display:flex;border-radius:var(--t4l-radius-md);overflow:hidden;border:1px solid var(--t4l-line-soft);margin-top:6px;}
+  .ramp .step{flex:1;height:44px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:5px;font-size:9.5px;color:#fff;font-weight:600;font-family:ui-monospace,monospace;}
+
+  /* type specimen */
+  .specimen>div{padding:10px 0;border-bottom:1px solid var(--t4l-line-soft);}
+  .specimen>div:last-child{border-bottom:none;}
+  .specimen .lab{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--t4l-ink-faint);font-weight:700;margin-bottom:4px;}
+  .d-display{font-family:var(--t4l-font-display);font-size:var(--t4l-size-display);font-weight:600;letter-spacing:-.01em;line-height:1.1;}
+  .d-h1{font-family:var(--t4l-font-display);font-size:var(--t4l-size-h1);font-weight:600;}
+  .d-h2{font-family:var(--t4l-font-display);font-size:var(--t4l-size-h2);font-weight:600;}
+  .d-body{font-size:var(--t4l-size-body);}
+  .d-small{font-size:var(--t4l-size-small);color:var(--t4l-ink-soft);}
+
+  .multi{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:8px;}
+  .mcell{background:var(--t4l-teal-wash);border-radius:var(--t4l-radius-sm);padding:11px 14px;}
+  .mcell .ml{font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--t4l-teal-deep);font-weight:700;margin-bottom:3px;}
+  .mcell .mt{font-size:15px;color:var(--t4l-ink);}
+  .mcell[dir="rtl"] .mt{font-family:"Noto Kufi Arabic",var(--t4l-font-ui);}
+  .mcell.cjk .mt{font-family:"Noto Sans SC",var(--t4l-font-ui);}
+
+  /* scale rows */
+  .scale{display:grid;gap:7px;}
+  .srow{display:flex;align-items:center;gap:14px;}
+  .srow .box{background:var(--t4l-teal);border-radius:4px;height:16px;flex:none;}
+  .srow .tk{font-size:11px;font-family:ui-monospace,monospace;color:var(--t4l-ink-soft);}
+  .srow .px{font-size:11px;color:var(--t4l-ink-faint);}
+
+  /* components */
+  .demo{background:#fbfaf7;border:1px solid var(--t4l-line-soft);border-radius:var(--t4l-radius-lg);padding:22px;margin-bottom:16px;}
+  .demo .dl{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--t4l-ink-faint);font-weight:700;margin:0 0 14px;}
+  .row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;}
+
+  /* buttons (product primitives) */
+  .btn{font-family:var(--t4l-font-ui);font-size:14px;font-weight:600;border:none;cursor:pointer;
+    padding:11px 20px;border-radius:var(--t4l-radius-pill);transition:transform .12s ease,box-shadow .12s ease,background .12s ease;}
+  .btn:active{transform:translateY(1px);}
+  .btn-primary{background:var(--t4l-teal);color:#fff;box-shadow:var(--t4l-elev-1);}
+  .btn-primary:hover{background:var(--t4l-teal-deep);}
+  .btn-accent{background:var(--t4l-amber);color:#3a2a08;}
+  .btn-accent:hover{background:var(--t4l-amber-deep);color:#fff;}
+  .btn-secondary{background:#fff;color:var(--t4l-teal-deep);border:1.5px solid var(--t4l-teal);}
+  .btn-secondary:hover{background:var(--t4l-teal-wash);}
+  .btn-ghost{background:transparent;color:var(--t4l-teal-deep);}
+  .btn-ghost:hover{background:var(--t4l-teal-wash);}
+  .btn:focus-visible{outline:3px solid var(--t4l-amber);outline-offset:2px;}
+
+  /* inputs */
+  .field{max-width:340px;}
+  .field label{display:block;font-size:12px;font-weight:600;color:var(--t4l-ink);margin-bottom:6px;}
+  .field input{width:100%;font-family:var(--t4l-font-ui);font-size:14px;color:var(--t4l-ink);
+    padding:11px 14px;border:1.5px solid var(--t4l-line);border-radius:var(--t4l-radius-sm);background:#fff;}
+  .field input:focus{outline:none;border-color:var(--t4l-teal);box-shadow:0 0 0 3px rgba(15,109,104,.15);}
+  .field .hint{font-size:11px;color:var(--t4l-ink-faint);margin-top:5px;}
+  .field.err input{border-color:var(--t4l-danger);}
+  .field.err .hint{color:var(--t4l-danger);}
+
+  /* signature: language + culture selector */
+  .selector{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:520px;}
+  .langopt{cursor:pointer;border:1.5px solid var(--t4l-line);border-radius:var(--t4l-radius-md);
+    padding:12px 12px;background:#fff;text-align:left;transition:border-color .12s,box-shadow .12s,background .12s;position:relative;}
+  .langopt:hover{border-color:var(--t4l-teal);}
+  .langopt.sel{border-color:var(--t4l-teal);background:var(--t4l-teal-wash);box-shadow:0 0 0 3px rgba(15,109,104,.12);}
+  .langopt .native{font-size:16px;font-weight:600;color:var(--t4l-ink);}
+  .langopt .en{font-size:11px;color:var(--t4l-ink-faint);margin-top:2px;}
+  .langopt .tick{position:absolute;top:10px;right:10px;width:16px;height:16px;border-radius:50%;background:var(--t4l-teal);display:none;align-items:center;justify-content:center;}
+  .langopt.sel .tick{display:flex;}
+  .langopt[dir="rtl"] .native{font-family:"Noto Kufi Arabic",var(--t4l-font-ui);}
+  .langopt.cjk .native{font-family:"Noto Sans SC",var(--t4l-font-ui);}
+
+  /* member card */
+  .mcard{max-width:360px;background:#fff;border:1px solid var(--t4l-line-soft);border-radius:var(--t4l-radius-lg);box-shadow:var(--t4l-elev-1);overflow:hidden;}
+  .mcard .top{padding:16px 18px;display:flex;gap:12px;align-items:center;border-bottom:1px solid var(--t4l-line-soft);}
+  .mcard .av{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--t4l-teal-bright),var(--t4l-teal-deep));flex:none;}
+  .mcard .nm{font-family:var(--t4l-font-display);font-size:15px;font-weight:600;margin:0;}
+  .mcard .role{font-size:11.5px;color:var(--t4l-ink-faint);margin:2px 0 0;}
+  .mcard .body{padding:16px 18px;}
+  .tags{display:flex;gap:6px;flex-wrap:wrap;}
+  .tag{font-size:11px;font-weight:600;padding:4px 10px;border-radius:var(--t4l-radius-pill);background:var(--t4l-teal-wash);color:var(--t4l-teal-deep);}
+  .tag.amber{background:var(--t4l-amber-wash);color:var(--t4l-amber-deep);}
+
+  /* check-in slider (resilience/productivity) */
+  .checkin{max-width:420px;}
+  .checkin .q{font-size:13px;font-weight:600;margin-bottom:12px;}
+  .checkin input[type=range]{width:100%;accent-color:var(--t4l-teal);}
+  .checkin .ends{display:flex;justify-content:space-between;font-size:11px;color:var(--t4l-ink-faint);margin-top:4px;}
+
+  /* toggle */
+  .switch{display:inline-flex;align-items:center;gap:10px;cursor:pointer;font-size:13px;}
+  .track{width:44px;height:26px;border-radius:var(--t4l-radius-pill);background:var(--t4l-line);position:relative;transition:background .15s;}
+  .track .knob{position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2);transition:left .15s;}
+  .switch.on .track{background:var(--t4l-teal);}
+  .switch.on .track .knob{left:21px;}
+
+  /* rtl demo */
+  .rtlcard{max-width:380px;background:var(--t4l-teal-wash);border-radius:var(--t4l-radius-md);padding:16px 18px;}
+  .rtlcard[dir="rtl"]{text-align:right;font-family:"Noto Kufi Arabic",var(--t4l-font-ui);}
+  .rtlcard .rt{font-size:15px;color:var(--t4l-ink);}
+  .rtlcard .rs{font-size:12px;color:var(--t4l-teal-deep);margin-top:6px;}
+
+  /* token code block */
+  pre{background:var(--t4l-ink);color:#e9f3f0;border-radius:var(--t4l-radius-md);padding:18px 20px;overflow:auto;
+    font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:11.5px;line-height:1.6;margin:0;}
+  pre .c{color:#7fb8ac;}
+  pre .v{color:#f2c987;}
+
+  .foot{padding:22px 46px 30px;background:#fbfaf7;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+  .foot .note{font-size:11px;color:var(--t4l-ink-faint);font-style:italic;}
+  .foot .tag2{font-size:11px;color:var(--t4l-ink-faint);font-weight:500;}
+
+  @media (max-width:720px){
+    body{padding:20px 12px 40px;}
+    .head,.sec,.foot{padding-left:22px;padding-right:22px;}
+    .swatches{grid-template-columns:repeat(2,1fr);}
+    .selector{grid-template-columns:1fr 1fr;}
+    .multi{grid-template-columns:1fr;}
+    .head-right{text-align:left;}
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <!-- HEADER -->
+  <div class="head">
+    <div class="brand">
+      <svg class="mark" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-label="Tamia4Life mark">
+        <circle cx="32" cy="47" r="4.2" fill="#e7a13a"/>
+        <path d="M32 47 C 31.2 42 32.8 40 32 36" stroke="#0f6d68" stroke-width="3" stroke-linecap="round" fill="none"/>
+        <path d="M32 43 C 30.5 33 25 26 15.5 21.5 C 17.5 31 22.5 38.5 32 43 Z" fill="#0d9488"/>
+        <path d="M32 43 C 33.5 29 41 20 51.5 15 C 49 27 43 37.5 32 43 Z" fill="#0f6d68"/>
+        <path d="M32 43 C 35 34 41 25 48 18.5" stroke="#ccfbf1" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+        <path d="M32 43 C 29.5 35 25 29 19 24" stroke="#ccfbf1" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+      </svg>
+      <div class="brand-txt">
+        <p class="kicker">Design System · v0 · Phase 0</p>
+        <h1>Tamia4Life</h1>
+      </div>
+    </div>
+    <div class="head-right">
+      <p class="lead">The foundation every surface is built on.</p>
+      <p>Canonical tokens, the multilingual type decision, and the component primitives — including the signature language &amp; culture selector.</p>
+    </div>
+  </div>
+
+  <!-- COLOR -->
+  <div class="sec">
+    <p class="eyebrow">Foundations · Color</p>
+    <h2>Palette</h2>
+    <p class="sub">Pine-green leads; amber is the seed — used as an accent, never a flood. Clay carries human warmth in small doses. The growth ramp encodes progress from seed to canopy across phases, progress bars, and data.</p>
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:#0f6d68"></div><div class="meta"><p class="nm">Teal — Primary</p><p class="hx">#0f6d68</p><p class="tk">--t4l-teal</p></div></div>
+      <div class="sw"><div class="chip" style="background:#0a4f4b"></div><div class="meta"><p class="nm">Teal Deep</p><p class="hx">#0a4f4b</p><p class="tk">--t4l-teal-deep</p></div></div>
+      <div class="sw"><div class="chip" style="background:#e7a13a"></div><div class="meta"><p class="nm">Amber — Accent</p><p class="hx">#e7a13a</p><p class="tk">--t4l-amber</p></div></div>
+      <div class="sw"><div class="chip" style="background:#c56a52"></div><div class="meta"><p class="nm">Clay — Warmth</p><p class="hx">#c56a52</p><p class="tk">--t4l-clay</p></div></div>
+      <div class="sw"><div class="chip" style="background:#1f2e2c"></div><div class="meta"><p class="nm">Ink</p><p class="hx">#1f2e2c</p><p class="tk">--t4l-ink</p></div></div>
+      <div class="sw"><div class="chip" style="background:#4a5b58"></div><div class="meta"><p class="nm">Ink Soft</p><p class="hx">#4a5b58</p><p class="tk">--t4l-ink-soft</p></div></div>
+      <div class="sw"><div class="chip" style="background:#f3f0ea;border-bottom:1px solid #e2ddd3"></div><div class="meta"><p class="nm">Paper — App BG</p><p class="hx">#f3f0ea</p><p class="tk">--t4l-paper</p></div></div>
+      <div class="sw"><div class="chip" style="background:#ffffff;border-bottom:1px solid #e2ddd3"></div><div class="meta"><p class="nm">Card — Surface</p><p class="hx">#ffffff</p><p class="tk">--t4l-card</p></div></div>
+    </div>
+    <div class="ramp" style="margin-top:14px">
+      <div class="step" style="background:#0a4f4b">seed</div>
+      <div class="step" style="background:#0f6d68">sprout</div>
+      <div class="step" style="background:#2f8a6e">sapling</div>
+      <div class="step" style="background:#7ba33f">tree</div>
+      <div class="step" style="background:#cf871e">canopy</div>
+    </div>
+  </div>
+
+  <!-- TYPE -->
+  <div class="sec">
+    <p class="eyebrow">Foundations · Typography</p>
+    <h2>Type &amp; the multilingual decision</h2>
+    <p class="sub"><strong>Deliberate constraint:</strong> the product lives or dies on rendering Arabic, Chinese, Cyrillic and more beautifully — so the UI face is Noto-first (Inter for Latin, falling back to Noto Sans / Noto Kufi Arabic / Noto Sans SC for full script coverage). Fraunces, a humanist serif, carries display headings with warmth. This is a brand constraint, not an afterthought.</p>
+    <div class="specimen">
+      <div><p class="lab">Display · Fraunces 600</p><div class="d-display">Wellness in your language</div></div>
+      <div><p class="lab">Heading 1 · Fraunces 600</p><div class="d-h1">Your journey, from surviving to growing</div></div>
+      <div><p class="lab">Heading 2 · Fraunces 600</p><div class="d-h2">Facilitators who understand you</div></div>
+      <div><p class="lab">Body · UI 400</p><div class="d-body">A mentally healthy person is more productive. Tamia4Life strengthens resilience before stress escalates — preventive, never clinical.</div></div>
+      <div><p class="lab">Small · UI 400</p><div class="d-small">Your individual data is never shared with your employer. Only anonymised aggregates.</div></div>
+    </div>
+    <p class="lab" style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#7d8c88;font-weight:700;margin:18px 0 8px">Script coverage — one component, every member</p>
+    <div class="multi">
+      <div class="mcell"><p class="ml">English</p><p class="mt">Welcome. Let's begin in your language.</p></div>
+      <div class="mcell" dir="rtl"><p class="ml">العربية · Arabic (RTL)</p><p class="mt">أهلاً بك. لنبدأ بلغتك.</p></div>
+      <div class="mcell cjk"><p class="ml">中文 · Chinese</p><p class="mt">欢迎。让我们用您的语言开始。</p></div>
+      <div class="mcell"><p class="ml">Русский · Cyrillic</p><p class="mt">Добро пожаловать. Начнём на вашем языке.</p></div>
+    </div>
+  </div>
+
+  <!-- SCALE -->
+  <div class="sec">
+    <p class="eyebrow">Foundations · Space &amp; radius</p>
+    <h2>Spacing, radius, elevation</h2>
+    <p class="sub">A 4px base grid keeps rhythm consistent across every surface. Radii step from crisp inputs to soft cards; three elevation levels only.</p>
+    <div class="scale">
+      <div class="srow"><div class="box" style="width:4px"></div><span class="tk">--t4l-space-1</span><span class="px">4px</span></div>
+      <div class="srow"><div class="box" style="width:8px"></div><span class="tk">--t4l-space-2</span><span class="px">8px</span></div>
+      <div class="srow"><div class="box" style="width:16px"></div><span class="tk">--t4l-space-4</span><span class="px">16px</span></div>
+      <div class="srow"><div class="box" style="width:24px"></div><span class="tk">--t4l-space-5</span><span class="px">24px</span></div>
+      <div class="srow"><div class="box" style="width:32px"></div><span class="tk">--t4l-space-6</span><span class="px">32px</span></div>
+      <div class="srow"><div class="box" style="width:48px"></div><span class="tk">--t4l-space-7</span><span class="px">48px</span></div>
+    </div>
+    <div class="row" style="margin-top:18px">
+      <div style="width:74px;height:54px;background:var(--t4l-teal-wash);border:1px solid var(--t4l-line);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:10px;color:#4a5b58;font-family:ui-monospace,monospace">8 · sm</div>
+      <div style="width:74px;height:54px;background:var(--t4l-teal-wash);border:1px solid var(--t4l-line);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:10px;color:#4a5b58;font-family:ui-monospace,monospace">12 · md</div>
+      <div style="width:74px;height:54px;background:var(--t4l-teal-wash);border:1px solid var(--t4l-line);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:10px;color:#4a5b58;font-family:ui-monospace,monospace">16 · lg</div>
+      <div style="width:74px;height:54px;background:#fff;border-radius:12px;box-shadow:var(--t4l-elev-1);display:flex;align-items:center;justify-content:center;font-size:10px;color:#4a5b58;font-family:ui-monospace,monospace">elev 1</div>
+      <div style="width:74px;height:54px;background:#fff;border-radius:12px;box-shadow:var(--t4l-elev-2);display:flex;align-items:center;justify-content:center;font-size:10px;color:#4a5b58;font-family:ui-monospace,monospace">elev 2</div>
+    </div>
+  </div>
+
+  <!-- COMPONENT PRIMITIVES -->
+  <div class="sec">
+    <p class="eyebrow">Component primitives</p>
+    <h2>The parts every screen is assembled from</h2>
+    <p class="sub">Buttons, inputs, cards, the check-in, and the signature primitive — the language &amp; culture selector — all built from the tokens above. These feed the Phase 0 clickable prototype.</p>
+
+    <div class="demo">
+      <p class="dl">Buttons</p>
+      <div class="row">
+        <button class="btn btn-primary">Book a session</button>
+        <button class="btn btn-accent">Start now</button>
+        <button class="btn btn-secondary">Learn more</button>
+        <button class="btn btn-ghost">Skip for now</button>
+      </div>
+    </div>
+
+    <div class="demo">
+      <p class="dl">Inputs — default &amp; error</p>
+      <div class="row" style="align-items:flex-start">
+        <div class="field">
+          <label for="n">Preferred name</label>
+          <input id="n" type="text" placeholder="How should we greet you?">
+          <p class="hint">Used only inside your private account.</p>
+        </div>
+        <div class="field err">
+          <label for="e">Work email</label>
+          <input id="e" type="text" value="amir@company">
+          <p class="hint">Enter a complete email address.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo">
+      <p class="dl">Signature primitive — language &amp; culture selector</p>
+      <div class="selector">
+        <button class="langopt sel"><span class="tick"><svg width="9" height="9" viewBox="0 0 12 12"><path d="M2 6.5L5 9.5L10 3" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="native">العربية</div><div class="en">Arabic</div></button>
+        <button class="langopt"><span class="tick"></span><div class="native">Italiano</div><div class="en">Italian</div></button>
+        <button class="langopt cjk"><span class="tick"></span><div class="native">中文</div><div class="en">Chinese</div></button>
+        <button class="langopt"><span class="tick"></span><div class="native">Русский</div><div class="en">Russian</div></button>
+        <button class="langopt"><span class="tick"></span><div class="native">English</div><div class="en">English</div></button>
+        <button class="langopt"><span class="tick"></span><div class="native">Español</div><div class="en">Spanish</div></button>
+      </div>
+    </div>
+
+    <div class="demo">
+      <p class="dl">Cards, tags &amp; toggle</p>
+      <div class="row" style="align-items:flex-start">
+        <div class="mcard">
+          <div class="top">
+            <div class="av"></div>
+            <div><p class="nm">Layla H.</p><p class="role">Facilitator · Arabic, English</p></div>
+          </div>
+          <div class="body">
+            <div class="tags">
+              <span class="tag">Mother tongue</span>
+              <span class="tag amber">Why this match</span>
+              <span class="tag">Same region</span>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <label class="switch on" onclick="this.classList.toggle('on')"><span class="track"><span class="knob"></span></span>Weekly check-in reminders</label>
+          <label class="switch" onclick="this.classList.toggle('on')"><span class="track"><span class="knob"></span></span>Share progress with my facilitator</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo">
+      <p class="dl">Resilience &amp; productivity check-in</p>
+      <div class="checkin">
+        <p class="q">This week, how steady has your energy felt?</p>
+        <input type="range" min="1" max="5" value="4">
+        <div class="ends"><span>Running low</span><span>Full &amp; steady</span></div>
+      </div>
+    </div>
+
+    <div class="demo">
+      <p class="dl">RTL — the whole layout mirrors, not just the text</p>
+      <div class="rtlcard" dir="rtl">
+        <div class="rt">رحلتك تبدأ بلغتك.</div>
+        <div class="rs">من البقاء إلى النمو</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOKENS CODE -->
+  <div class="sec">
+    <p class="eyebrow">For developers</p>
+    <h2>Copy the tokens</h2>
+    <p class="sub">Drop this <code>:root</code> block in as the single source of truth. Every colour, type, space, and radius decision references a token — no hard-coded hex in components.</p>
+<pre><span class="c">/* tamia4life.tokens.css */</span>
+:root{
+  <span class="c">/* color · primary */</span>
+  --t4l-teal:<span class="v">#0f6d68</span>; --t4l-teal-deep:<span class="v">#0a4f4b</span>; --t4l-teal-bright:<span class="v">#0d9488</span>;
+  <span class="c">/* color · accent + warmth */</span>
+  --t4l-amber:<span class="v">#e7a13a</span>; --t4l-amber-deep:<span class="v">#cf871e</span>; --t4l-clay:<span class="v">#c56a52</span>;
+  <span class="c">/* color · growth ramp (seed→canopy) */</span>
+  --t4l-grow-0:<span class="v">#0a4f4b</span>; --t4l-grow-1:<span class="v">#0f6d68</span>; --t4l-grow-2:<span class="v">#2f8a6e</span>;
+  --t4l-grow-3:<span class="v">#7ba33f</span>; --t4l-grow-4:<span class="v">#cf871e</span>;
+  <span class="c">/* color · neutrals */</span>
+  --t4l-ink:<span class="v">#1f2e2c</span>; --t4l-ink-soft:<span class="v">#4a5b58</span>; --t4l-paper:<span class="v">#f3f0ea</span>; --t4l-card:<span class="v">#ffffff</span>;
+  <span class="c">/* type — Noto-first for full script coverage */</span>
+  --t4l-font-display:<span class="v">"Fraunces",Georgia,serif</span>;
+  --t4l-font-ui:<span class="v">"Inter","Noto Sans","Noto Kufi Arabic","Noto Sans SC",system-ui,sans-serif</span>;
+  <span class="c">/* space (4px base) · radius */</span>
+  --t4l-space-4:<span class="v">16px</span>; --t4l-space-5:<span class="v">24px</span>;
+  --t4l-radius-md:<span class="v">12px</span>; --t4l-radius-pill:<span class="v">999px</span>;
+}</pre>
+  </div>
+
+  <div class="foot">
+    <span class="note">Phase 0 · Foundation. Next: wire these primitives into the clickable prototype of the three priority screens for usability testing.</span>
+    <span class="tag2">Tamia4Life · AZM Venture Portfolio</span>
+  </div>
+
+</div>
+</body>
+</html>

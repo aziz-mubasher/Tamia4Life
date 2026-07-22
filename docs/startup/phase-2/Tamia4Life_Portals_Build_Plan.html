@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tamia4Life — Digital Assets &amp; Portals Build Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1f2e2c; --ink-soft:#4a5b58; --ink-faint:#7d8c88;
+    --paper:#f3f0ea; --card:#ffffff; --line:#e2ddd3; --line-soft:#ece8df;
+    --teal:#0f6d68; --teal-deep:#0a4f4b; --teal-bright:#0d9488; --teal-wash:#e7f0ee;
+    --amber:#e7a13a; --amber-deep:#cf871e; --amber-wash:#f9edd8; --clay:#c56a52;
+    --p0:#0a4f4b; --p1:#0f6d68; --p2:#2f8a6e; --p3:#7ba33f; --p4:#cf871e;
+    /* portal accents */
+    --member:#0f6d68; --facil:#2f8a6e; --employer:#cf871e; --system:#c56a52;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);color:var(--ink);
+    font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    -webkit-font-smoothing:antialiased;line-height:1.5;padding:44px 24px 60px;
+  }
+  .sheet{
+    max-width:1080px;margin:0 auto;background:var(--card);
+    border:1px solid var(--line);border-radius:22px;
+    box-shadow:0 18px 54px rgba(31,46,44,.10);overflow:hidden;
+  }
+
+  /* header */
+  .head{
+    padding:38px 46px 30px;
+    background:radial-gradient(120% 140% at 100% 0%, rgba(231,161,58,.10), transparent 55%),linear-gradient(180deg,#fbfaf7,#fff);
+    border-bottom:1px solid var(--line-soft);
+    display:flex;justify-content:space-between;align-items:flex-start;gap:28px;flex-wrap:wrap;
+  }
+  .brand{display:flex;align-items:center;gap:15px;}
+  .mark{width:52px;height:52px;flex:none;}
+  .kicker{font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--teal);font-weight:700;margin:0 0 3px;}
+  .brand-txt h1{font-family:"Fraunces",Georgia,serif;font-size:28px;font-weight:600;margin:0;letter-spacing:-.01em;}
+  .head-right{text-align:right;max-width:420px;}
+  .head-right .lead{font-family:"Fraunces",Georgia,serif;font-size:15px;font-style:italic;color:var(--teal-deep);margin:0 0 6px;line-height:1.4;}
+  .head-right p{font-size:12.5px;color:var(--ink-soft);margin:0;line-height:1.5;}
+  .head-right b{color:var(--clay);font-weight:600;}
+
+  /* section shell */
+  .sec{padding:30px 46px;border-bottom:1px solid var(--line-soft);}
+  .sec:last-child{border-bottom:none;}
+  .eyebrow{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--amber-deep);font-weight:700;margin:0 0 6px;}
+  .sec h2{font-family:"Fraunces",Georgia,serif;font-size:22px;font-weight:600;margin:0 0 4px;letter-spacing:-.01em;}
+  .sec .sub{font-size:13px;color:var(--ink-soft);margin:0 0 22px;max-width:760px;}
+
+  /* portal cards */
+  .portals{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+  .pcard{border:1px solid var(--line-soft);border-radius:14px;padding:18px 18px 16px;position:relative;background:#fff;border-top:3px solid var(--ac);}
+  .pcard .ptag{font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--ac);margin:0 0 3px;}
+  .pcard h3{font-family:"Fraunces",Georgia,serif;font-size:17px;font-weight:600;margin:0 0 8px;}
+  .pcard p{font-size:12.3px;color:var(--ink-soft);margin:0 0 10px;line-height:1.45;}
+  .pcard .ref{font-size:11.5px;color:var(--ink);background:var(--teal-wash);border-radius:8px;padding:8px 11px;line-height:1.45;}
+  .pcard .ref b{color:var(--teal-deep);font-weight:700;}
+
+  /* phase blocks */
+  .phase{padding:22px 0;border-bottom:1px dashed var(--line);}
+  .phase:last-child{border-bottom:none;}
+  .ph-head{display:flex;align-items:baseline;gap:12px;margin:0 0 4px;flex-wrap:wrap;}
+  .ph-badge{font-family:"Fraunces",Georgia,serif;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:var(--pc);padding:4px 11px;border-radius:20px;}
+  .ph-head h3{font-family:"Fraunces",Georgia,serif;font-size:18px;font-weight:600;margin:0;}
+  .ph-head .dur{font-size:11px;color:var(--ink-faint);background:var(--line-soft);padding:3px 10px;border-radius:20px;font-weight:500;}
+  .ph-aim{font-size:12.5px;color:var(--ink-soft);margin:0 0 14px;}
+  .ph-aim b{color:var(--ink);}
+
+  .lanes{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:12px;}
+  .lane{border-left:3px solid var(--lc);background:#fbfaf7;border-radius:0 10px 10px 0;padding:11px 14px;}
+  .lane .lt{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--lc);margin:0 0 6px;}
+  .lane ul{list-style:none;margin:0;padding:0;display:grid;gap:5px;}
+  .lane li{position:relative;padding-left:15px;font-size:12px;color:var(--ink);line-height:1.4;}
+  .lane li::before{content:"";position:absolute;left:0;top:6px;width:6px;height:6px;border-radius:2px;background:var(--lc);transform:rotate(45deg);}
+  .lane li b{color:var(--teal-deep);font-weight:600;}
+
+  .refnote{display:flex;gap:9px;align-items:flex-start;background:var(--amber-wash);border-left:3px solid var(--amber-deep);padding:9px 13px;border-radius:0 10px 10px 0;}
+  .refnote .lbl{font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;font-weight:700;color:var(--amber-deep);white-space:nowrap;padding-top:1px;}
+  .refnote .val{font-size:12px;color:var(--ink);line-height:1.45;}
+  .refnote .val b{color:var(--teal-deep);font-weight:700;}
+
+  /* mapping table */
+  table{width:100%;border-collapse:collapse;font-size:12.2px;}
+  thead th{text-align:left;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);font-weight:700;padding:0 12px 9px;border-bottom:1.5px solid var(--line);}
+  tbody td{padding:11px 12px;border-bottom:1px solid var(--line-soft);vertical-align:top;line-height:1.4;color:var(--ink);}
+  tbody tr:last-child td{border-bottom:none;}
+  tbody td:first-child{font-weight:600;color:var(--teal-deep);white-space:nowrap;}
+  .src{font-weight:600;}
+  .src.ou{color:var(--teal);}
+  .src.tr{color:var(--clay);}
+
+  /* not-to-copy */
+  .avoid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+  .acard{background:#fff;border:1px solid var(--line-soft);border-radius:12px;padding:14px 15px;border-top:3px solid var(--clay);}
+  .acard .at{font-family:"Fraunces",Georgia,serif;font-size:13.5px;font-weight:600;color:var(--clay);margin:0 0 4px;}
+  .acard .ad{font-size:11.5px;color:var(--ink-soft);margin:0;line-height:1.45;}
+
+  .foot{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:22px 46px 30px;background:#fbfaf7;flex-wrap:wrap;}
+  .foot .note{font-size:11px;color:var(--ink-faint);font-style:italic;}
+  .foot .tag{font-size:11px;color:var(--ink-faint);font-weight:500;letter-spacing:.04em;}
+
+  @media (max-width:720px){
+    body{padding:20px 12px 40px;}
+    .head,.sec,.foot{padding-left:22px;padding-right:22px;}
+    .portals,.lanes,.avoid{grid-template-columns:1fr;}
+    .head-right{text-align:left;}
+    table{font-size:11px;}
+  }
+  @media print{
+    body{background:#fff;padding:0;}
+    .sheet{box-shadow:none;border:none;border-radius:0;max-width:none;}
+    .phase,.pcard,.acard{break-inside:avoid;}
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <!-- HEADER -->
+  <div class="head">
+    <div class="brand">
+      <svg class="mark" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-label="Tamia4Life mark">
+        <circle cx="32" cy="47" r="4.2" fill="#e7a13a"/>
+        <path d="M32 47 C 31.2 42 32.8 40 32 36" stroke="#0f6d68" stroke-width="3" stroke-linecap="round" fill="none"/>
+        <path d="M32 43 C 30.5 33 25 26 15.5 21.5 C 17.5 31 22.5 38.5 32 43 Z" fill="#0d9488"/>
+        <path d="M32 43 C 33.5 29 41 20 51.5 15 C 49 27 43 37.5 32 43 Z" fill="#0f6d68"/>
+        <path d="M32 43 C 35 34 41 25 48 18.5" stroke="#ccfbf1" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+        <path d="M32 43 C 29.5 35 25 29 19 24" stroke="#ccfbf1" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+      </svg>
+      <div class="brand-txt">
+        <p class="kicker">Digital Assets &amp; Portals — Build Plan</p>
+        <h1>Tamia4Life</h1>
+      </div>
+    </div>
+    <div class="head-right">
+      <p class="lead">Configure the commodity, build the moat — one surface at a time.</p>
+      <p>Three user portals over one shared design system, built along the Phase 0–4 roadmap. Architecture from <b>OpenUp</b>, cultural intimacy from <b>Transiti</b>.</p>
+    </div>
+  </div>
+
+  <!-- SECTION A: SURFACES -->
+  <div class="sec">
+    <p class="eyebrow">What we're building</p>
+    <h2>Four surfaces, one design system</h2>
+    <p class="sub">Every screen draws from a single component library and multilingual content layer. Three of the surfaces are user-facing portals; the fourth is the internal back office that runs the moat — matching, vetting, and content.</p>
+    <div class="portals">
+      <div class="pcard" style="--ac:var(--member)">
+        <p class="ptag">Portal · B2C</p>
+        <h3>Member Portal</h3>
+        <p>Where members onboard in their mother tongue, track their journey, book facilitators, and attend sessions. The heart of the product.</p>
+        <p class="ref"><b>Model:</b> OpenUp's private-account → self-assessment → personalised recommendations → check-ins flow, wrapped in Transiti's warm, mother-tongue session intimacy.</p>
+      </div>
+      <div class="pcard" style="--ac:var(--facil)">
+        <p class="ptag">Portal · Supply</p>
+        <h3>Facilitator Portal</h3>
+        <p>Where culturally-matched facilitators manage their profile, availability, session space, and member context — the supply side of the moat.</p>
+        <p class="ref"><b>Model:</b> Transiti's branded, secure session space, extended with lightweight facilitator ops (calendar, notes, group tooling).</p>
+      </div>
+      <div class="pcard" style="--ac:var(--employer)">
+        <p class="ptag">Portal · B2B</p>
+        <h3>Employer / HR Portal</h3>
+        <p>Where employer buyers see <b>anonymised, aggregate</b> wellbeing and engagement insights, manage seats, and activate their workforce. The revenue engine.</p>
+        <p class="ref"><b>Model:</b> OpenUp's business-EAP dashboards and wellbeing-ROI framing — never individual data, only aggregates.</p>
+      </div>
+      <div class="pcard" style="--ac:var(--system)">
+        <p class="ptag">Foundation · Internal</p>
+        <h3>Design System &amp; Ops</h3>
+        <p>Tokens and components from the brand guidelines, an i18n/RTL content layer, plus the internal back office for facilitator vetting, matching, and the content CMS.</p>
+        <p class="ref"><b>Model:</b> Own it. This is the layer the references don't show — and where Tamia4Life's differentiation lives.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION B: PHASE PLAN -->
+  <div class="sec">
+    <p class="eyebrow">The build, phase by phase</p>
+    <h2>Sequencing the surfaces</h2>
+    <p class="sub">Each phase advances the surfaces in step with the venture roadmap. Nothing gets built before it's needed, and the multilingual layer is structural from the first commit — never retrofitted.</p>
+
+    <!-- PHASE 0 -->
+    <div class="phase" style="--pc:var(--p0)">
+      <div class="ph-head"><span class="ph-badge">Phase 0</span><h3>Foundation &amp; Validation</h3><span class="dur">1–2 months</span></div>
+      <p class="ph-aim"><b>Aim:</b> prove the surfaces before building them — and pour the foundation everything else stands on.</p>
+      <div class="lanes">
+        <div class="lane" style="--lc:var(--system)">
+          <p class="lt">Design system &amp; ops</p>
+          <ul>
+            <li>Design tokens from the <b>brand guidelines</b> — colour, type, spacing, the sprout mark.</li>
+            <li>Decide the <b>i18n / RTL architecture</b> and multilingual content model (day-one decision).</li>
+            <li>Component primitives: buttons, inputs, cards, the language selector.</li>
+          </ul>
+        </div>
+        <div class="lane" style="--lc:var(--member)">
+          <p class="lt">Member portal</p>
+          <ul>
+            <li>Clickable <b>prototype</b> of the three priority screens — no backend.</li>
+            <li>Onboarding step 1: mother tongue + cultural context selector (the signature).</li>
+            <li>Usability-test the prototype <b>in members' own languages</b>.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="refnote"><span class="lbl">Reference</span><span class="val">Document OpenUp's onboarding/self-assessment flow and Transiti's secure session space as concrete patterns before writing code. <b>Exit gate:</b> validated screens + a working prototype.</span></div>
+    </div>
+
+    <!-- PHASE 1 -->
+    <div class="phase" style="--pc:var(--p1)">
+      <div class="ph-head"><span class="ph-badge">Phase 1</span><h3>MVP — Member Portal core</h3><span class="dur">3–4 months</span></div>
+      <p class="ph-aim"><b>Aim:</b> a working member portal delivering real sessions in 1–2 launch languages, with the facilitator side just deep enough to supply it.</p>
+      <div class="lanes">
+        <div class="lane" style="--lc:var(--member)">
+          <p class="lt">Member portal</p>
+          <ul>
+            <li>The three screens live: <b>onboarding</b>, <b>“My Journey”</b> dashboard, <b>facilitator match &amp; booking</b>.</li>
+            <li>Live 1:1 <b>session space</b> (booking + video) — Transiti-style branded secure room.</li>
+            <li>Starter self-guided <b>content library</b> + first resilience/productivity check-in.</li>
+            <li>B2C freemium + paid tier via Stripe.</li>
+          </ul>
+        </div>
+        <div class="lane" style="--lc:var(--facil)">
+          <p class="lt">Facilitator portal v1</p>
+          <ul>
+            <li>Profile, <b>availability calendar</b>, and the session space.</li>
+            <li>Minimal member context + post-session notes.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="refnote"><span class="lbl">Reference</span><span class="val">OpenUp's flow — account → assessment → personalised recommendations → check-ins — becomes the member spine; Transiti's cultural warmth sets the session tone. <b>Harden the component library</b> from the prototype into production parts.</span></div>
+    </div>
+
+    <!-- PHASE 2 -->
+    <div class="phase" style="--pc:var(--p2)">
+      <div class="ph-head"><span class="ph-badge">Phase 2</span><h3>Employer (B2B) Portal</h3><span class="dur">3–4 months</span></div>
+      <p class="ph-aim"><b>Aim:</b> stand up the revenue engine — the employer portal — and widen member language coverage.</p>
+      <div class="lanes">
+        <div class="lane" style="--lc:var(--employer)">
+          <p class="lt">Employer / HR portal</p>
+          <ul>
+            <li><b>Anonymised, aggregate</b> wellbeing &amp; engagement dashboard.</li>
+            <li>Seat management, employer onboarding + activation materials, <b>SSO</b>.</li>
+            <li>Per-seat billing.</li>
+          </ul>
+        </div>
+        <div class="lane" style="--lc:var(--member)">
+          <p class="lt">Member &amp; facilitator</p>
+          <ul>
+            <li>Expand to <b>3–5 languages</b>; add group programs / masterclasses surfaces.</li>
+            <li>Facilitator portal gains <b>group-session tooling</b>.</li>
+            <li>Matching engine strengthened with real usage data.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="refnote"><span class="lbl">Reference</span><span class="val">OpenUp's business-EAP dashboards and ROI framing, adapted almost verbatim — but the <b>privacy-as-trust</b> guardrail is absolute: employers see aggregates, never a single member's data.</span></div>
+    </div>
+
+    <!-- PHASE 3 -->
+    <div class="phase" style="--pc:var(--p3)">
+      <div class="ph-head"><span class="ph-badge">Phase 3</span><h3>Scale &amp; Prove Impact</h3><span class="dur">4–6 months</span></div>
+      <p class="ph-aim"><b>Aim:</b> take the portals mobile and instrument them to prove ROI.</p>
+      <div class="lanes">
+        <div class="lane" style="--lc:var(--member)">
+          <p class="lt">Reach</p>
+          <ul>
+            <li>Native <b>mobile apps</b> at member-portal parity.</li>
+            <li>Broader language coverage + a growing facilitator network.</li>
+            <li>Content <b>personalisation</b> engine and expanded library production.</li>
+          </ul>
+        </div>
+        <div class="lane" style="--lc:var(--employer)">
+          <p class="lt">Proof</p>
+          <ul>
+            <li>Formal <b>outcome measurement</b> — wellbeing + productivity/retention.</li>
+            <li>Deeper analytics dashboards across member, facilitator, employer.</li>
+            <li>Workflow automation for facilitator ops.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="refnote"><span class="lbl">Reference</span><span class="val">This is where OpenUp's wellbeing-ROI story stops being a pitch and becomes <b>real data</b> you can put in front of investors and enterprise buyers.</span></div>
+    </div>
+
+    <!-- PHASE 4 -->
+    <div class="phase" style="--pc:var(--p4)">
+      <div class="ph-head"><span class="ph-badge">Phase 4</span><h3>Institutional &amp; Expansion</h3><span class="dur">Ongoing</span></div>
+      <p class="ph-aim"><b>Aim:</b> harden the surfaces for institutional partners and expand into new communities.</p>
+      <div class="lanes">
+        <div class="lane" style="--lc:var(--system)">
+          <p class="lt">Institutional surfaces</p>
+          <ul>
+            <li>Public / municipal partner surfaces or <b>white-label</b> access.</li>
+            <li>Accessibility &amp; compliance hardening to EU public-sector standards.</li>
+          </ul>
+        </div>
+        <div class="lane" style="--lc:var(--facil)">
+          <p class="lt">Depth at scale</p>
+          <ul>
+            <li>Localisation at scale; new sectors, regions, communities.</li>
+            <li>Back-office maturity: matching quality, facilitator supply, measured impact.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="refnote"><span class="lbl">Reference</span><span class="val">Beyond the references — this is Tamia4Life's own territory: durable, credible, multilingual public infrastructure for belonging.</span></div>
+    </div>
+  </div>
+
+  <!-- SECTION C: MAPPING TABLE -->
+  <div class="sec">
+    <p class="eyebrow">Pattern → surface</p>
+    <h2>Where each reference pattern lands</h2>
+    <p class="sub">A quick lookup for designers and developers: which proven pattern seeds which Tamia4Life surface, and the adaptation that makes it ours.</p>
+    <table>
+      <thead>
+        <tr><th>Tamia4Life surface</th><th>Source pattern</th><th>Adaptation</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Onboarding step 1</td><td><span class="src tr">Transiti</span> — mother-tongue delivery</td><td>Language + cultural context chosen first; drives matching, content, and tone downstream.</td></tr>
+        <tr><td>“My Journey” dashboard</td><td><span class="src ou">OpenUp</span> — self-assessment + check-ins</td><td>Recommendations plus a resilience/productivity trend, framed as growth not diagnosis.</td></tr>
+        <tr><td>Facilitator match &amp; booking</td><td><span class="src ou">OpenUp</span> architecture + <span class="src tr">Transiti</span> culture</td><td>Culture/language-first matching with a clear “why this match” explanation.</td></tr>
+        <tr><td>Session space</td><td><span class="src tr">Transiti</span> — branded secure room</td><td>Warm, private, multilingual — belonging over clinic.</td></tr>
+        <tr><td>Employer / HR dashboard</td><td><span class="src ou">OpenUp</span> — business-EAP insights</td><td>Anonymised aggregates only; productivity framing for the ROI story.</td></tr>
+        <tr><td>Family access</td><td><span class="src ou">OpenUp</span> — partners/family included</td><td>Strong fit — family and relationships across borders are a core theme.</td></tr>
+        <tr><td>Privacy reassurance</td><td>Both references</td><td>First-screen reassurance, not fine print — visible confidentiality as a feature.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SECTION D: WHAT NOT TO COPY -->
+  <div class="sec">
+    <p class="eyebrow">Guardrails on the references</p>
+    <h2>What not to copy</h2>
+    <p class="sub">The references are patterns to learn from, not identities to inherit. Three things to leave behind on every surface.</p>
+    <div class="avoid">
+      <div class="acard">
+        <p class="at">OpenUp's visual identity</p>
+        <p class="ad">Reads corporate-Northern-European. Tamia4Life needs a warmer, multicultural, human language that signals belonging.</p>
+      </div>
+      <div class="acard">
+        <p class="at">Transiti's clinical framing</p>
+        <p class="ad">Therapy-first and academic. Keep Tamia4Life preventive, modern, and accessible — strength before struggle.</p>
+      </div>
+      <div class="acard">
+        <p class="at">Anything crisis-centred</p>
+        <p class="ad">Both references occasionally lean clinical. Stay on the growth-and-resilience side of the line, with clean referral paths out.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span class="note">Durations mirror the venture roadmap and are illustrative; portal work overlaps — B2C and B2B tracks run partly in parallel.</span>
+    <span class="tag">Tamia4Life · AZM Venture Portfolio</span>
+  </div>
+
+</div>
+</body>
+</html>

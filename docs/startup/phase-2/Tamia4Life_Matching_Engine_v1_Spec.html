@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tamia4Life — Matching Engine v1 Spec</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Noto+Kufi+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1f2e2c; --ink-soft:#4a5b58; --ink-faint:#7d8c88;
+    --paper:#f3f0ea; --card:#ffffff; --line:#e2ddd3; --line-soft:#ece8df;
+    --teal:#0f6d68; --teal-deep:#0a4f4b; --teal-bright:#0d9488; --teal-wash:#e7f0ee;
+    --amber:#e7a13a; --amber-deep:#cf871e; --amber-wash:#f9edd8; --clay:#c56a52;
+    --g0:#0a4f4b; --g1:#0f6d68; --g2:#2f8a6e; --g3:#7ba33f; --g4:#cf871e;
+    --danger:#b4442f;
+    --font-d:"Fraunces",Georgia,serif;
+    --font-ui:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{background:var(--paper);color:var(--ink);font-family:var(--font-ui);line-height:1.5;
+    -webkit-font-smoothing:antialiased;padding:44px 24px 60px;}
+  .sheet{max-width:1080px;margin:0 auto;background:var(--card);border:1px solid var(--line);
+    border-radius:22px;box-shadow:0 18px 54px rgba(31,46,44,.10);overflow:hidden;}
+
+  .head{padding:38px 46px 30px;border-bottom:1px solid var(--line-soft);
+    background:radial-gradient(120% 140% at 100% 0%, rgba(231,161,58,.10), transparent 55%),linear-gradient(180deg,#fbfaf7,#fff);
+    display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap;}
+  .brand{display:flex;align-items:center;gap:15px;}
+  .mark{width:52px;height:52px;flex:none;}
+  .kicker{font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--teal);font-weight:700;margin:0 0 3px;}
+  .brand-txt h1{font-family:var(--font-d);font-size:27px;font-weight:600;margin:0;letter-spacing:-.01em;}
+  .head-right{text-align:right;max-width:410px;}
+  .head-right .lead{font-family:var(--font-d);font-size:15px;font-style:italic;color:var(--teal-deep);margin:0 0 6px;}
+  .head-right p{font-size:12.5px;color:var(--ink-soft);margin:0;}
+  .head-right b{color:var(--clay);font-weight:600;}
+
+  .sec{padding:32px 46px;border-bottom:1px solid var(--line-soft);}
+  .sec:last-child{border-bottom:none;}
+  .eyebrow{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--amber-deep);font-weight:700;margin:0 0 6px;}
+  .sec h2{font-family:var(--font-d);font-size:22px;font-weight:600;margin:0 0 4px;letter-spacing:-.01em;}
+  .sec .sub{font-size:13px;color:var(--ink-soft);margin:0 0 20px;max-width:770px;}
+
+  .rule{display:flex;gap:14px;align-items:flex-start;background:var(--teal-wash);border-radius:14px;padding:16px 18px;margin-bottom:20px;}
+  .rule svg{flex:none;margin-top:2px;}
+  .rule p{margin:0;font-size:14px;color:var(--teal-deep);line-height:1.5;}
+  .rule b{font-weight:700;}
+
+  .princ{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+  .pc{background:#fbfaf7;border:1px solid var(--line-soft);border-radius:12px;padding:14px 15px;border-top:3px solid var(--pc);}
+  .pc .t{font-family:var(--font-d);font-size:14px;font-weight:600;color:var(--pc);margin:0 0 4px;}
+  .pc p{font-size:11.8px;color:var(--ink-soft);margin:0;line-height:1.45;}
+
+  /* signals two-col */
+  .signals{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .scol{border:1px solid var(--line-soft);border-radius:14px;overflow:hidden;}
+  .scol .sh{padding:11px 16px;font-weight:700;font-size:12.5px;color:#fff;display:flex;align-items:center;gap:8px;}
+  .scol.mem .sh{background:var(--teal);}
+  .scol.fac .sh{background:var(--g2);}
+  .scol table{width:100%;border-collapse:collapse;}
+  .scol td{padding:9px 16px;border-bottom:1px solid var(--line-soft);font-size:12px;vertical-align:top;line-height:1.4;}
+  .scol tr:last-child td{border-bottom:none;}
+  .scol td:first-child{font-weight:600;color:var(--teal-deep);white-space:nowrap;width:1%;padding-right:12px;}
+  .scol td .src{font-size:10px;color:var(--ink-faint);display:block;margin-top:2px;font-style:italic;}
+
+  table.grid{width:100%;border-collapse:collapse;font-size:12.3px;}
+  table.grid thead th{text-align:left;font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-faint);font-weight:700;padding:0 12px 9px;border-bottom:1.5px solid var(--line);}
+  table.grid tbody td{padding:11px 12px;border-bottom:1px solid var(--line-soft);vertical-align:top;line-height:1.4;}
+  table.grid tbody tr:last-child td{border-bottom:none;}
+  table.grid .dim{font-weight:600;color:var(--teal-deep);white-space:nowrap;}
+  .wt{font-family:var(--mono);font-weight:700;color:var(--ink);}
+  .bar{height:8px;border-radius:4px;background:var(--teal);display:inline-block;vertical-align:middle;margin-left:8px;}
+
+  .filters{display:grid;gap:8px;}
+  .filt{display:flex;gap:10px;align-items:flex-start;background:#fbfaf7;border-left:3px solid var(--danger);border-radius:0 10px 10px 0;padding:10px 14px;}
+  .filt .fl{font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--danger);white-space:nowrap;padding-top:1px;}
+  .filt .fv{font-size:12.3px;color:var(--ink);line-height:1.4;}
+  .filt .fv b{color:var(--teal-deep);}
+
+  pre{background:var(--ink);color:#e9f3f0;border-radius:12px;padding:18px 20px;overflow:auto;
+    font-family:var(--mono);font-size:11.6px;line-height:1.65;margin:0;}
+  pre .k{color:#f2c987;} pre .c{color:#7fb8ac;} pre .n{color:#e69a86;} pre .s{color:#a9d5c8;}
+
+  /* reason mapping */
+  .rmap td:first-child{font-weight:600;color:var(--teal-deep);}
+  .rquote{background:var(--amber-wash);border-radius:6px;padding:2px 8px;font-size:12px;color:var(--ink);display:inline-block;}
+
+  .ladder{counter-reset:step;display:grid;gap:10px;}
+  .lstep{display:flex;gap:13px;align-items:flex-start;background:#fbfaf7;border:1px solid var(--line-soft);border-radius:12px;padding:12px 15px;}
+  .lstep::before{counter-increment:step;content:counter(step);font-family:var(--font-d);font-weight:700;font-size:13px;color:#fff;background:var(--teal);width:26px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex:none;}
+  .lstep p{margin:0;font-size:12.5px;color:var(--ink);line-height:1.45;}
+  .lstep b{color:var(--teal-deep);}
+
+  /* worked example */
+  .member-card{background:var(--teal-wash);border-radius:14px;padding:15px 18px;margin-bottom:18px;}
+  .member-card .ml{font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;font-weight:700;color:var(--teal-deep);margin:0 0 6px;}
+  .member-card .mv{font-size:13px;color:var(--ink);line-height:1.6;}
+  .member-card .mv b{color:var(--teal-deep);}
+  .rank{border:1px solid var(--line-soft);border-radius:14px;padding:15px 17px;margin-bottom:12px;position:relative;}
+  .rank.win{border-color:var(--teal);box-shadow:0 0 0 3px rgba(15,109,104,.10);}
+  .rank.out{opacity:.72;background:#faf8f4;}
+  .rank .rtop{display:flex;align-items:center;gap:12px;margin-bottom:8px;}
+  .rank .rn{font-family:var(--font-d);font-size:16px;font-weight:600;margin:0;}
+  .rank .rmeta{font-size:11.5px;color:var(--ink-faint);}
+  .rank .score{margin-left:auto;text-align:right;}
+  .rank .score .pct{font-family:var(--font-d);font-size:22px;font-weight:600;color:var(--g2);}
+  .rank.out .score .pct{color:var(--danger);font-size:14px;}
+  .rank .score .pl{font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-faint);}
+  .calc{font-family:var(--mono);font-size:11px;color:var(--ink-soft);background:#fbfaf7;border-radius:8px;padding:8px 11px;margin:8px 0;line-height:1.6;overflow:auto;}
+  .calc b{color:var(--teal-deep);}
+  .whyrow{display:flex;gap:7px;flex-wrap:wrap;margin-top:4px;}
+  .whyrow .w{font-size:11px;background:var(--amber-wash);color:var(--amber-deep);border-radius:999px;padding:4px 11px;font-weight:600;}
+
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .box{border:1px solid var(--line-soft);border-radius:14px;padding:15px 17px;}
+  .box h4{font-family:var(--font-d);font-size:14px;font-weight:600;margin:0 0 9px;}
+  .box ul{margin:0;padding:0;list-style:none;display:grid;gap:6px;}
+  .box li{position:relative;padding-left:16px;font-size:12.2px;color:var(--ink);line-height:1.4;}
+  .box li::before{content:"";position:absolute;left:0;top:6px;width:6px;height:6px;border-radius:2px;transform:rotate(45deg);background:var(--teal);}
+  .box.defer li::before{background:var(--ink-faint);}
+  .box li b{color:var(--teal-deep);font-weight:600;}
+
+  .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+  .metric{background:#fbfaf7;border:1px solid var(--line-soft);border-radius:12px;padding:14px 15px;border-top:3px solid var(--mc);}
+  .metric .mt{font-family:var(--font-d);font-size:13.5px;font-weight:600;margin:0 0 3px;color:var(--mc);}
+  .metric p{font-size:11.3px;color:var(--ink-soft);margin:0;line-height:1.4;}
+
+  .foot{padding:22px 46px 30px;background:#fbfaf7;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+  .foot .note{font-size:11px;color:var(--ink-faint);font-style:italic;max-width:640px;}
+  .foot .tag2{font-size:11px;color:var(--ink-faint);font-weight:500;}
+  .ar{font-family:"Noto Kufi Arabic",var(--font-ui);}
+
+  @media (max-width:720px){
+    body{padding:20px 12px 40px;}
+    .head,.sec,.foot{padding-left:22px;padding-right:22px;}
+    .princ,.signals,.two,.metrics{grid-template-columns:1fr;}
+    .head-right{text-align:left;}
+    table.grid{font-size:11px;}
+  }
+  @media print{
+    body{background:#fff;padding:0;}
+    .sheet{box-shadow:none;border:none;border-radius:0;max-width:none;}
+    .rank,.scol,.pc,.metric,.box{break-inside:avoid;}
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <!-- HEADER -->
+  <div class="head">
+    <div class="brand">
+      <svg class="mark" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-label="Tamia4Life mark">
+        <circle cx="32" cy="47" r="4.2" fill="#e7a13a"/>
+        <path d="M32 47 C 31.2 42 32.8 40 32 36" stroke="#0f6d68" stroke-width="3" stroke-linecap="round" fill="none"/>
+        <path d="M32 43 C 30.5 33 25 26 15.5 21.5 C 17.5 31 22.5 38.5 32 43 Z" fill="#0d9488"/>
+        <path d="M32 43 C 33.5 29 41 20 51.5 15 C 49 27 43 37.5 32 43 Z" fill="#0f6d68"/>
+        <path d="M32 43 C 35 34 41 25 48 18.5" stroke="#ccfbf1" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+        <path d="M32 43 C 29.5 35 25 29 19 24" stroke="#ccfbf1" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+      </svg>
+      <div class="brand-txt">
+        <p class="kicker">Matching Engine · v1 Spec</p>
+        <h1>Tamia4Life</h1>
+      </div>
+    </div>
+    <div class="head-right">
+      <p class="lead">Not who's free. Who understands where you're coming from.</p>
+      <p>A <b>rules-based, transparent</b> matcher for Phase 1 — culture and language first, every ranking explainable. The moat, specified.</p>
+    </div>
+  </div>
+
+  <!-- PRINCIPLES -->
+  <div class="sec">
+    <p class="eyebrow">What it optimizes for</p>
+    <h2>Principles</h2>
+    <div class="rule">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2L4 6v6c0 5 3.5 8 8 10 4.5-2 8-5 8-10V6l-8-4z" stroke="#0a4f4b" stroke-width="1.6" fill="rgba(15,109,104,.12)"/><path d="M9 12l2 2 4-4" stroke="#0a4f4b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <p><b>The one rule:</b> mother tongue is never traded away for availability. A sooner slot in the wrong language is not a match — it's a failure the engine must refuse to make.</p>
+    </div>
+    <div class="princ">
+      <div class="pc" style="--pc:var(--teal)"><p class="t">Explainable by design</p><p>Every ranking produces human-readable reasons. v1 is rules-based, not learned — trust depends on the member seeing <em>why</em>.</p></div>
+      <div class="pc" style="--pc:var(--g2)"><p class="t">Culture &amp; language first</p><p>Language capability is a hard gate; cultural and lived-experience alignment is the heaviest soft signal. Availability breaks ties, it doesn't lead.</p></div>
+      <div class="pc" style="--pc:var(--amber-deep)"><p class="t">Fair to new facilitators</p><p>No ratings exist yet, so v1 never ranks on them. A light fairness boost gives new, vetted facilitators real exposure.</p></div>
+    </div>
+  </div>
+
+  <!-- SIGNALS -->
+  <div class="sec">
+    <p class="eyebrow">Inputs</p>
+    <h2>The signals it reads</h2>
+    <p class="sub">Everything comes from onboarding, the baseline self-assessment, and facilitator profiles — captured in Phase 1 Epics 2, 4 and 8. No employer data is ever an input.</p>
+    <div class="signals">
+      <div class="scol mem">
+        <div class="sh"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="#fff" stroke-width="1.7"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/></svg>From the member</div>
+        <table>
+          <tr><td>Language</td><td>Mother tongue chosen at onboarding, + any secondary/bridge languages.<span class="src">onboarding · signature step</span></td></tr>
+          <tr><td>Cultural context</td><td>e.g. New to Italy · Working abroad · Studying · Raising a family · Long-term resident.<span class="src">onboarding</span></td></tr>
+          <tr><td>Focus area</td><td>What they want support with — settling in, work-life balance, career confidence, etc.<span class="src">baseline self-assessment</span></td></tr>
+          <tr><td>Availability</td><td>Preferred days/times and how soon they want to start.<span class="src">booking</span></td></tr>
+          <tr><td>Plan</td><td>Free vs paid — gates whether 1:1 booking is available.<span class="src">Stripe entitlement</span></td></tr>
+        </table>
+      </div>
+      <div class="scol fac">
+        <div class="sh"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 3a4 4 0 100 8 4 4 0 000-8z" stroke="#fff" stroke-width="1.7"/><path d="M5 21c0-4 3-6 7-6s7 2 7 6" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/></svg>From the facilitator</div>
+        <table>
+          <tr><td>Languages</td><td>Each with proficiency — <b>native</b>, professional, conversational.<span class="src">facilitator profile</span></td></tr>
+          <tr><td>Cultural background</td><td>Origin, region, and lived experience (e.g. relocated to Italy themselves).<span class="src">facilitator profile</span></td></tr>
+          <tr><td>Focus / specialties</td><td>The areas they support, matched against member focus.<span class="src">facilitator profile</span></td></tr>
+          <tr><td>Availability &amp; capacity</td><td>Open slots + current caseload vs max.<span class="src">availability calendar</span></td></tr>
+          <tr><td>Status</td><td>Active + vetting complete — a precondition, not a score.<span class="src">ops / vetting</span></td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODEL -->
+  <div class="sec">
+    <p class="eyebrow">The model</p>
+    <h2>Two stages: filter, then score</h2>
+    <p class="sub">First, hard filters remove anyone who <em>cannot</em> serve this member. Then the survivors are scored on weighted soft signals and ranked. Two stages, so the language rule can never be outweighed.</p>
+
+    <h3 style="font-family:var(--font-d);font-size:15px;margin:0 0 10px;color:var(--ink)">Stage 1 — Hard filters <span style="font-weight:400;color:var(--ink-faint);font-size:12px">(pass / fail — no partial credit)</span></h3>
+    <div class="filters" style="margin-bottom:24px">
+      <div class="filt"><span class="fl">Language</span><span class="fv">Facilitator speaks the member's <b>chosen language</b> at professional level or above. <b>No exceptions in v1.</b></span></div>
+      <div class="filt"><span class="fl">Status</span><span class="fv">Facilitator is active and has completed vetting.</span></div>
+      <div class="filt"><span class="fl">Availability</span><span class="fv">Has at least one open slot inside the member's booking window.</span></div>
+      <div class="filt"><span class="fl">Capacity</span><span class="fv">Current caseload is below their maximum.</span></div>
+    </div>
+
+    <h3 style="font-family:var(--font-d);font-size:15px;margin:0 0 10px;color:var(--ink)">Stage 2 — Weighted score <span style="font-weight:400;color:var(--ink-faint);font-size:12px">(each signal normalized 0–1, then × weight; weights sum to 100)</span></h3>
+    <table class="grid">
+      <thead><tr><th>Signal</th><th>Weight</th><th>What earns a high score</th></tr></thead>
+      <tbody>
+        <tr><td class="dim">Language quality</td><td><span class="wt">30</span><span class="bar" style="width:90px"></span></td><td>Native mother-tongue match scores 1.0; professional fluency scores lower. The member's language, spoken <em>as</em> theirs.</td></tr>
+        <tr><td class="dim">Cultural alignment</td><td><span class="wt">25</span><span class="bar" style="width:75px"></span></td><td>Shared or adjacent cultural background, same region, and lived experience of relocation.</td></tr>
+        <tr><td class="dim">Focus overlap</td><td><span class="wt">20</span><span class="bar" style="width:60px"></span></td><td>Facilitator specialties cover the member's stated focus area.</td></tr>
+        <tr><td class="dim">Availability fit</td><td><span class="wt">15</span><span class="bar" style="width:45px"></span></td><td>Has a slot soon and within preferred days/times.</td></tr>
+        <tr><td class="dim">Fairness boost</td><td><span class="wt">10</span><span class="bar" style="width:30px"></span></td><td>Lightly favors under-utilized and newer (vetted) facilitators. <b>Internal only — never shown as a reason.</b></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- FORMULA -->
+  <div class="sec">
+    <p class="eyebrow">The formula</p>
+    <h2>Scoring, in pseudocode</h2>
+    <p class="sub">Deliberately simple and inspectable. Anyone on the team can read it, and any score can be traced back to its signals.</p>
+<pre><span class="k">function</span> rankFacilitators(member, facilitators):
+  <span class="c"># Stage 1 — eliminate anyone who cannot serve this member</span>
+  eligible = [f <span class="k">for</span> f <span class="k">in</span> facilitators <span class="k">if</span>
+      speaksLanguage(f, member.language, minProficiency=<span class="s">"professional"</span>)
+      <span class="k">and</span> f.active <span class="k">and</span> f.vetted
+      <span class="k">and</span> hasOpenSlot(f, member.window)
+      <span class="k">and</span> caseload(f) &lt; f.maxCaseload ]
+
+  <span class="c"># Stage 2 — score the survivors</span>
+  <span class="k">for</span> f <span class="k">in</span> eligible:
+    f.score = <span class="n">0.30</span>*languageQuality(f, member)     <span class="c"># native &gt; professional</span>
+            + <span class="n">0.25</span>*culturalAlignment(f, member)   <span class="c"># region + lived experience</span>
+            + <span class="n">0.20</span>*focusOverlap(f, member)        <span class="c"># specialties ∩ needs</span>
+            + <span class="n">0.15</span>*availabilityFit(f, member)     <span class="c"># soon + preferred times</span>
+            + <span class="n">0.10</span>*fairnessBoost(f)               <span class="c"># exposure for new/under-used</span>
+    f.display = round(f.score * <span class="n">100</span>)
+    f.reasons = topReasons(f, member, max=<span class="n">3</span>)     <span class="c"># human-readable, in member.language</span>
+
+  <span class="k">return</span> sortDesc(eligible, by=<span class="s">"score"</span>)[:<span class="n">3</span>]        <span class="c"># show top 3, tie-break on fairness</span></pre>
+  </div>
+
+  <!-- WHY THIS MATCH -->
+  <div class="sec">
+    <p class="eyebrow">Explainability</p>
+    <h2>How "why this match" is generated</h2>
+    <p class="sub">Reasons are not decoration — they're the top-contributing signals, turned into a sentence in the member's own language. Show the 2–3 highest contributors above a threshold; drop anything below it; never surface the fairness boost.</p>
+    <table class="grid rmap">
+      <thead><tr><th>Contributing signal</th><th>Becomes (shown in member's language)</th></tr></thead>
+      <tbody>
+        <tr><td>Language quality — native</td><td><span class="rquote">Shares your mother tongue — sessions fully in {language}</span></td></tr>
+        <tr><td>Cultural — lived relocation</td><td><span class="rquote">Relocated to Italy themselves — knows the transition</span></td></tr>
+        <tr><td>Cultural — same region</td><td><span class="rquote">From the same region as you</span></td></tr>
+        <tr><td>Focus overlap</td><td><span class="rquote">Focus: {member's focus area}</span></td></tr>
+        <tr><td>Availability fit</td><td><span class="rquote">Has a slot this {day}</span></td></tr>
+        <tr><td>Fairness boost</td><td style="color:var(--ink-faint);font-style:italic">Never shown — internal ranking signal only</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- FAIRNESS + FALLBACK -->
+  <div class="sec">
+    <p class="eyebrow">Edge handling</p>
+    <h2>Cold-start, ties &amp; the no-match ladder</h2>
+    <div class="two" style="margin-bottom:22px">
+      <div class="box">
+        <h4>Cold-start &amp; tie-breaks</h4>
+        <ul>
+          <li><b>New facilitators</b> get a neutral baseline (no ratings used) plus the fairness boost, so they accrue sessions and become rankable on real data by Phase 2.</li>
+          <li><b>Ties</b> break toward the higher fairness boost — spreading demand across the network.</li>
+          <li><b>Repeat exposure</b> is dampened so the same three faces don't always surface first.</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h4>Privacy inside matching</h4>
+        <ul>
+          <li>The engine reads member context to rank, but the facilitator card shows only <b>privacy-safe</b> context.</li>
+          <li><b>Employer data is never</b> an input or output.</li>
+          <li>Match reasons expose the member's <em>own</em> stated context back to them — nothing new is inferred and shared.</li>
+        </ul>
+      </div>
+    </div>
+    <h3 style="font-family:var(--font-d);font-size:15px;margin:0 0 12px;color:var(--ink)">When no facilitator passes the filters — the fallback ladder</h3>
+    <div class="ladder">
+      <div class="lstep"><p><b>Widen availability first.</b> Extend the booking window before touching anything about language or culture — supply, not fit, is usually the gap.</p></div>
+      <div class="lstep"><p><b>Offer a bridge language, clearly flagged.</b> Only if the member indicated a secondary language they're comfortable in — and say so explicitly. Never silent.</p></div>
+      <div class="lstep"><p><b>Waitlist + notify.</b> Register interest in their mother tongue and alert them the moment a match opens. The language requirement stays intact.</p></div>
+      <div class="lstep"><p><b>Meanwhile, serve value.</b> Surface an in-language self-guided resource so the member isn't left empty-handed while supply catches up.</p></div>
+    </div>
+  </div>
+
+  <!-- WORKED EXAMPLE -->
+  <div class="sec">
+    <p class="eyebrow">Worked example</p>
+    <h2>One member, three facilitators</h2>
+    <p class="sub">This is the same scenario the prototype showed — now with real, traceable scores replacing the placeholder percentages.</p>
+    <div class="member-card">
+      <p class="ml">Member — Amir</p>
+      <p class="mv">Language: <b class="ar">العربية</b> <b>Arabic (mother tongue)</b> · Context: <b>New to Italy</b> · Focus: <b>settling in &amp; work-life balance</b> · Prefers: <b>weekday evenings</b>, wants to start this week</p>
+    </div>
+
+    <div class="rank win">
+      <div class="rtop">
+        <div><p class="rn">Layla H.</p><p class="rmeta">Arabic (native) · English · relocated to Italy · focus: settling-in, work-life balance · Thu 18:00 open</p></div>
+        <div class="score"><div class="pct">92%</div><div class="pl">match</div></div>
+      </div>
+      <div class="calc">lang <b>1.0×30=30</b> · culture <b>0.92×25=23</b> · focus <b>1.0×20=20</b> · avail(Thu eve) <b>0.95×15=14</b> · fairness <b>0.5×10=5</b> → <b>92</b></div>
+      <div class="whyrow"><span class="w">Shares your mother tongue</span><span class="w">Relocated to Italy herself</span><span class="w">Focus: settling in</span></div>
+    </div>
+
+    <div class="rank">
+      <div class="rtop">
+        <div><p class="rn">Youssef A.</p><p class="rmeta">Arabic (native) · Italian · relocated · focus: career &amp; workplace confidence · Fri 12:30 open · newer facilitator</p></div>
+        <div class="score"><div class="pct">80%</div><div class="pl">match</div></div>
+      </div>
+      <div class="calc">lang <b>1.0×30=30</b> · culture <b>0.80×25=20</b> · focus <b>0.55×20=11</b> · avail(Fri midday) <b>0.60×15=9</b> · fairness <b>0.80×10=8</b> → <b>80</b></div>
+      <div class="whyrow"><span class="w">Shares your mother tongue</span><span class="w">Also fluent in Italian</span><span class="w">Focus: workplace confidence</span></div>
+    </div>
+
+    <div class="rank out">
+      <div class="rtop">
+        <div><p class="rn">Marco B.</p><p class="rmeta">Italian (native) · professional English · focus: general wellbeing · many slots</p></div>
+        <div class="score"><div class="pct">Filtered out</div><div class="pl">stage 1</div></div>
+      </div>
+      <div class="calc">Fails the <b>language</b> hard filter — does not speak Arabic. Never scored, regardless of availability.</div>
+    </div>
+
+    <p style="font-size:12px;color:var(--ink-soft);margin:14px 0 0;line-height:1.5;">Note the separation: Layla and Youssef share the mother-tongue gate, but Layla's lived-relocation experience and exact focus match pull her clearly ahead — <b>while Youssef's fairness boost keeps a strong, newer facilitator visible.</b> Marco has the most availability and is excluded anyway. That ordering <em>is</em> the product.</p>
+  </div>
+
+  <!-- DATA MODEL + SCOPE -->
+  <div class="sec">
+    <p class="eyebrow">Build notes</p>
+    <h2>Scope for v1</h2>
+    <div class="two">
+      <div class="box">
+        <h4>In v1 — build this</h4>
+        <ul>
+          <li>Rules-based two-stage matcher with the weights above.</li>
+          <li>A <b>tunable weights config</b> — weights live in config, not hard-coded, so ops can adjust without a deploy.</li>
+          <li>Reason generator wired to the localized string layer.</li>
+          <li>The fallback ladder and waitlist.</li>
+        </ul>
+      </div>
+      <div class="box defer">
+        <h4>Deferred to v2 (Phase 2–3)</h4>
+        <ul>
+          <li><b>Learned weights</b> tuned on real usage data.</li>
+          <li><b>Outcome- &amp; rating-based</b> ranking once history exists.</li>
+          <li><b>Group / masterclass</b> matching.</li>
+          <li>Re-match on dissatisfaction &amp; continuity preference (same facilitator).</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- METRICS -->
+  <div class="sec">
+    <p class="eyebrow">Is it working?</p>
+    <h2>Success metrics</h2>
+    <div class="metrics">
+      <div class="metric" style="--mc:var(--teal)"><p class="mt">Match acceptance</p><p>% of members who book from the top-3 offered.</p></div>
+      <div class="metric" style="--mc:var(--g2)"><p class="mt">Time to first session</p><p>From onboarding to first booked session.</p></div>
+      <div class="metric" style="--mc:var(--g3)"><p class="mt">Rebooking rate</p><p>% who book a second session with the same match.</p></div>
+      <div class="metric" style="--mc:var(--amber-deep)"><p class="mt">Reason comprehension</p><p>Do members say the "why" felt true? (usability signal)</p></div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span class="note">Weights and normalized values are the recommended v1 starting point, held in config for tuning — not fixed constants. The worked-example scores replace the placeholder 96% / 89% shown in the prototype; real scoring creates clearer, more honest separation, which is the point.</span>
+    <span class="tag2">Tamia4Life · AZM Venture Portfolio</span>
+  </div>
+
+</div>
+</body>
+</html>
