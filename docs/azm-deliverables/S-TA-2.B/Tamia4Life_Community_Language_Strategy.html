@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tamia4Life — Community &amp; Language Strategy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Noto+Kufi+Arabic:wght@400;500;700&family=Noto+Sans+Bengali:wght@400;500;700&family=Noto+Sans+Devanagari:wght@400;500;700&family=Noto+Sans+Gurmukhi:wght@400;500;700&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1f2e2c; --ink-soft:#4a5b58; --ink-faint:#7d8c88;
+    --paper:#f3f0ea; --card:#fff; --line:#e2ddd3; --line-soft:#ece8df;
+    --teal:#0f6d68; --teal-deep:#0a4f4b; --teal-bright:#0d9488; --teal-wash:#e7f0ee;
+    --amber:#e7a13a; --amber-deep:#cf871e; --amber-wash:#f9edd8; --clay:#c56a52;
+    --g2:#2f8a6e; --g3:#7ba33f; --danger:#b4442f;
+    --font-d:"Fraunces",Georgia,serif;
+    --font-ui:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{background:var(--paper);color:var(--ink);font-family:var(--font-ui);line-height:1.5;
+    -webkit-font-smoothing:antialiased;padding:44px 24px 60px;}
+  .sheet{max-width:1080px;margin:0 auto;background:var(--card);border:1px solid var(--line);
+    border-radius:22px;box-shadow:0 18px 54px rgba(31,46,44,.10);overflow:hidden;}
+
+  .head{padding:38px 46px 30px;border-bottom:1px solid var(--line-soft);
+    background:radial-gradient(120% 140% at 100% 0%, rgba(231,161,58,.10), transparent 55%),linear-gradient(180deg,#fbfaf7,#fff);
+    display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap;}
+  .brand{display:flex;align-items:center;gap:15px;}
+  .mark{width:52px;height:52px;flex:none;}
+  .kicker{font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--teal);font-weight:700;margin:0 0 3px;}
+  .brand-txt h1{font-family:var(--font-d);font-size:27px;font-weight:600;margin:0;letter-spacing:-.01em;}
+  .head-right{text-align:right;max-width:400px;}
+  .head-right .lead{font-family:var(--font-d);font-size:15px;font-style:italic;color:var(--teal-deep);margin:0 0 6px;}
+  .head-right p{font-size:12.5px;color:var(--ink-soft);margin:0;}
+  .head-right b{color:var(--clay);font-weight:600;}
+
+  .sec{padding:32px 46px;border-bottom:1px solid var(--line-soft);}
+  .sec:last-child{border-bottom:none;}
+  .eyebrow{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--amber-deep);font-weight:700;margin:0 0 6px;}
+  .sec h2{font-family:var(--font-d);font-size:22px;font-weight:600;margin:0 0 4px;letter-spacing:-.01em;}
+  .sec .sub{font-size:13px;color:var(--ink-soft);margin:0 0 20px;max-width:780px;}
+
+  .keyrule{display:flex;gap:14px;align-items:flex-start;background:var(--teal-wash);border-radius:14px;padding:16px 18px;margin-bottom:20px;}
+  .keyrule svg{flex:none;margin-top:2px;}
+  .keyrule p{margin:0;font-size:14px;color:var(--teal-deep);line-height:1.5;}
+  .keyrule b{font-weight:700;}
+
+  table.grid{width:100%;border-collapse:collapse;font-size:12.3px;}
+  table.grid thead th{text-align:left;font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-faint);font-weight:700;padding:0 11px 9px;border-bottom:1.5px solid var(--line);}
+  table.grid tbody td{padding:10px 11px;border-bottom:1px solid var(--line-soft);vertical-align:top;line-height:1.4;}
+  table.grid tbody tr:last-child td{border-bottom:none;}
+  .rk{font-family:var(--font-d);font-weight:700;color:var(--teal);width:1%;}
+  .nat{font-weight:600;color:var(--teal-deep);white-space:nowrap;}
+  .num{font-family:var(--mono);font-size:11.5px;white-space:nowrap;}
+  .scr{font-size:11.5px;}
+  tr.excl td{background:#faf6f4;color:var(--ink-faint);}
+  tr.excl .nat{color:var(--danger);}
+  .strike{text-decoration:line-through;}
+
+  .pill{display:inline-block;font-size:9.5px;font-weight:700;letter-spacing:.04em;padding:3px 8px;border-radius:999px;}
+  .pill.rtl{background:#f6e0da;color:var(--danger);}
+  .pill.new{background:var(--amber-wash);color:var(--amber-deep);}
+  .pill.have{background:var(--teal-wash);color:var(--teal-deep);}
+  .pill.w1{background:#e5f0e0;color:#4c7326;}
+  .pill.w2{background:var(--amber-wash);color:var(--amber-deep);}
+  .pill.w3{background:#eef0ee;color:var(--ink-faint);}
+
+  /* script specimens */
+  .specs{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+  .spec{border:1px solid var(--line-soft);border-radius:12px;padding:13px 15px;background:#fbfaf7;}
+  .spec .sl{font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);font-weight:700;margin:0 0 7px;}
+  .spec .sv{font-size:17px;color:var(--ink);line-height:1.9;}
+  .spec .sf{font-family:var(--mono);font-size:10px;color:var(--teal);margin-top:8px;}
+  .bn{font-family:"Noto Sans Bengali",sans-serif;}
+  .dv{font-family:"Noto Sans Devanagari",sans-serif;}
+  .gu{font-family:"Noto Sans Gurmukhi",sans-serif;}
+  .ur{font-family:"Noto Nastaliq Urdu",serif;line-height:2.4 !important;}
+  .arb{font-family:"Noto Kufi Arabic",sans-serif;}
+
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .box{border:1px solid var(--line-soft);border-radius:14px;padding:16px 18px;}
+  .box.warn{border-left:3px solid var(--danger);background:#fbf7f5;}
+  .box.good{border-left:3px solid var(--g2);background:#f7faf8;}
+  .box h4{font-family:var(--font-d);font-size:15px;font-weight:600;margin:0 0 8px;}
+  .box p{font-size:12.5px;color:var(--ink-soft);margin:0 0 8px;line-height:1.5;}
+  .box p:last-child{margin-bottom:0;}
+  .box ul{margin:0;padding:0;list-style:none;display:grid;gap:6px;}
+  .box li{position:relative;padding-left:16px;font-size:12.3px;color:var(--ink);line-height:1.45;}
+  .box li::before{content:"";position:absolute;left:0;top:6px;width:6px;height:6px;border-radius:2px;transform:rotate(45deg);background:var(--teal);}
+  .box.warn li::before{background:var(--danger);}
+  .box li b{color:var(--teal-deep);font-weight:600;}
+
+  /* wave sequencing */
+  .waves{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+  .wave{border:1px solid var(--line-soft);border-radius:14px;padding:15px 17px;border-top:3px solid var(--wc);background:#fff;}
+  .wave .wl{font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--wc);margin:0 0 4px;}
+  .wave h4{font-family:var(--font-d);font-size:15px;font-weight:600;margin:0 0 8px;}
+  .wave .langs{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:9px;}
+  .wave .lg{font-size:11.5px;font-weight:600;padding:4px 10px;border-radius:999px;background:var(--teal-wash);color:var(--teal-deep);}
+  .wave p{font-size:11.8px;color:var(--ink-soft);margin:0;line-height:1.45;}
+
+  /* eu map */
+  .eu{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+  .mkt{background:#fbfaf7;border:1px solid var(--line-soft);border-radius:12px;padding:13px 15px;}
+  .mkt .mn{font-family:var(--font-d);font-size:14.5px;font-weight:600;margin:0 0 5px;color:var(--teal-deep);}
+  .mkt p{font-size:11.8px;color:var(--ink-soft);margin:0;line-height:1.45;}
+  .mkt b{color:var(--ink);font-weight:600;}
+
+  /* corrections */
+  .corr{display:grid;gap:9px;}
+  .cr{display:flex;gap:12px;align-items:flex-start;background:var(--amber-wash);border-left:3px solid var(--amber-deep);border-radius:0 10px 10px 0;padding:11px 15px;}
+  .cr .cl{font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--amber-deep);white-space:nowrap;padding-top:2px;min-width:104px;}
+  .cr .cv{font-size:12.4px;color:var(--ink);line-height:1.45;}
+  .cr .cv b{color:var(--teal-deep);font-weight:600;}
+  code{font-family:var(--mono);font-size:11.5px;background:#eef0ee;padding:1px 6px;border-radius:4px;color:var(--teal-deep);}
+
+  .foot{padding:22px 46px 30px;background:#fbfaf7;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+  .foot .note{font-size:11px;color:var(--ink-faint);font-style:italic;max-width:660px;line-height:1.5;}
+  .foot .tag2{font-size:11px;color:var(--ink-faint);font-weight:500;}
+
+  @media (max-width:760px){
+    body{padding:20px 12px 40px;}
+    .head,.sec,.foot{padding-left:22px;padding-right:22px;}
+    .two,.specs,.waves,.eu{grid-template-columns:1fr;}
+    .head-right{text-align:left;}
+    table.grid{font-size:11px;}
+  }
+  @media print{
+    body{background:#fff;padding:0;}
+    .sheet{box-shadow:none;border:none;border-radius:0;max-width:none;}
+    .wave,.box,.spec,.mkt{break-inside:avoid;}
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <!-- HEADER -->
+  <div class="head">
+    <div class="brand">
+      <svg class="mark" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-label="Tamia4Life mark">
+        <circle cx="32" cy="47" r="4.2" fill="#e7a13a"/>
+        <path d="M32 47 C 31.2 42 32.8 40 32 36" stroke="#0f6d68" stroke-width="3" stroke-linecap="round" fill="none"/>
+        <path d="M32 43 C 30.5 33 25 26 15.5 21.5 C 17.5 31 22.5 38.5 32 43 Z" fill="#0d9488"/>
+        <path d="M32 43 C 33.5 29 41 20 51.5 15 C 49 27 43 37.5 32 43 Z" fill="#0f6d68"/>
+        <path d="M32 43 C 35 34 41 25 48 18.5" stroke="#ccfbf1" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+        <path d="M32 43 C 29.5 35 25 29 19 24" stroke="#ccfbf1" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+      </svg>
+      <div class="brand-txt">
+        <p class="kicker">Directional · Community &amp; Language Strategy</p>
+        <h1>Tamia4Life</h1>
+      </div>
+    </div>
+    <div class="head-right">
+      <p class="lead">Ten communities. Italy first. Europe by design.</p>
+      <p>Which communities we serve, which languages that actually means, and what it changes in what we've already built. <b>Chinese excluded by decision.</b></p>
+    </div>
+  </div>
+
+  <!-- THE MARKET -->
+  <div class="sec">
+    <p class="eyebrow">The ground truth</p>
+    <h2>The ten target communities in Italy</h2>
+    <p class="sub">As of January 2026 Italy's foreign resident population reached about <b>5.56 million — 9.4% of the country</b>, growing 3.5% in a year, with roughly <b>58% concentrated in the North</b>. Ten nationalities alone make up nearly two-thirds of that population — which is exactly why a ten-community focus is the right unit of strategy.</p>
+    <table class="grid">
+      <thead><tr><th>#</th><th>Community</th><th>Scale in Italy</th><th>Primary languages we'd deliver in</th><th>Script</th></tr></thead>
+      <tbody>
+        <tr><td class="rk">1</td><td class="nat">Romanian</td><td class="num">~1,053,000 · 19.6%</td><td class="scr">Romanian</td><td><span class="pill have">Latin</span></td></tr>
+        <tr><td class="rk">2</td><td class="nat">Albanian</td><td class="num">~7.7%</td><td class="scr">Albanian</td><td><span class="pill have">Latin</span></td></tr>
+        <tr><td class="rk">3</td><td class="nat">Moroccan</td><td class="num">~416,000 · 7.7%</td><td class="scr">Arabic (Darija), French, Amazigh</td><td><span class="pill have">Arabic</span> <span class="pill rtl">RTL</span></td></tr>
+        <tr class="excl"><td class="rk">—</td><td class="nat"><span class="strike">Chinese</span></td><td class="num">~5.8%</td><td class="scr">Excluded by strategic decision</td><td><span class="pill w3">n/a</span></td></tr>
+        <tr><td class="rk">4</td><td class="nat">Ukrainian</td><td class="num">~5.3%</td><td class="scr">Ukrainian, Russian (bridge)</td><td><span class="pill have">Cyrillic</span></td></tr>
+        <tr><td class="rk">5</td><td class="nat">Bangladeshi</td><td class="num">~176,000+ · 3%+</td><td class="scr">Bengali</td><td><span class="pill new">Bengali</span></td></tr>
+        <tr><td class="rk">6</td><td class="nat">Indian</td><td class="num">~3%+</td><td class="scr">Punjabi, Hindi, Bengali, Malayalam, Tamil</td><td><span class="pill new">Gurmukhi</span> <span class="pill new">Devanagari</span></td></tr>
+        <tr><td class="rk">7</td><td class="nat">Egyptian</td><td class="num">~3%+</td><td class="scr">Arabic (Masri)</td><td><span class="pill have">Arabic</span> <span class="pill rtl">RTL</span></td></tr>
+        <tr><td class="rk">8</td><td class="nat">Pakistani</td><td class="num">~165,000 · 3%+</td><td class="scr">Urdu, Punjabi, Pashto</td><td><span class="pill new">Nastaliq</span> <span class="pill rtl">RTL</span></td></tr>
+        <tr><td class="rk">9</td><td class="nat">Filipino</td><td class="num">~3%+</td><td class="scr">Tagalog, English</td><td><span class="pill have">Latin</span></td></tr>
+        <tr><td class="rk">10</td><td class="nat">Moldovan</td><td class="num">~88,000+ Orthodox</td><td class="scr">Romanian, Russian</td><td><span class="pill have">Latin</span> <span class="pill have">Cyrillic</span></td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:11.5px;color:var(--ink-faint);margin:14px 0 0;line-height:1.5;font-style:italic">Peruvian, Senegalese, Sri Lankan, Nigerian and Tunisian communities sit just outside the ten and are the natural first candidates for review. Bangladesh is the fastest-moving of the group — it now ranks among the top three nationalities for new residence permits in over half of Italy's provinces, and citizenship acquisitions from the Indian subcontinent are rising sharply (India +30%, Bangladesh +19% year on year).</p>
+  </div>
+
+  <!-- LANGUAGE ≠ NATIONALITY -->
+  <div class="sec">
+    <p class="eyebrow">The insight that changes the build</p>
+    <h2>Language is not nationality</h2>
+    <div class="keyrule">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#0a4f4b" stroke-width="1.7"/><path d="M12 8v5M12 16h.01" stroke="#0a4f4b" stroke-width="1.9" stroke-linecap="round"/></svg>
+      <p><b>Ten communities do not mean ten languages.</b> India alone spans Punjabi, Hindi, Bengali, Malayalam and Tamil. Meanwhile Bengali serves both Bangladesh <em>and</em> West Bengali Indians; Arabic serves Morocco <em>and</em> Egypt; Romanian serves Romania <em>and</em> Moldova. The member's language — not their passport — must be the unit the product is built on.</p>
+    </div>
+    <div class="two">
+      <div class="box good">
+        <h4>Where one language buys two communities</h4>
+        <ul>
+          <li><b>Romanian</b> → Romanian + Moldovan (two of the top ten, one language asset).</li>
+          <li><b>Arabic</b> → Moroccan + Egyptian, though the dialects differ sharply (Darija vs Masri) — a <b>cultural matching</b> problem, not a language one.</li>
+          <li><b>Bengali</b> → Bangladeshi + West Bengali Indian.</li>
+          <li><b>Punjabi</b> → Indian Sikh + Pakistani Punjabi. Same spoken language, <b>two different scripts</b> (Gurmukhi vs Shahmukhi) — a facilitator can serve both in session, but written content cannot be shared.</li>
+        </ul>
+      </div>
+      <div class="box warn">
+        <h4>Where one community needs several</h4>
+        <ul>
+          <li><b>India</b> is not a language. Punjabi (large Sikh farming population in the North) is likely the highest-value Indian entry point, not Hindi.</li>
+          <li><b>Pakistan</b> needs Urdu, but Punjabi and Pashto sit underneath it.</li>
+          <li><b>Morocco</b> may need French or Amazigh for some members, not only Arabic.</li>
+          <li><b>Ukraine</b> — Russian is a usable bridge for some, but a <b>politically sensitive</b> default. Never auto-assign it; offer it, and never as a fallback the member didn't choose.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <div class="sec">
+    <p class="eyebrow">What this forces technically</p>
+    <h2>Four new scripts — and one that leaves</h2>
+    <p class="sub">This is the most concrete consequence. The design system's font stack was built around a Chinese-inclusive assumption; it now needs three new Indic scripts and a Nastaliq face, and Chinese comes out. Better to absorb this in Phase 1 than retrofit it later — exactly the failure mode we've been guarding against.</p>
+    <div class="specs">
+      <div class="spec"><p class="sl">Bengali · Bangladesh + India</p><p class="sv bn">আপনার ভাষায় শুরু করি</p><p class="sf">Noto Sans Bengali · NEW</p></div>
+      <div class="spec"><p class="sl">Devanagari · Hindi</p><p class="sv dv">आइए आपकी भाषा में शुरू करें</p><p class="sf">Noto Sans Devanagari · NEW</p></div>
+      <div class="spec"><p class="sl">Gurmukhi · Punjabi (India)</p><p class="sv gu">ਆਓ ਤੁਹਾਡੀ ਭਾਸ਼ਾ ਵਿੱਚ ਸ਼ੁਰੂ ਕਰੀਏ</p><p class="sf">Noto Sans Gurmukhi · NEW</p></div>
+      <div class="spec"><p class="sl">Urdu · Pakistan <span class="pill rtl">RTL</span></p><p class="sv ur">آئیے آپ کی زبان میں شروع کرتے ہیں</p><p class="sf">Noto Nastaliq Urdu · NEW</p></div>
+      <div class="spec"><p class="sl">Arabic · Morocco + Egypt <span class="pill rtl">RTL</span></p><p class="sv arb">لنبدأ بلغتك</p><p class="sf">Noto Kufi Arabic · already in stack</p></div>
+      <div class="spec"><p class="sl">Latin + Cyrillic</p><p class="sv">Să începem · Почнімо</p><p class="sf">Inter + Noto Sans · already in stack</p></div>
+    </div>
+    <div class="box warn" style="margin-top:16px">
+      <h4>Urdu is the one that will bite</h4>
+      <p>Urdu is written in <b>Nastaliq</b>, not the Naskh style used for Arabic — it's steeply cursive, and glyphs need far more vertical room. A layout tuned for Arabic <em>will</em> clip Urdu. It needs its own line-height and font-size rules, and it must be tested on real strings, not placeholders. Treat Urdu as a distinct rendering target from Arabic, not a variant of it.</p>
+    </div>
+  </div>
+
+  <!-- SEQUENCING -->
+  <div class="sec">
+    <p class="eyebrow">Sequencing</p>
+    <h2>Launch languages, in waves</h2>
+    <p class="sub">Phase 1 ships 1–2 languages. The choice should balance community size, facilitator recruitability, and B2B reachability — not size alone. A defensible opening pair: <b>Arabic</b> (serves two top-ten communities, RTL already built and tested) plus <b>Romanian</b> (largest community by far, Latin script, and it carries Moldova too).</p>
+    <div class="waves">
+      <div class="wave" style="--wc:var(--g2)">
+        <p class="wl">Wave 1 · Phase 1 MVP</p>
+        <h4>Prove the model</h4>
+        <div class="langs"><span class="lg">Arabic</span><span class="lg">Romanian</span></div>
+        <p>Widest reach per unit of build. Arabic covers Moroccan + Egyptian and reuses the RTL work already done; Romanian covers the single largest community plus Moldovan, with no new script.</p>
+      </div>
+      <div class="wave" style="--wc:var(--amber-deep)">
+        <p class="wl">Wave 2 · Phase 2</p>
+        <h4>The South Asian bloc</h4>
+        <div class="langs"><span class="lg">Bengali</span><span class="lg">Urdu</span><span class="lg">Punjabi</span></div>
+        <p>The fastest-growing segment and the explicit strategic priority. Absorbs three new scripts at once — budget engineering time for Nastaliq specifically.</p>
+      </div>
+      <div class="wave" style="--wc:var(--teal)">
+        <p class="wl">Wave 3 · Phase 2–3</p>
+        <h4>Complete the ten</h4>
+        <div class="langs"><span class="lg">Ukrainian</span><span class="lg">Albanian</span><span class="lg">Tagalog</span><span class="lg">Hindi</span></div>
+        <p>Ukrainian also unlocks the strongest EU expansion markets. Albanian and Tagalog are Latin-script, so they're cheap adds once the content engine is mature.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- B2B TENSION -->
+  <div class="sec">
+    <p class="eyebrow">The tension worth naming</p>
+    <h2>Biggest community ≠ best B2B beachhead</h2>
+    <p class="sub">The revenue engine is employer-paid, so the target isn't simply the largest community — it's the largest community <em>reachable through an employer with a benefits budget</em>. These are not the same list, and pretending otherwise is how a good B2C product fails to find a B2B buyer.</p>
+    <div class="two">
+      <div class="box warn">
+        <h4>The mismatch</h4>
+        <ul>
+          <li>Several target communities concentrate in <b>sectors with thin or no welfare budgets</b> — domestic and care work, agriculture, small-scale food service, logistics subcontracting.</li>
+          <li>Employment is often via <b>micro-employers or cooperatives</b> with no HR function to sell to.</li>
+          <li>A community can be huge in Italy and still be commercially unreachable through the employer channel.</li>
+        </ul>
+      </div>
+      <div class="box good">
+        <h4>The wedge</h4>
+        <ul>
+          <li>Italy's <b>welfare aziendale</b> regime makes employer-funded wellbeing benefits tax-advantaged — a real, Italy-specific reason for an employer to say yes.</li>
+          <li>Target <b>large multicultural employers</b> — logistics, manufacturing, food processing, facilities management, large care cooperatives — where one contract covers thousands of workers across several of our ten communities at once.</li>
+          <li>Public and municipal integration budgets (Phase 4) reach the communities employers can't.</li>
+        </ul>
+      </div>
+    </div>
+    <p style="font-size:12.5px;color:var(--ink-soft);margin:16px 0 0;line-height:1.55;"><b>The practical implication:</b> pick the Phase&nbsp;0 pilot employer for the <em>overlap</em> — a large employer whose workforce is concentrated in our Wave&nbsp;1 languages. That single choice validates the B2C product and the B2B motion simultaneously, and it should be a deliberate filter on the letter-of-intent target list.</p>
+  </div>
+
+  <!-- EU SCALING -->
+  <div class="sec">
+    <p class="eyebrow">Scope</p>
+    <h2>Italy first — but the language assets travel</h2>
+    <p class="sub">The strategic gift of this community set is that it is <b>pan-European, not Italian-specific</b>. Every language asset built for Italy is redeployable into another EU market without rebuilding. Expansion becomes a facilitator-supply and go-to-market problem, not a product problem.</p>
+    <div class="eu">
+      <div class="mkt"><p class="mn">Spain</p><p>Romanian and Moroccan communities are both very large; Latin-American Spanish adds reach. <b>Wave 1 languages transfer almost intact.</b></p></div>
+      <div class="mkt"><p class="mn">Germany</p><p>Large Ukrainian, Romanian and Turkish populations. <b>Wave 3 Ukrainian unlocks it</b>; Turkish would be the one net-new investment.</p></div>
+      <div class="mkt"><p class="mn">Poland &amp; Czechia</p><p>The largest Ukrainian populations in Europe. A <b>single-language market entry</b> — unusually cheap to serve once Ukrainian exists.</p></div>
+      <div class="mkt"><p class="mn">France · Belgium · Netherlands</p><p>Moroccan and North African communities, plus strong South Asian presence in the Netherlands. <b>Arabic and Wave 2 both transfer.</b></p></div>
+    </div>
+    <p style="font-size:12.5px;color:var(--ink-soft);margin:16px 0 0;line-height:1.55;"><b>What this means for the build:</b> nothing in the product may hard-code Italy. Country becomes a first-class dimension alongside language and culture — in the data model, in matching (a member in Poland needs a facilitator licensed and time-zoned for Poland), and in compliance. Cheap to design in now; expensive to retrofit in Phase 3.</p>
+  </div>
+
+  <!-- CORRECTIONS -->
+  <div class="sec">
+    <p class="eyebrow">Consequences</p>
+    <h2>What changes in what we've already built</h2>
+    <p class="sub">These decisions land on existing artifacts. Worth correcting now, while everything is still cheap to change.</p>
+    <div class="corr">
+      <div class="cr"><span class="cl">Design System</span><span class="cv">Remove <code>Noto Sans SC</code> from <code>--t4l-font-ui</code>. Add <b>Noto Sans Bengali, Noto Sans Devanagari, Noto Sans Gurmukhi</b>, and <b>Noto Nastaliq Urdu</b> — the last with its own line-height rule.</span></div>
+      <div class="cr"><span class="cl">Prototype v0</span><span class="cv">The onboarding language grid shows <b>中文</b> as a headline option. Replace with <b>বাংলা · ਪੰਜਾਬੀ · اردو</b>, and re-test the selector with the new scripts.</span></div>
+      <div class="cr"><span class="cl">Matching engine</span><span class="cv">The spec's separation of language from cultural background <b>holds up</b> — but the data model must allow <b>multiple languages per member and facilitator</b>, with a script attribute, and add <b>country</b> as a filter dimension for EU scale.</span></div>
+      <div class="cr"><span class="cl">Phase 1 backlog</span><span class="cv">Epic 1 (i18n) grows: <b>four new scripts, two RTL systems</b> (Naskh and Nastaliq behave differently). Re-size before committing to the 3–4 month window.</span></div>
+      <div class="cr"><span class="cl">Phase 0 gate</span><span class="cv">Facilitator sourcing pilots should target <b>Wave 1 languages</b>, and the pilot-employer LOI target list should be filtered for workforce overlap with those languages.</span></div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span class="note">Population figures are drawn from ISTAT and ISMU reporting for 2025–2026 and are approximate — several communities are reported as a share of the foreign-resident total rather than an absolute count, and undocumented residents are not captured. Directionally reliable for strategy; verify precise figures before using them in investor or employer-facing material.</span>
+    <span class="tag2">Tamia4Life · AZM Venture Portfolio</span>
+  </div>
+
+</div>
+</body>
+</html>
