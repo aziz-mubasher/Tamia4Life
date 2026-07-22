@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tamia4Life — Design System v0.1 (Kaizen)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Noto+Sans:wght@400;500;600;700&family=Noto+Kufi+Arabic:wght@400;500;700&family=Noto+Sans+Bengali:wght@400;500;700&family=Noto+Sans+Devanagari:wght@400;500;700&family=Noto+Sans+Gurmukhi:wght@400;500;700&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  /* =========================================================
+     TAMIA4LIFE — DESIGN TOKENS v0.1
+     Changed in v0.1: font stack rebuilt for the ten-community
+     strategy. Noto Sans SC removed; Bengali, Devanagari,
+     Gurmukhi and Nastaliq Urdu added. See changelog below.
+     ========================================================= */
+  :root{
+    /* — brand color: primary (pine/teal) — */
+    --t4l-teal:#0f6d68;
+    --t4l-teal-deep:#0a4f4b;
+    --t4l-teal-bright:#0d9488;
+    --t4l-teal-wash:#e7f0ee;
+
+    /* — brand color: accent (amber, the seed) — */
+    --t4l-amber:#e7a13a;
+    --t4l-amber-deep:#cf871e;
+    --t4l-amber-wash:#f9edd8;
+
+    /* — brand color: clay (human warmth, sparing) — */
+    --t4l-clay:#c56a52;
+
+    /* — growth ramp: seed → canopy — */
+    --t4l-grow-0:#0a4f4b;
+    --t4l-grow-1:#0f6d68;
+    --t4l-grow-2:#2f8a6e;
+    --t4l-grow-3:#7ba33f;
+    --t4l-grow-4:#cf871e;
+
+    /* — neutrals — */
+    --t4l-ink:#1f2e2c;
+    --t4l-ink-soft:#4a5b58;
+    --t4l-ink-faint:#7d8c88;
+    --t4l-paper:#f3f0ea;
+    --t4l-card:#ffffff;
+    --t4l-line:#e2ddd3;
+    --t4l-line-soft:#ece8df;
+
+    /* — semantic — */
+    --t4l-success:#2f8a6e;
+    --t4l-warning:#cf871e;
+    --t4l-danger:#b4442f;
+
+    /* — type: display (Latin headings) — */
+    --t4l-font-display:"Fraunces",Georgia,"Times New Roman",serif;
+
+    /* — type: UI/body — Noto-first, ten-community script coverage —
+         Covers: Latin (Romanian, Albanian, Tagalog, Italian, English),
+         Arabic (Moroccan Darija, Egyptian Masri), Cyrillic (Ukrainian,
+         Russian), Bengali, Devanagari (Hindi), Gurmukhi (Punjabi).
+         Urdu is NOT in this stack — it has its own face, see below. */
+    --t4l-font-ui:"Inter","Noto Sans","Noto Kufi Arabic","Noto Sans Bengali","Noto Sans Devanagari","Noto Sans Gurmukhi",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+
+    /* — type: Urdu · Nastaliq — a SEPARATE rendering target.
+         Nastaliq is steeply cursive and needs far more vertical
+         room than Arabic Naskh. Never inherit Arabic metrics. */
+    --t4l-font-urdu:"Noto Nastaliq Urdu",serif;
+    --t4l-lineheight-urdu:2.4;
+    --t4l-size-adjust-urdu:1.05;
+
+    /* — type scale — */
+    --t4l-size-display:34px;
+    --t4l-size-h1:26px;
+    --t4l-size-h2:20px;
+    --t4l-size-h3:16px;
+    --t4l-size-body:14px;
+    --t4l-size-small:12.5px;
+    --t4l-size-caption:11px;
+
+    /* — spacing (4px base) — */
+    --t4l-space-1:4px;  --t4l-space-2:8px;  --t4l-space-3:12px;
+    --t4l-space-4:16px; --t4l-space-5:24px; --t4l-space-6:32px;
+    --t4l-space-7:48px; --t4l-space-8:64px;
+
+    /* — radius — */
+    --t4l-radius-sm:8px; --t4l-radius-md:12px; --t4l-radius-lg:16px;
+    --t4l-radius-xl:22px; --t4l-radius-pill:999px;
+
+    /* — elevation — */
+    --t4l-elev-1:0 2px 8px rgba(31,46,44,.06);
+    --t4l-elev-2:0 8px 24px rgba(31,46,44,.10);
+    --t4l-elev-3:0 18px 54px rgba(31,46,44,.12);
+  }
+
+  /* ---- THE URDU RULE (new in v0.1) ----
+     Any element in Urdu gets the Nastaliq face plus its own
+     line-height. Apply via [lang="ur"] — never by assuming
+     dir="rtl" implies Arabic. */
+  [lang="ur"], .t4l-urdu{
+    font-family:var(--t4l-font-urdu);
+    line-height:var(--t4l-lineheight-urdu);
+    font-size:calc(1em * var(--t4l-size-adjust-urdu));
+  }
+
+  /* =========================================================
+     PAGE CHROME (reference doc only)
+     ========================================================= */
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{background:var(--t4l-paper);color:var(--t4l-ink);
+    font-family:var(--t4l-font-ui);line-height:1.5;padding:44px 24px 70px;
+    -webkit-font-smoothing:antialiased;}
+  .sheet{max-width:1060px;margin:0 auto;background:var(--t4l-card);
+    border:1px solid var(--t4l-line);border-radius:var(--t4l-radius-xl);
+    box-shadow:var(--t4l-elev-3);overflow:hidden;}
+
+  .head{padding:38px 46px 30px;border-bottom:1px solid var(--t4l-line-soft);
+    background:radial-gradient(120% 140% at 100% 0%, rgba(231,161,58,.10), transparent 55%),linear-gradient(180deg,#fbfaf7,#fff);
+    display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap;}
+  .brand{display:flex;align-items:center;gap:15px;}
+  .mark{width:52px;height:52px;flex:none;}
+  .kicker{font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--t4l-teal);font-weight:700;margin:0 0 3px;}
+  .brand-txt h1{font-family:var(--t4l-font-display);font-size:27px;font-weight:600;margin:0;letter-spacing:-.01em;}
+  .head-right{text-align:right;max-width:380px;}
+  .head-right .lead{font-family:var(--t4l-font-display);font-size:15px;font-style:italic;color:var(--t4l-teal-deep);margin:0 0 6px;}
+  .head-right p{font-size:12.5px;color:var(--t4l-ink-soft);margin:0;}
+  .head-right b{color:var(--t4l-clay);font-weight:600;}
+
+  .sec{padding:34px 46px;border-bottom:1px solid var(--t4l-line-soft);}
+  .sec:last-child{border-bottom:none;}
+  .eyebrow{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--t4l-amber-deep);font-weight:700;margin:0 0 6px;}
+  .sec h2{font-family:var(--t4l-font-display);font-size:22px;font-weight:600;margin:0 0 4px;letter-spacing:-.01em;}
+  .sec .sub{font-size:13px;color:var(--t4l-ink-soft);margin:0 0 22px;max-width:740px;}
+
+  /* changelog */
+  .chg{display:grid;gap:9px;}
+  .cl{display:flex;gap:12px;align-items:flex-start;border-radius:0 10px 10px 0;padding:11px 15px;}
+  .cl.rm{background:#fbf5f3;border-left:3px solid var(--t4l-danger);}
+  .cl.add{background:#f4f9f6;border-left:3px solid var(--t4l-success);}
+  .cl.chgd{background:var(--t4l-amber-wash);border-left:3px solid var(--t4l-amber-deep);}
+  .cl .tagl{font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;white-space:nowrap;padding-top:2px;min-width:74px;}
+  .cl.rm .tagl{color:var(--t4l-danger);}
+  .cl.add .tagl{color:var(--t4l-success);}
+  .cl.chgd .tagl{color:var(--t4l-amber-deep);}
+  .cl .v{font-size:12.4px;color:var(--t4l-ink);line-height:1.45;}
+  .cl .v b{color:var(--t4l-teal-deep);font-weight:600;}
+
+  /* specimens */
+  .multi{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+  .mcell{background:var(--t4l-teal-wash);border-radius:var(--t4l-radius-sm);padding:12px 15px;}
+  .mcell .ml{font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--t4l-teal-deep);font-weight:700;margin-bottom:4px;}
+  .mcell .mt{font-size:16px;color:var(--t4l-ink);line-height:1.7;}
+  .mcell .comm{font-size:10.5px;color:var(--t4l-ink-faint);margin-top:5px;font-style:italic;}
+  .bn{font-family:"Noto Sans Bengali",sans-serif;}
+  .dv{font-family:"Noto Sans Devanagari",sans-serif;}
+  .gu{font-family:"Noto Sans Gurmukhi",sans-serif;}
+  .arb{font-family:"Noto Kufi Arabic",sans-serif;}
+  .urd{font-family:var(--t4l-font-urdu);line-height:var(--t4l-lineheight-urdu);}
+
+  .urdubox{border:1px solid var(--t4l-line-soft);border-radius:var(--t4l-radius-md);overflow:hidden;margin-top:14px;}
+  .urdubox .uh{background:var(--t4l-danger);color:#fff;font-size:12.5px;font-weight:700;padding:10px 16px;}
+  .urdubox .ub{padding:16px;display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .ucell{border-radius:var(--t4l-radius-sm);padding:12px 15px;overflow:hidden;}
+  .ucell.bad{background:#fbf5f3;}
+  .ucell.good{background:#f4f9f6;}
+  .ucell .ul{font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;margin-bottom:8px;}
+  .ucell.bad .ul{color:var(--t4l-danger);}
+  .ucell.good .ul{color:var(--t4l-success);}
+  .ucell .ut{font-family:var(--t4l-font-urdu);font-size:17px;color:var(--t4l-ink);}
+  .ucell.bad .ut{line-height:1.5;}
+  .ucell.good .ut{line-height:var(--t4l-lineheight-urdu);}
+  .ucell .un{font-size:10.5px;color:var(--t4l-ink-faint);margin-top:8px;font-style:italic;}
+
+  /* selector */
+  .demo{background:#fbfaf7;border:1px solid var(--t4l-line-soft);border-radius:var(--t4l-radius-lg);padding:22px;}
+  .demo .dl{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--t4l-ink-faint);font-weight:700;margin:0 0 14px;}
+  .selector{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+  .langopt{cursor:pointer;border:1.5px solid var(--t4l-line);border-radius:var(--t4l-radius-md);
+    padding:12px 13px;background:#fff;text-align:left;transition:.12s;position:relative;}
+  .langopt:hover{border-color:var(--t4l-teal);}
+  .langopt.sel{border-color:var(--t4l-teal);background:var(--t4l-teal-wash);box-shadow:0 0 0 3px rgba(15,109,104,.12);}
+  .langopt .native{font-size:16px;font-weight:600;color:var(--t4l-ink);}
+  .langopt.urd .native{font-family:var(--t4l-font-urdu);line-height:2.1;font-size:15px;}
+  .langopt.bn .native{font-family:"Noto Sans Bengali",sans-serif;}
+  .langopt.gu .native{font-family:"Noto Sans Gurmukhi",sans-serif;}
+  .langopt.dv .native{font-family:"Noto Sans Devanagari",sans-serif;}
+  .langopt.arb .native{font-family:"Noto Kufi Arabic",sans-serif;}
+  .langopt .en{font-size:11px;color:var(--t4l-ink-faint);margin-top:2px;}
+  .langopt .wv{position:absolute;top:9px;right:10px;font-size:8.5px;font-weight:700;letter-spacing:.06em;padding:2px 6px;border-radius:999px;}
+  .wv.w1{background:var(--t4l-teal-wash);color:var(--t4l-teal-deep);}
+  .wv.w2{background:var(--t4l-amber-wash);color:var(--t4l-amber-deep);}
+  .wv.w3{background:#eef0ee;color:var(--t4l-ink-faint);}
+
+  pre{background:var(--t4l-ink);color:#e9f3f0;border-radius:var(--t4l-radius-md);padding:18px 20px;overflow:auto;
+    font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:11.4px;line-height:1.65;margin:0;}
+  pre .c{color:#7fb8ac;} pre .v{color:#f2c987;} pre .r{color:#e69a86;}
+
+  .foot{padding:22px 46px 30px;background:#fbfaf7;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+  .foot .note{font-size:11px;color:var(--t4l-ink-faint);font-style:italic;max-width:620px;line-height:1.5;}
+  .foot .tag2{font-size:11px;color:var(--t4l-ink-faint);font-weight:500;}
+
+  @media (max-width:720px){
+    body{padding:20px 12px 40px;}
+    .head,.sec,.foot{padding-left:22px;padding-right:22px;}
+    .multi,.selector,.urdubox .ub{grid-template-columns:1fr;}
+    .head-right{text-align:left;}
+  }
+  @media print{
+    body{background:#fff;padding:0;}
+    .sheet{box-shadow:none;border:none;border-radius:0;max-width:none;}
+    .mcell,.ucell,.cl{break-inside:avoid;}
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <!-- HEADER -->
+  <div class="head">
+    <div class="brand">
+      <svg class="mark" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-label="Tamia4Life mark">
+        <circle cx="32" cy="47" r="4.2" fill="#e7a13a"/>
+        <path d="M32 47 C 31.2 42 32.8 40 32 36" stroke="#0f6d68" stroke-width="3" stroke-linecap="round" fill="none"/>
+        <path d="M32 43 C 30.5 33 25 26 15.5 21.5 C 17.5 31 22.5 38.5 32 43 Z" fill="#0d9488"/>
+        <path d="M32 43 C 33.5 29 41 20 51.5 15 C 49 27 43 37.5 32 43 Z" fill="#0f6d68"/>
+        <path d="M32 43 C 35 34 41 25 48 18.5" stroke="#ccfbf1" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+        <path d="M32 43 C 29.5 35 25 29 19 24" stroke="#ccfbf1" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+      </svg>
+      <div class="brand-txt">
+        <p class="kicker">Design System · v0.1 · Kaizen correction</p>
+        <h1>Tamia4Life</h1>
+      </div>
+    </div>
+    <div class="head-right">
+      <p class="lead">The font stack, rebuilt for the ten communities.</p>
+      <p>Supersedes v0. Chinese removed; <b>four new scripts</b> added; Urdu given its own rendering rules. Colour, spacing, radius and elevation tokens are unchanged.</p>
+    </div>
+  </div>
+
+  <!-- CHANGELOG -->
+  <div class="sec">
+    <p class="eyebrow">What changed from v0</p>
+    <h2>Changelog</h2>
+    <p class="sub">Driven by <b>S TA 2.B — Community and Language Strategy</b>. Only typography changed; every colour, space, radius and elevation token from v0 carries over untouched, so nothing built on v0 breaks.</p>
+    <div class="chg">
+      <div class="cl rm"><span class="tagl">Removed</span><span class="v"><b>Noto Sans SC</b> dropped from <code>--t4l-font-ui</code>. The Chinese-speaking community is excluded from the target set by strategic decision.</span></div>
+      <div class="cl add"><span class="tagl">Added</span><span class="v"><b>Noto Sans Bengali</b> — serves Bangladeshi and West Bengali Indian members.</span></div>
+      <div class="cl add"><span class="tagl">Added</span><span class="v"><b>Noto Sans Devanagari</b> — Hindi (and Marathi/Nepali if the set widens).</span></div>
+      <div class="cl add"><span class="tagl">Added</span><span class="v"><b>Noto Sans Gurmukhi</b> — Punjabi for Indian Sikh members. Note: Pakistani Punjabi uses Shahmukhi, which renders through the Urdu face, not this one.</span></div>
+      <div class="cl chgd"><span class="tagl">New rule</span><span class="v"><b>Urdu is a separate rendering target.</b> New tokens <code>--t4l-font-urdu</code>, <code>--t4l-lineheight-urdu</code> and <code>--t4l-size-adjust-urdu</code>, applied via <code>[lang="ur"]</code>. Urdu is deliberately <em>not</em> in the main UI stack.</span></div>
+    </div>
+  </div>
+
+  <!-- SCRIPT COVERAGE -->
+  <div class="sec">
+    <p class="eyebrow">Coverage</p>
+    <h2>Every target community, rendered</h2>
+    <p class="sub">One shared component set, ten communities. Each specimen below is live in this document — if it renders here, the stack covers it.</p>
+    <div class="multi">
+      <div class="mcell"><p class="ml">Romanian · Latin</p><p class="mt">Să începem în limba ta.</p><p class="comm">Romanian + Moldovan · Wave 1</p></div>
+      <div class="mcell"><p class="ml">Arabic · Naskh <span style="color:var(--t4l-danger)">RTL</span></p><p class="mt arb" dir="rtl">لنبدأ بلغتك.</p><p class="comm">Moroccan + Egyptian · Wave 1</p></div>
+      <div class="mcell"><p class="ml">Bengali</p><p class="mt bn">আপনার ভাষায় শুরু করি।</p><p class="comm">Bangladeshi + West Bengali Indian · Wave 2</p></div>
+      <div class="mcell"><p class="ml">Urdu · Nastaliq <span style="color:var(--t4l-danger)">RTL</span></p><p class="mt urd" dir="rtl" lang="ur">آئیے آپ کی زبان میں شروع کرتے ہیں۔</p><p class="comm">Pakistani · Wave 2</p></div>
+      <div class="mcell"><p class="ml">Punjabi · Gurmukhi</p><p class="mt gu">ਆਓ ਤੁਹਾਡੀ ਭਾਸ਼ਾ ਵਿੱਚ ਸ਼ੁਰੂ ਕਰੀਏ।</p><p class="comm">Indian Sikh · Wave 2</p></div>
+      <div class="mcell"><p class="ml">Hindi · Devanagari</p><p class="mt dv">आइए आपकी भाषा में शुरू करें।</p><p class="comm">Indian · Wave 3</p></div>
+      <div class="mcell"><p class="ml">Ukrainian · Cyrillic</p><p class="mt">Почнімо вашою мовою.</p><p class="comm">Ukrainian · Wave 3</p></div>
+      <div class="mcell"><p class="ml">Albanian / Tagalog · Latin</p><p class="mt">Le të fillojmë · Magsimula tayo</p><p class="comm">Albanian + Filipino · Wave 3</p></div>
+    </div>
+  </div>
+
+  <!-- THE URDU RULE -->
+  <div class="sec">
+    <p class="eyebrow">The one that bites</p>
+    <h2>Urdu is not Arabic</h2>
+    <p class="sub">Both are right-to-left, so it's tempting to treat Urdu as an Arabic variant. It isn't. Nastaliq slopes steeply down the line and needs far more vertical room — an Arabic-tuned line-height clips descenders. This is the single most likely rendering bug in the multilingual build, so the rule is a token, not a convention.</p>
+    <div class="urdubox">
+      <div class="uh">Same string, same font — only line-height differs</div>
+      <div class="ub">
+        <div class="ucell bad">
+          <p class="ul">✗ Arabic metrics · line-height 1.5</p>
+          <p class="ut" dir="rtl">آئیے آپ کی زبان میں شروع کرتے ہیں</p>
+          <p class="un">Descenders collide and clip. This is what inheriting the Arabic rule produces.</p>
+        </div>
+        <div class="ucell good">
+          <p class="ul">✓ Nastaliq metrics · line-height 2.4</p>
+          <p class="ut" dir="rtl">آئیے آپ کی زبان میں شروع کرتے ہیں</p>
+          <p class="un">Legible and correctly spaced. Applied automatically via <code>[lang="ur"]</code>.</p>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:12.5px;color:var(--t4l-ink-soft);margin:16px 0 0;line-height:1.55;"><b>Rule for the team:</b> never branch on <code>dir="rtl"</code> to pick a font. Branch on <code>lang</code>. RTL tells you the direction; it does not tell you the script.</p>
+  </div>
+
+  <!-- SELECTOR -->
+  <div class="sec">
+    <p class="eyebrow">Signature primitive, corrected</p>
+    <h2>Language &amp; culture selector</h2>
+    <p class="sub">The v0 grid led with 中文. This is the corrected set, each option in its own script, tagged by launch wave so the Phase 1 build knows what ships first.</p>
+    <div class="demo">
+      <p class="dl">Onboarding · step 1</p>
+      <div class="selector">
+        <button class="langopt arb sel"><span class="wv w1">W1</span><div class="native" dir="rtl">العربية</div><div class="en">Arabic</div></button>
+        <button class="langopt"><span class="wv w1">W1</span><div class="native">Română</div><div class="en">Romanian</div></button>
+        <button class="langopt bn"><span class="wv w2">W2</span><div class="native">বাংলা</div><div class="en">Bengali</div></button>
+        <button class="langopt urd"><span class="wv w2">W2</span><div class="native" dir="rtl" lang="ur">اردو</div><div class="en">Urdu</div></button>
+        <button class="langopt gu"><span class="wv w2">W2</span><div class="native">ਪੰਜਾਬੀ</div><div class="en">Punjabi</div></button>
+        <button class="langopt"><span class="wv w3">W3</span><div class="native">Українська</div><div class="en">Ukrainian</div></button>
+        <button class="langopt dv"><span class="wv w3">W3</span><div class="native">हिन्दी</div><div class="en">Hindi</div></button>
+        <button class="langopt"><span class="wv w3">W3</span><div class="native">Shqip</div><div class="en">Albanian</div></button>
+        <button class="langopt"><span class="wv w3">W3</span><div class="native">Tagalog</div><div class="en">Filipino</div></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOKENS -->
+  <div class="sec">
+    <p class="eyebrow">For developers</p>
+    <h2>The corrected typography tokens</h2>
+    <p class="sub">Replace the v0 typography block with this. Everything else in <code>:root</code> stays as it was.</p>
+<pre><span class="c">/* tamia4life.tokens.css — v0.1 typography */</span>
+:root{
+  --t4l-font-display:<span class="v">"Fraunces",Georgia,serif</span>;
+
+  <span class="c">/* UI stack — ten-community coverage. NOTE: no Noto Sans SC. */</span>
+  --t4l-font-ui:<span class="v">"Inter","Noto Sans","Noto Kufi Arabic",
+                 "Noto Sans Bengali","Noto Sans Devanagari",
+                 "Noto Sans Gurmukhi",system-ui,sans-serif</span>;
+
+  <span class="c">/* Urdu — separate target. Do NOT fold into --t4l-font-ui. */</span>
+  --t4l-font-urdu:<span class="v">"Noto Nastaliq Urdu",serif</span>;
+  --t4l-lineheight-urdu:<span class="v">2.4</span>;
+  --t4l-size-adjust-urdu:<span class="v">1.05</span>;
+}
+
+<span class="c">/* Branch on lang, never on dir. */</span>
+<span class="r">[lang="ur"]</span>{
+  font-family:var(--t4l-font-urdu);
+  line-height:var(--t4l-lineheight-urdu);
+  font-size:calc(1em * var(--t4l-size-adjust-urdu));
+}</pre>
+  </div>
+
+  <div class="foot">
+    <span class="note">Source: S TA 2.B — Community and Language Strategy. Downstream items still open: Prototype v0 language grid, matching-engine data model (multiple languages per person + script attribute + country), and Phase 1 Epic 1 i18n re-sizing for four scripts and two RTL systems.</span>
+    <span class="tag2">Tamia4Life · AZM Venture Portfolio</span>
+  </div>
+
+</div>
+</body>
+</html>
