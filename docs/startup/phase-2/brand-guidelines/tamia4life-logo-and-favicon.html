@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tamia4Life — Logo &amp; Favicon</title>
+<!-- Favicon: embedded (works standalone) + file links -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsPSJUYW1pYTRMaWZlIj4KICA8cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHJ4PSIxNSIgZmlsbD0iIzBGNzY2RSIvPgogIDxjaXJjbGUgY3g9IjMyIiBjeT0iNDYiIHI9IjQuNiIgZmlsbD0iI0Y1OUUwQiIvPgogIDxwYXRoIGQ9Ik0zMiA0NiBDIDMxIDQxLjUgMzIuNiAzOSAzMiAzNSIgc3Ryb2tlPSIjRkZGRkZGIiBzdHJva2Utd2lkdGg9IjMuNiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBmaWxsPSJub25lIi8+CiAgPHBhdGggZD0iTTMyIDQyLjUgQyAzMC41IDMyLjUgMjUgMjUuNSAxNS41IDIxIEMgMTcuNSAzMC41IDIyLjUgMzggMzIgNDIuNSBaIiBmaWxsPSIjQ0NGQkYxIi8+CiAgPHBhdGggZD0iTTMyIDQyLjUgQyAzMy41IDI4LjUgNDEgMTkuNSA1MS41IDE0LjUgQyA0OSAyNi41IDQzIDM3IDMyIDQyLjUgWiIgZmlsbD0iI0ZGRkZGRiIvPgo8L3N2Zz4K">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{--teal:#0F766E;--teal-600:#0D9488;--teal-100:#CCFBF1;--teal-50:#F0FDFA;--sun:#F59E0B;--ink:#14201F;--paper:#FBFDFC;--muted:#5C6E6B;--line:#E3EDEB}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Figtree",system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:980px;margin:0 auto;padding:0 28px}
+  header{padding:64px 0 44px;background:radial-gradient(900px 380px at 80% -10%,var(--teal-50),transparent 60%)}
+  .eyebrow{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--teal-600);margin:0 0 12px}
+  h1{font-size:clamp(28px,4vw,42px);font-weight:800;letter-spacing:-.02em;margin:0 0 8px}
+  .sub{color:var(--muted);font-size:18px;margin:0;max-width:56ch}
+  section{padding:40px 0;border-top:1px solid var(--line)}
+  h2{font-size:22px;font-weight:800;margin:0 0 4px;letter-spacing:-.01em}
+  .hint{color:var(--muted);font-size:14px;margin:0 0 22px}
+  .grid{display:grid;gap:16px}
+  .g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+  .card{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff}
+  .stage{min-height:130px;display:flex;align-items:center;justify-content:center;padding:24px}
+  .stage.light{background:var(--teal-50)}.stage.teal{background:var(--teal)}.stage.ink{background:var(--ink)}
+  .cap{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:11px 14px;border-top:1px solid var(--line);font-size:12.5px;font-weight:600;color:var(--muted)}
+  .dl{font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:500;color:var(--teal);text-decoration:none;border:1px solid var(--teal-100);background:var(--teal-50);padding:3px 9px;border-radius:100px;white-space:nowrap}
+  .dl:hover{background:var(--teal-100)}
+  .wm{font-weight:800;letter-spacing:-.03em;line-height:1;font-size:30px;white-space:nowrap}
+  .wm .t{color:var(--ink)}.wm .l{color:var(--teal-600)}
+  .lockup{display:inline-flex;align-items:center;gap:.5em}
+  .lockup svg{height:1.3em;width:auto;display:block}
+  .on-teal .t,.on-teal .l,.on-ink .t,.on-ink .l{color:#fff}
+  .fav-row{display:flex;align-items:flex-end;gap:26px;flex-wrap:wrap}
+  .fav-row figure{margin:0;text-align:center}
+  .fav-row img{display:block;image-rendering:auto;border-radius:0}
+  .fav-row figcaption{font-size:12px;color:var(--muted);margin-top:8px;font-weight:600}
+  .tabmock{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:9px 9px 0 0;padding:8px 14px;font-size:13px;color:var(--ink);font-weight:600;box-shadow:0 6px 20px -14px rgba(0,0,0,.4)}
+  .tabmock img{width:16px;height:16px}
+  .snippet{background:var(--ink);color:#dcece9;border-radius:14px;padding:18px 20px;font-family:"JetBrains Mono",monospace;font-size:12.5px;line-height:1.7;overflow:auto;margin-top:14px}
+  .snippet .k{color:#7dd3c8}.snippet .s{color:#f0b866}
+  .filelist{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:6px}
+  .filelist a{display:flex;justify-content:space-between;gap:10px;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:11px;padding:11px 15px;font-size:14px;font-weight:600;background:#fff}
+  .filelist a:hover{border-color:var(--teal-600);background:var(--teal-50)}
+  .filelist span{color:var(--muted);font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:500}
+  footer{padding:34px 0 60px;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
+  @media(max-width:760px){.g3,.g4,.filelist{grid-template-columns:1fr 1fr}}
+  @media(max-width:480px){.g3,.g4,.filelist{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="eyebrow">Tamia4Life · Assets</p>
+    <h1>Logo &amp; favicon</h1>
+    <p class="sub">One place for the sprout mark, wordmark lockups and the browser icon — with download links for every file. This page's own tab icon is the Tamia4Life favicon.</p>
+  </div>
+</header>
+
+<!-- LOGO -->
+<section>
+  <div class="wrap">
+    <h2>Logo</h2>
+    <p class="hint">Sprout mark + wordmark. Use the reversed and mono versions on dark or single-colour surfaces.</p>
+    <div class="grid g3">
+      <div class="card">
+        <div class="stage light">
+          <span class="lockup">
+            <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="46.5" r="4.4" fill="#F59E0B"/><path d="M32 46.5 C 31 42 32.6 39.5 32 35.5" stroke="#0F766E" stroke-width="3.4" stroke-linecap="round" fill="none"/><path d="M32 43 C 30.5 33 25 26 15.5 21.5 C 17.5 31 22.5 38.5 32 43 Z" fill="#0F766E"/><path d="M32 43 C 33.5 29 41 20 51.5 15 C 49 27 43 37.5 32 43 Z" fill="#0D9488"/><path d="M32 43 C 35 34 41 25 48 18.5" stroke="#CCFBF1" stroke-width="1.4" stroke-linecap="round" fill="none"/></svg>
+            <span class="wm"><span class="t">Tamia</span><span class="l">4Life</span></span>
+          </span>
+        </div>
+        <div class="cap">Primary <a class="dl" href="tamia4life-logo.svg" download>SVG ↓</a></div>
+      </div>
+
+      <div class="card">
+        <div class="stage teal on-teal">
+          <span class="lockup">
+            <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="46.5" r="4.4" fill="#F59E0B"/><path d="M32 46.5 C 31 42 32.6 39.5 32 35.5" stroke="#fff" stroke-width="3.4" stroke-linecap="round" fill="none"/><path d="M32 43 C 30.5 33 25 26 15.5 21.5 C 17.5 31 22.5 38.5 32 43 Z" fill="#CCFBF1"/><path d="M32 43 C 33.5 29 41 20 51.5 15 C 49 27 43 37.5 32 43 Z" fill="#fff"/></svg>
+            <span class="wm"><span class="t">Tamia</span><span class="l">4Life</span></span>
+          </span>
+        </div>
+        <div class="cap">Reversed <a class="dl" href="tamia4life-logo-reversed.svg" download>SVG ↓</a></div>
+      </div>
+
+      <div class="card">
+        <div class="stage ink on-ink">
+          <span class="lockup" style="color:#fff">
+            <svg viewBox="0 0 64 64" fill="#fff" aria-hidden="true"><circle cx="32" cy="46.5" r="4.4"/><path d="M32 46.5 C 31 42 32.6 39.5 32 35.5" stroke="#fff" stroke-width="3.4" stroke-linecap="round" fill="none"/><path d="M32 43 C 30.5 33 25 26 15.5 21.5 C 17.5 31 22.5 38.5 32 43 Z"/><path d="M32 43 C 33.5 29 41 20 51.5 15 C 49 27 43 37.5 32 43 Z"/></svg>
+            <span class="wm"><span class="t">Tamia</span><span class="l">4Life</span></span>
+          </span>
+        </div>
+        <div class="cap">Mono <a class="dl" href="tamia4life-mark-mono.svg" download>mark ↓</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARK -->
+<section>
+  <div class="wrap">
+    <h2>The mark</h2>
+    <p class="hint">The sprout on its own — for avatars, stamps and social profiles.</p>
+    <div class="grid g3">
+      <div class="card">
+        <div class="stage light">
+          <svg viewBox="0 0 64 64" width="80" height="80" aria-hidden="true"><circle cx="32" cy="46.5" r="4.4" fill="#F59E0B"/><path d="M32 46.5 C 31 42 32.6 39.5 32 35.5" stroke="#0F766E" stroke-width="3.4" stroke-linecap="round" fill="none"/><path d="M32 43 C 30.5 33 25 26 15.5 21.5 C 17.5 31 22.5 38.5 32 43 Z" fill="#0F766E"/><path d="M32 43 C 33.5 29 41 20 51.5 15 C 49 27 43 37.5 32 43 Z" fill="#0D9488"/><path d="M32 43 C 35 34 41 25 48 18.5" stroke="#CCFBF1" stroke-width="1.4" stroke-linecap="round" fill="none"/></svg>
+        </div>
+        <div class="cap">Colour mark <a class="dl" href="tamia4life-mark.svg" download>SVG ↓</a></div>
+      </div>
+      <div class="card">
+        <div class="stage ink">
+          <svg viewBox="0 0 64 64" width="80" height="80" fill="#fff" aria-hidden="true"><circle cx="32" cy="46.5" r="4.4"/><path d="M32 46.5 C 31 42 32.6 39.5 32 35.5" stroke="#fff" stroke-width="3.4" stroke-linecap="round" fill="none"/><path d="M32 43 C 30.5 33 25 26 15.5 21.5 C 17.5 31 22.5 38.5 32 43 Z"/><path d="M32 43 C 33.5 29 41 20 51.5 15 C 49 27 43 37.5 32 43 Z"/></svg>
+        </div>
+        <div class="cap">Mono white <a class="dl" href="tamia4life-mark-mono.svg" download>SVG ↓</a></div>
+      </div>
+      <div class="card">
+        <div class="stage light">
+          <div style="width:88px;height:88px;border-radius:21px;background:#0F766E;display:grid;place-items:center">
+            <svg viewBox="0 0 64 64" width="60" height="60" aria-hidden="true"><circle cx="32" cy="46" r="4.6" fill="#F59E0B"/><path d="M32 46 C 31 41.5 32.6 39 32 35" stroke="#fff" stroke-width="3.6" stroke-linecap="round" fill="none"/><path d="M32 42.5 C 30.5 32.5 25 25.5 15.5 21 C 17.5 30.5 22.5 38 32 42.5 Z" fill="#CCFBF1"/><path d="M32 42.5 C 33.5 28.5 41 19.5 51.5 14.5 C 49 26.5 43 37 32 42.5 Z" fill="#fff"/></svg>
+          </div>
+        </div>
+        <div class="cap">App tile <a class="dl" href="apple-touch-icon.png" download>PNG ↓</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAVICON -->
+<section>
+  <div class="wrap">
+    <h2>Favicon</h2>
+    <p class="hint">Teal tile with a white sprout — legible down to 16&nbsp;px. Look at this page's browser tab to see it live.</p>
+    <div class="fav-row" style="margin-bottom:26px">
+      <figure><img src="favicon-16x16.png" width="16" height="16" alt="16px favicon"><figcaption>16&nbsp;px</figcaption></figure>
+      <figure><img src="favicon-32x32.png" width="32" height="32" alt="32px favicon"><figcaption>32&nbsp;px</figcaption></figure>
+      <figure><img src="apple-touch-icon.png" width="48" height="48" alt="48px favicon"><figcaption>48&nbsp;px</figcaption></figure>
+      <figure><img src="apple-touch-icon.png" width="88" height="88" style="border-radius:20px" alt="180px favicon"><figcaption>180&nbsp;px · Apple touch</figcaption></figure>
+      <figure>
+        <span class="tabmock"><img src="favicon-32x32.png" alt="">Tamia4Life</span>
+        <figcaption>Tab preview</figcaption>
+      </figure>
+    </div>
+
+    <div class="snippet"><span class="k">&lt;link</span> rel=<span class="s">"icon"</span> type=<span class="s">"image/svg+xml"</span> href=<span class="s">"favicon.svg"</span><span class="k">&gt;</span>
+<span class="k">&lt;link</span> rel=<span class="s">"icon"</span> type=<span class="s">"image/png"</span> sizes=<span class="s">"32x32"</span> href=<span class="s">"favicon-32x32.png"</span><span class="k">&gt;</span>
+<span class="k">&lt;link</span> rel=<span class="s">"icon"</span> type=<span class="s">"image/png"</span> sizes=<span class="s">"16x16"</span> href=<span class="s">"favicon-16x16.png"</span><span class="k">&gt;</span>
+<span class="k">&lt;link</span> rel=<span class="s">"apple-touch-icon"</span> sizes=<span class="s">"180x180"</span> href=<span class="s">"apple-touch-icon.png"</span><span class="k">&gt;</span>
+<span class="k">&lt;link</span> rel=<span class="s">"icon"</span> href=<span class="s">"favicon.ico"</span> sizes=<span class="s">"any"</span><span class="k">&gt;</span></div>
+  </div>
+</section>
+
+<!-- FILES -->
+<section>
+  <div class="wrap">
+    <h2>All files</h2>
+    <p class="hint">Click to download individually.</p>
+    <div class="filelist">
+      <a href="tamia4life-logo.svg" download>Primary logo <span>logo.svg</span></a>
+      <a href="tamia4life-logo-reversed.svg" download>Reversed logo <span>logo-reversed.svg</span></a>
+      <a href="tamia4life-mark.svg" download>Colour mark <span>mark.svg</span></a>
+      <a href="tamia4life-mark-mono.svg" download>Mono mark <span>mark-mono.svg</span></a>
+      <a href="favicon.svg" download>Favicon (vector) <span>favicon.svg</span></a>
+      <a href="favicon.ico" download>Favicon (ICO) <span>favicon.ico</span></a>
+      <a href="favicon-32x32.png" download>Favicon 32 <span>32x32.png</span></a>
+      <a href="favicon-16x16.png" download>Favicon 16 <span>16x16.png</span></a>
+      <a href="apple-touch-icon.png" download>Apple touch icon <span>180x180.png</span></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">Tamia4Life — logo &amp; favicon pack · wordmark set in Figtree · Part of the AZM venture portfolio.</div>
+</footer>
+
+</body>
+</html>

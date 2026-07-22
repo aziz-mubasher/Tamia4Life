@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tamia4Life — Prototype v0 (Phase 0)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Noto+Sans:wght@400;500;600;700&family=Noto+Kufi+Arabic:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --teal:#0f6d68; --teal-deep:#0a4f4b; --teal-bright:#0d9488; --teal-wash:#e7f0ee;
+    --amber:#e7a13a; --amber-deep:#cf871e; --amber-wash:#f9edd8; --clay:#c56a52;
+    --g0:#0a4f4b; --g1:#0f6d68; --g2:#2f8a6e; --g3:#7ba33f; --g4:#cf871e;
+    --ink:#1f2e2c; --ink-soft:#4a5b58; --ink-faint:#7d8c88;
+    --paper:#f3f0ea; --card:#fff; --line:#e2ddd3; --line-soft:#ece8df;
+    --font-d:"Fraunces",Georgia,serif;
+    --font-ui:"Inter","Noto Sans","Noto Kufi Arabic","Noto Sans SC",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{background:#e8e3d8;color:var(--ink);font-family:var(--font-ui);
+    -webkit-font-smoothing:antialiased;padding:34px 16px 60px;
+    background-image:radial-gradient(60% 50% at 50% 0%,rgba(15,109,104,.08),transparent 70%);}
+
+  /* stage */
+  .stage{max-width:940px;margin:0 auto;display:flex;gap:34px;align-items:flex-start;justify-content:center;flex-wrap:wrap;}
+
+  /* tester rail */
+  .rail{width:230px;flex:none;position:sticky;top:34px;}
+  .rail .brand{display:flex;align-items:center;gap:11px;margin-bottom:16px;}
+  .rail .brand svg{width:38px;height:38px;}
+  .rail .brand .k{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);font-weight:700;margin:0;}
+  .rail .brand h1{font-family:var(--font-d);font-size:18px;font-weight:600;margin:0;}
+  .rail .panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 8px 24px rgba(31,46,44,.08);}
+  .rail .lbl{font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);font-weight:700;margin:0 0 9px;}
+  .rail .navbtn{display:flex;align-items:center;gap:9px;width:100%;text-align:left;border:none;background:transparent;
+    padding:9px 10px;border-radius:10px;font-family:var(--font-ui);font-size:12.5px;color:var(--ink-soft);cursor:pointer;font-weight:500;}
+  .rail .navbtn:hover{background:var(--teal-wash);}
+  .rail .navbtn.on{background:var(--teal);color:#fff;}
+  .rail .navbtn .n{width:19px;height:19px;border-radius:50%;background:var(--line-soft);color:var(--ink-soft);
+    font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none;}
+  .rail .navbtn.on .n{background:rgba(255,255,255,.25);color:#fff;}
+  .rail hr{border:none;border-top:1px solid var(--line-soft);margin:14px 0;}
+  .rail .langsel{display:flex;flex-wrap:wrap;gap:6px;}
+  .rail .lchip{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:5px 11px;font-size:12px;
+    cursor:pointer;font-family:var(--font-ui);color:var(--ink-soft);}
+  .rail .lchip.on{border-color:var(--teal);background:var(--teal-wash);color:var(--teal-deep);font-weight:600;}
+  .rail .tip{font-size:10.5px;color:var(--ink-faint);line-height:1.45;margin:12px 0 0;font-style:italic;}
+
+  /* phone */
+  .phone{width:378px;flex:none;background:#0a1615;border-radius:44px;padding:12px;
+    box-shadow:0 30px 70px rgba(31,46,44,.28),inset 0 0 0 2px rgba(255,255,255,.04);}
+  .screen{background:var(--paper);border-radius:33px;overflow:hidden;height:760px;position:relative;display:flex;flex-direction:column;}
+  .notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:130px;height:26px;background:#0a1615;border-radius:0 0 16px 16px;z-index:20;}
+  .statusbar{height:40px;display:flex;align-items:center;justify-content:space-between;padding:0 22px;font-size:12px;font-weight:600;color:var(--ink);flex:none;}
+  .view{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+  .view::-webkit-scrollbar{width:0;}
+
+  .pad{padding:6px 22px 26px;}
+  .app{display:none;}
+  .app.show{display:block;}
+
+  /* shared bits */
+  .mark-sm{width:30px;height:30px;}
+  .step{font-size:11px;color:var(--ink-faint);font-weight:600;}
+  .hero{font-family:var(--font-d);font-size:27px;font-weight:600;line-height:1.15;letter-spacing:-.01em;margin:14px 0 6px;}
+  .sub{font-size:13px;color:var(--ink-soft);line-height:1.5;margin:0 0 20px;}
+  .flabel{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);font-weight:700;margin:0 0 10px;}
+
+  .btn{font-family:var(--font-ui);font-size:15px;font-weight:600;border:none;cursor:pointer;
+    padding:14px 20px;border-radius:999px;width:100%;transition:background .12s,transform .1s;}
+  .btn:active{transform:translateY(1px);}
+  .btn-primary{background:var(--teal);color:#fff;box-shadow:0 6px 16px rgba(15,109,104,.28);}
+  .btn-primary:hover{background:var(--teal-deep);}
+  .btn-primary:disabled{background:#b9c6c2;box-shadow:none;cursor:not-allowed;}
+  .btn-ghost{background:transparent;color:var(--teal-deep);box-shadow:none;padding:12px;}
+
+  /* language grid */
+  .lgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:22px;}
+  .lopt{position:relative;border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:13px 14px;text-align:left;cursor:pointer;transition:border-color .12s,background .12s,box-shadow .12s;}
+  .lopt:hover{border-color:var(--teal);}
+  .lopt.sel{border-color:var(--teal);background:var(--teal-wash);box-shadow:0 0 0 3px rgba(15,109,104,.12);}
+  .lopt .nv{font-size:17px;font-weight:600;color:var(--ink);}
+  .lopt .en{font-size:11px;color:var(--ink-faint);margin-top:2px;}
+  .lopt.ar .nv{font-family:"Noto Kufi Arabic",var(--font-ui);}
+  .lopt.zh .nv{font-family:"Noto Sans SC",var(--font-ui);}
+  .lopt .tick{position:absolute;top:11px;right:11px;width:17px;height:17px;border-radius:50%;background:var(--teal);display:none;align-items:center;justify-content:center;}
+  .lopt.sel .tick{display:flex;}
+
+  /* culture chips */
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px;}
+  .chip{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:9px 15px;font-size:13px;color:var(--ink-soft);cursor:pointer;font-family:var(--font-ui);transition:.12s;}
+  .chip:hover{border-color:var(--teal);}
+  .chip.sel{border-color:var(--teal);background:var(--teal);color:#fff;font-weight:600;}
+
+  .privacy{display:flex;gap:10px;align-items:flex-start;background:var(--teal-wash);border-radius:12px;padding:12px 14px;margin-bottom:20px;}
+  .privacy svg{flex:none;margin-top:1px;}
+  .privacy p{font-size:12px;color:var(--teal-deep);margin:0;line-height:1.45;}
+  .privacy b{font-weight:700;}
+
+  /* dashboard */
+  .greet{font-family:var(--font-d);font-size:24px;font-weight:600;margin:12px 0 2px;}
+  .greet-sub{font-size:12.5px;color:var(--ink-soft);margin:0 0 18px;}
+  .card{background:#fff;border:1px solid var(--line-soft);border-radius:18px;padding:16px 17px;margin-bottom:14px;box-shadow:0 2px 8px rgba(31,46,44,.05);}
+  .card .ct{font-family:var(--font-d);font-size:15px;font-weight:600;margin:0 0 3px;}
+  .card .cd{font-size:12px;color:var(--ink-soft);margin:0;line-height:1.45;}
+  .trendcard .rowb{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;}
+  .trend-val{font-family:var(--font-d);font-size:22px;font-weight:600;color:var(--teal-deep);}
+  .trend-val span{font-size:12px;color:var(--g2);font-weight:600;font-family:var(--font-ui);}
+  .reco{display:flex;gap:12px;align-items:center;background:#fff;border:1px solid var(--line-soft);border-radius:16px;padding:13px 14px;margin-bottom:11px;cursor:pointer;transition:.12s;}
+  .reco:hover{border-color:var(--teal);box-shadow:0 4px 14px rgba(31,46,44,.08);}
+  .reco .ic{width:42px;height:42px;border-radius:12px;flex:none;display:flex;align-items:center;justify-content:center;}
+  .reco .rt{font-size:13.5px;font-weight:600;margin:0;}
+  .reco .rs{font-size:11.5px;color:var(--ink-faint);margin:2px 0 0;}
+  .reco .arr{margin-left:auto;color:var(--ink-faint);}
+  .sessioncard{background:linear-gradient(135deg,var(--teal-deep),var(--teal));color:#fff;border:none;}
+  .sessioncard .ct{color:#fff;}
+  .sessioncard .cd{color:rgba(255,255,255,.82);}
+  .sessioncard .join{margin-top:12px;background:var(--amber);color:#3a2a08;border:none;padding:9px 16px;border-radius:999px;font-weight:600;font-size:13px;cursor:pointer;font-family:var(--font-ui);}
+
+  /* bottom nav */
+  .tabbar{flex:none;display:flex;justify-content:space-around;padding:10px 8px 22px;background:#fff;border-top:1px solid var(--line-soft);}
+  .tab{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:9.5px;color:var(--ink-faint);cursor:pointer;background:none;border:none;font-family:var(--font-ui);font-weight:600;}
+  .tab.on{color:var(--teal);}
+
+  /* facilitator match */
+  .match{background:#fff;border:1px solid var(--line-soft);border-radius:18px;padding:16px 17px;margin-bottom:14px;box-shadow:0 2px 8px rgba(31,46,44,.05);}
+  .match .top{display:flex;gap:12px;align-items:center;}
+  .match .av{width:52px;height:52px;border-radius:50%;flex:none;background:linear-gradient(135deg,var(--teal-bright),var(--teal-deep));display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--font-d);font-size:19px;font-weight:600;}
+  .match .nm{font-family:var(--font-d);font-size:16px;font-weight:600;margin:0;}
+  .match .lang{font-size:11.5px;color:var(--ink-faint);margin:2px 0 0;}
+  .match .fit{margin-left:auto;text-align:center;}
+  .match .fit .pct{font-family:var(--font-d);font-size:18px;font-weight:600;color:var(--g2);}
+  .match .fit .pl{font-size:9px;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.08em;}
+  .why{margin-top:13px;background:var(--amber-wash);border-radius:12px;padding:11px 13px;}
+  .why .wl{font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber-deep);font-weight:700;margin:0 0 7px;}
+  .why ul{margin:0;padding:0;list-style:none;display:grid;gap:5px;}
+  .why li{position:relative;padding-left:18px;font-size:12px;color:var(--ink);line-height:1.4;}
+  .why li svg{position:absolute;left:0;top:2px;}
+  .book{margin-top:13px;display:flex;gap:8px;flex-wrap:wrap;}
+  .slot{border:1.5px solid var(--line);background:#fff;border-radius:10px;padding:8px 13px;font-size:12.5px;color:var(--ink-soft);cursor:pointer;font-family:var(--font-ui);transition:.12s;}
+  .slot:hover{border-color:var(--teal);}
+  .slot.sel{border-color:var(--teal);background:var(--teal);color:#fff;font-weight:600;}
+
+  /* toast */
+  .toast{position:absolute;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);opacity:0;
+    background:var(--ink);color:#fff;padding:12px 20px;border-radius:999px;font-size:13px;font-weight:600;
+    box-shadow:0 12px 30px rgba(0,0,0,.3);transition:.28s;z-index:30;white-space:nowrap;display:flex;gap:8px;align-items:center;}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+  /* rtl */
+  .app[dir="rtl"]{text-align:right;}
+  .app[dir="rtl"] .hero,.app[dir="rtl"] .greet{font-family:"Noto Kufi Arabic",var(--font-d);}
+  .app[dir="rtl"] .lgrid,.app[dir="rtl"] .chips{direction:rtl;}
+  .app[dir="rtl"] .privacy{flex-direction:row-reverse;}
+  .app[dir="rtl"] .lopt{text-align:right;}
+  .app[dir="rtl"] .lopt .tick{right:auto;left:11px;}
+
+  @media (max-width:840px){
+    .rail{position:static;width:378px;}
+    .stage{flex-direction:column;align-items:center;}
+  }
+</style>
+</head>
+<body>
+<div class="stage">
+
+  <!-- TESTER RAIL -->
+  <div class="rail">
+    <div class="brand">
+      <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="32" cy="47" r="4.2" fill="#e7a13a"/>
+        <path d="M32 47 C 31.2 42 32.8 40 32 36" stroke="#0f6d68" stroke-width="3" stroke-linecap="round" fill="none"/>
+        <path d="M32 43 C 30.5 33 25 26 15.5 21.5 C 17.5 31 22.5 38.5 32 43 Z" fill="#0d9488"/>
+        <path d="M32 43 C 33.5 29 41 20 51.5 15 C 49 27 43 37.5 32 43 Z" fill="#0f6d68"/>
+      </svg>
+      <div><p class="k">Prototype v0</p><h1>Tamia4Life</h1></div>
+    </div>
+    <div class="panel">
+      <p class="lbl">Priority screens</p>
+      <button class="navbtn on" data-go="onboarding"><span class="n">1</span>Onboarding</button>
+      <button class="navbtn" data-go="journey"><span class="n">2</span>My Journey</button>
+      <button class="navbtn" data-go="match"><span class="n">3</span>Facilitator match</button>
+      <hr>
+      <p class="lbl">Test in language</p>
+      <div class="langsel">
+        <button class="lchip on" data-lang="en">English</button>
+        <button class="lchip" data-lang="ar">العربية</button>
+        <button class="lchip" data-lang="it">Italiano</button>
+      </div>
+      <p class="tip">Switching to العربية flips onboarding to full right-to-left — the layout mirrors, not just the text.</p>
+    </div>
+  </div>
+
+  <!-- PHONE -->
+  <div class="phone">
+    <div class="screen">
+      <div class="notch"></div>
+      <div class="statusbar"><span>9:41</span><span>tamia4life</span></div>
+      <div class="view">
+
+        <!-- SCREEN 1 · ONBOARDING -->
+        <div class="app show" id="onboarding" dir="ltr">
+          <div class="pad">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <svg class="mark-sm" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="32" cy="47" r="4.2" fill="#e7a13a"/>
+                <path d="M32 47 C 31.2 42 32.8 40 32 36" stroke="#0f6d68" stroke-width="3" stroke-linecap="round" fill="none"/>
+                <path d="M32 43 C 30.5 33 25 26 15.5 21.5 C 17.5 31 22.5 38.5 32 43 Z" fill="#0d9488"/>
+                <path d="M32 43 C 33.5 29 41 20 51.5 15 C 49 27 43 37.5 32 43 Z" fill="#0f6d68"/>
+              </svg>
+              <span class="step" id="stepLabel">Step 1 of 3</span>
+            </div>
+            <h2 class="hero" id="obHero">Let's begin in your language.</h2>
+            <p class="sub" id="obSub">The one you think in, feel in, and rest in. Everything else follows from this.</p>
+
+            <p class="flabel" id="obLangLabel">Choose your language</p>
+            <div class="lgrid" id="langGrid">
+              <button class="lopt ar sel" data-code="ar"><span class="tick"><svg width="9" height="9" viewBox="0 0 12 12"><path d="M2 6.5L5 9.5L10 3" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="nv">العربية</div><div class="en">Arabic</div></button>
+              <button class="lopt" data-code="it"><span class="tick"></span><div class="nv">Italiano</div><div class="en">Italian</div></button>
+              <button class="lopt zh" data-code="zh"><span class="tick"></span><div class="nv">中文</div><div class="en">Chinese</div></button>
+              <button class="lopt" data-code="ru"><span class="tick"></span><div class="nv">Русский</div><div class="en">Russian</div></button>
+              <button class="lopt" data-code="en"><span class="tick"></span><div class="nv">English</div><div class="en">English</div></button>
+              <button class="lopt" data-code="es"><span class="tick"></span><div class="nv">Español</div><div class="en">Spanish</div></button>
+            </div>
+
+            <p class="flabel" id="obCtxLabel">Where are you finding your feet?</p>
+            <div class="chips" id="ctxChips">
+              <button class="chip sel">New to Italy</button>
+              <button class="chip">Working abroad</button>
+              <button class="chip">Studying here</button>
+              <button class="chip">Raising a family</button>
+              <button class="chip">Long-term resident</button>
+            </div>
+
+            <div class="privacy">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L4 6v6c0 5 3.5 8 8 10 4.5-2 8-5 8-10V6l-8-4z" stroke="#0a4f4b" stroke-width="1.6" fill="rgba(15,109,104,.12)"/><path d="M9 12l2 2 4-4" stroke="#0a4f4b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <p id="obPriv"><b>Private by default.</b> Your account is yours. Never shared with your employer — only anonymised aggregates.</p>
+            </div>
+
+            <button class="btn btn-primary" id="obContinue">Continue</button>
+          </div>
+        </div>
+
+        <!-- SCREEN 2 · MY JOURNEY -->
+        <div class="app" id="journey" dir="ltr">
+          <div class="pad">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <div>
+                <h2 class="greet">Good to see you, Amir.</h2>
+                <p class="greet-sub">Week 6 · you're building a steady rhythm.</p>
+              </div>
+              <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--teal-bright),var(--teal-deep));"></div>
+            </div>
+
+            <!-- trend -->
+            <div class="card trendcard">
+              <div class="rowb">
+                <div>
+                  <p class="ct">Resilience &amp; energy</p>
+                  <p class="cd">Your check-ins, last 6 weeks</p>
+                </div>
+                <div class="trend-val">Steady <span>&#9650; rising</span></div>
+              </div>
+              <svg viewBox="0 0 300 90" width="100%" height="90" preserveAspectRatio="none">
+                <defs><linearGradient id="fill" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0" stop-color="#0f6d68" stop-opacity=".22"/><stop offset="1" stop-color="#0f6d68" stop-opacity="0"/>
+                </linearGradient></defs>
+                <line x1="0" y1="70" x2="300" y2="70" stroke="#ece8df" stroke-width="1"/>
+                <line x1="0" y1="40" x2="300" y2="40" stroke="#ece8df" stroke-width="1"/>
+                <path d="M6,62 C50,60 60,54 96,50 C140,45 150,40 186,34 C230,27 250,24 294,16 L294,84 L6,84 Z" fill="url(#fill)"/>
+                <path d="M6,62 C50,60 60,54 96,50 C140,45 150,40 186,34 C230,27 250,24 294,16" fill="none" stroke="#0f6d68" stroke-width="2.5" stroke-linecap="round"/>
+                <circle cx="294" cy="16" r="4.5" fill="#e7a13a" stroke="#fff" stroke-width="2"/>
+              </svg>
+            </div>
+
+            <!-- upcoming session -->
+            <div class="card sessioncard">
+              <p class="ct">Your next session</p>
+              <p class="cd">With Layla · Thursday 18:00 · in Arabic</p>
+              <button class="join" data-go="match">Manage &amp; rebook</button>
+            </div>
+
+            <!-- check-in prompt -->
+            <div class="card">
+              <p class="ct">This week's check-in</p>
+              <p class="cd" style="margin-bottom:12px">How steady has your energy felt?</p>
+              <input type="range" min="1" max="5" value="4" style="width:100%;accent-color:var(--teal);">
+              <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--ink-faint);margin-top:4px;"><span>Running low</span><span>Full &amp; steady</span></div>
+            </div>
+
+            <!-- recommendations -->
+            <p class="flabel" style="margin-top:22px">Recommended for you</p>
+            <div class="reco" data-go="match">
+              <div class="ic" style="background:var(--teal-wash)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 3a4 4 0 100 8 4 4 0 000-8z" stroke="#0f6d68" stroke-width="1.8"/><path d="M5 21c0-4 3-6 7-6s7 2 7 6" stroke="#0f6d68" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+              <div><p class="rt">Book a facilitator</p><p class="rs">Culture &amp; language-matched · 3 near you</p></div>
+              <span class="arr">&rsaquo;</span>
+            </div>
+            <div class="reco">
+              <div class="ic" style="background:var(--amber-wash)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 8l7-4 7 4-7 4-7-4z" stroke="#cf871e" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
+              <div><p class="rt">5-min: naming what you carry</p><p class="rs">Self-guided · in Arabic</p></div>
+              <span class="arr">&rsaquo;</span>
+            </div>
+            <div class="reco">
+              <div class="ic" style="background:#eef3e4"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="9" r="3" stroke="#7ba33f" stroke-width="1.8"/><circle cx="16" cy="14" r="3" stroke="#7ba33f" stroke-width="1.8"/></svg></div>
+              <div><p class="rt">Group: Finding your feet in Italy</p><p class="rs">Live masterclass · Saturday</p></div>
+              <span class="arr">&rsaquo;</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- SCREEN 3 · FACILITATOR MATCH -->
+        <div class="app" id="match" dir="ltr">
+          <div class="pad">
+            <span class="step">Facilitator match &amp; booking</span>
+            <h2 class="hero" style="font-size:24px">Matched to you — by language and lived experience.</h2>
+            <p class="sub">Not just who's free. Who understands where you're coming from.</p>
+
+            <!-- match 1 -->
+            <div class="match">
+              <div class="top">
+                <div class="av">ل</div>
+                <div><p class="nm">Layla H.</p><p class="lang">Arabic (native) · English</p></div>
+                <div class="fit"><div class="pct">96%</div><div class="pl">match</div></div>
+              </div>
+              <div class="why">
+                <p class="wl">Why this match</p>
+                <ul>
+                  <li><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6.5L5 9.5L10 3" stroke="#cf871e" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Shares your mother tongue — sessions fully in Arabic</li>
+                  <li><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6.5L5 9.5L10 3" stroke="#cf871e" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Relocated to Italy herself — knows the transition</li>
+                  <li><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6.5L5 9.5L10 3" stroke="#cf871e" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Focus: settling in, work-life balance</li>
+                </ul>
+              </div>
+              <div class="book" id="slots1">
+                <button class="slot">Thu 18:00</button>
+                <button class="slot">Fri 12:30</button>
+                <button class="slot">Sat 10:00</button>
+              </div>
+              <button class="btn btn-primary" style="margin-top:13px" id="confirmBtn" disabled>Pick a time to book</button>
+            </div>
+
+            <!-- match 2 -->
+            <div class="match">
+              <div class="top">
+                <div class="av">Y</div>
+                <div><p class="nm">Youssef A.</p><p class="lang">Arabic (native) · Italian</p></div>
+                <div class="fit"><div class="pct">89%</div><div class="pl">match</div></div>
+              </div>
+              <div class="why">
+                <p class="wl">Why this match</p>
+                <ul>
+                  <li><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6.5L5 9.5L10 3" stroke="#cf871e" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Same mother tongue · also fluent in Italian for admin life</li>
+                  <li><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6.5L5 9.5L10 3" stroke="#cf871e" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Focus: career &amp; workplace confidence</li>
+                </ul>
+              </div>
+              <button class="btn btn-ghost" style="margin-top:6px">See times</button>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /view -->
+
+      <!-- bottom tab bar (persistent on journey/match) -->
+      <div class="tabbar" id="tabbar" style="display:none">
+        <button class="tab on" data-go="journey"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 11l9-7 9 7M5 10v10h14V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Home</button>
+        <button class="tab" data-go="match"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="M20 20l-3-3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>Explore</button>
+        <button class="tab"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="4" y="5" width="16" height="16" rx="3" stroke="currentColor" stroke-width="1.8"/><path d="M8 3v4M16 3v4M4 10h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>Sessions</button>
+        <button class="tab"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>Me</button>
+      </div>
+
+      <div class="toast" id="toast"><svg width="15" height="15" viewBox="0 0 12 12"><path d="M2 6.5L5 9.5L10 3" stroke="#7ee0c8" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="toastMsg">Session booked with Layla</span></div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  // ---- localized onboarding copy (for usability testing in-language) ----
+  const T = {
+    en:{dir:"ltr",hero:"Let's begin in your language.",sub:"The one you think in, feel in, and rest in. Everything else follows from this.",lang:"Choose your language",ctx:"Where are you finding your feet?",priv:"<b>Private by default.</b> Your account is yours. Never shared with your employer — only anonymised aggregates.",cont:"Continue",step:"Step 1 of 3"},
+    ar:{dir:"rtl",hero:"لنبدأ بلغتك.",sub:"اللغة التي تفكّر بها، وتشعر بها، وتطمئن إليها. كل شيء يبدأ من هنا.",lang:"اختر لغتك",ctx:"أين تجد موطئ قدمك؟",priv:"<b>خصوصيتك أولاً.</b> حسابك ملكك وحدك. لا يُشارَك مع صاحب العمل — فقط بيانات مجمّعة ومجهّلة.",cont:"متابعة",step:"الخطوة ١ من ٣"},
+    it:{dir:"ltr",hero:"Iniziamo nella tua lingua.",sub:"Quella in cui pensi, senti e ti riposi. Tutto il resto parte da qui.",lang:"Scegli la tua lingua",ctx:"Dove stai trovando il tuo equilibrio?",priv:"<b>Privato per impostazione.</b> Il tuo account è solo tuo. Mai condiviso con il datore di lavoro — solo dati aggregati e anonimi.",cont:"Continua",step:"Passo 1 di 3"}
+  };
+
+  function applyLang(code){
+    const t = T[code] || T.en;
+    const ob = document.getElementById('onboarding');
+    ob.setAttribute('dir', t.dir);
+    document.getElementById('obHero').textContent = t.hero;
+    document.getElementById('obSub').textContent = t.sub;
+    document.getElementById('obLangLabel').textContent = t.lang;
+    document.getElementById('obCtxLabel').textContent = t.ctx;
+    document.getElementById('obPriv').innerHTML = t.priv;
+    document.getElementById('obContinue').textContent = t.cont;
+    document.getElementById('stepLabel').textContent = t.step;
+    document.querySelectorAll('.lchip').forEach(c=>c.classList.toggle('on', c.dataset.lang===code));
+  }
+
+  // ---- screen navigation ----
+  function go(id){
+    document.querySelectorAll('.app').forEach(a=>a.classList.toggle('show', a.id===id));
+    document.querySelectorAll('.rail .navbtn').forEach(b=>b.classList.toggle('on', b.dataset.go===id));
+    document.getElementById('tabbar').style.display = (id==='onboarding') ? 'none' : 'flex';
+    document.querySelectorAll('.view')[0].scrollTop = 0;
+    document.querySelectorAll('#tabbar .tab').forEach(t=>t.classList.toggle('on', t.dataset.go===id));
+  }
+  document.querySelectorAll('[data-go]').forEach(el=>el.addEventListener('click',()=>go(el.dataset.go)));
+  document.querySelectorAll('.rail .lchip').forEach(c=>c.addEventListener('click',()=>applyLang(c.dataset.lang)));
+
+  // ---- onboarding interactions ----
+  document.querySelectorAll('#langGrid .lopt').forEach(o=>o.addEventListener('click',()=>{
+    document.querySelectorAll('#langGrid .lopt').forEach(x=>x.classList.remove('sel'));
+    o.classList.add('sel');
+    const map={ar:'ar',it:'it',en:'en'};
+    if(map[o.dataset.code]) applyLang(map[o.dataset.code]);
+  }));
+  document.querySelectorAll('#ctxChips .chip').forEach(c=>c.addEventListener('click',()=>{
+    document.querySelectorAll('#ctxChips .chip').forEach(x=>x.classList.remove('sel')); c.classList.add('sel');
+  }));
+  document.getElementById('obContinue').addEventListener('click',()=>go('journey'));
+
+  // ---- booking interactions ----
+  document.querySelectorAll('#slots1 .slot').forEach(s=>s.addEventListener('click',()=>{
+    document.querySelectorAll('#slots1 .slot').forEach(x=>x.classList.remove('sel')); s.classList.add('sel');
+    const b=document.getElementById('confirmBtn'); b.disabled=false; b.textContent='Confirm booking · '+s.textContent;
+  }));
+  document.getElementById('confirmBtn').addEventListener('click',function(){
+    if(this.disabled) return;
+    const tt=document.getElementById('toast'); tt.classList.add('show');
+    setTimeout(()=>{tt.classList.remove('show'); go('journey');},1600);
+  });
+
+  applyLang('en');
+</script>
+</body>
+</html>
