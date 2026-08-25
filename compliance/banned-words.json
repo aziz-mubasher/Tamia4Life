@@ -1,0 +1,117 @@
+{
+  "version": "1.2.0",
+  "constitution": "CLAUDE.md §5",
+  "updated": "2026-08-25",
+  "note": "Lane B/C surfaces. Lane A may use clinical language if the Albo professional is named (§5.3). Audited public pages list permitted residual hits in audited_surfaces. Matching is case-insensitive. Same-line escape: <!-- t4l-allow: phrase:it:sostegno psicologico --> or <!-- t4l-allow-line -->.",
+  "allowlist_path_prefixes": [
+    "CLAUDE.md",
+    "AGENTS.md",
+    ".cursorrules",
+    "compliance/",
+    "scripts/lint-banned-words.py",
+    ".github/workflows/banned-words.yml",
+    "docs/azm-deliverables/K-TA-7.1/COPY-AUDIT.md",
+    "docs/azm-deliverables/S-TA-1.1/",
+    "discovery/"
+  ],
+  "audited_surfaces": {
+    "docs/azm-deliverables/K-TA-7.1/tamia4life-site.html": {
+      "audit": "docs/azm-deliverables/K-TA-7.1/COPY-AUDIT.md",
+      "permit_rules": [
+        "token:en:psychologist",
+        "token:en:psychologists",
+        "token:en:psychological",
+        "token:en:stress",
+        "token:en:diagnosis",
+        "token:en:treatment",
+        "token:it:diagnosi",
+        "token:it:psicologico",
+        "token:it:stress",
+        "phrase:it:sostegno psicologico",
+        "phrase:it:colloquio clinico"
+      ]
+    }
+  },
+  "phrases": {
+    "it": [
+      "sostegno psicologico",
+      "supporto psicologico",
+      "benessere psicologico",
+      "disagio psichico",
+      "percorso di cura",
+      "colloquio clinico",
+      "test psicodiagnostici"
+    ],
+    "en": [
+      "psychological support",
+      "emotional support",
+      "mental health",
+      "wellbeing score",
+      "wellbeing scores",
+      "wellness score",
+      "burnout prevention",
+      "psychological result"
+    ],
+    "ro": [
+      "sprijin psihologic",
+      "suport psihologic"
+    ],
+    "ar": [
+      "دعم نفسي",
+      "مساندة نفسية"
+    ],
+    "es": [
+      "apoyo psicológico",
+      "soporte psicológico"
+    ]
+  },
+  "tokens": {
+    "it": [
+      "psicologico",
+      "terapia",
+      "terapeutico",
+      "ansia",
+      "depressione",
+      "trauma",
+      "cura",
+      "paziente",
+      "diagnosi"
+    ],
+    "en": [
+      "therapist",
+      "psychotherapy",
+      "therapy",
+      "anxiety",
+      "depression",
+      "trauma",
+      "patient",
+      "cure",
+      "counselling",
+      "counseling",
+      "diagnosis",
+      "treatment",
+      "psychologist",
+      "psychologists",
+      "psychological"
+    ]
+  },
+  "contextual_tokens": {
+    "comment": "stress is banned as something the service treats (§5.1), not in the statutory phrase stress lavoro-correlato. Audited surfaces may permit the token.",
+    "it": ["stress"],
+    "en": ["stress"]
+  },
+  "locale_pack_status": {
+    "it": "v1-from-constitution-§5.1",
+    "en": "v1.2-from-K-TA-7.1-copy-audit",
+    "es": "starter-§5.4",
+    "ro": "starter-incomplete",
+    "ar": "starter-incomplete",
+    "uk": "missing-do-not-ship",
+    "sq": "missing-do-not-ship",
+    "bn": "missing-do-not-ship",
+    "ur": "missing-do-not-ship",
+    "pa": "missing-do-not-ship",
+    "hi": "missing-do-not-ship",
+    "tl": "missing-do-not-ship"
+  }
+}

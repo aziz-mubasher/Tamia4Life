@@ -1,0 +1,18 @@
+# Tamia4Life — Cursor rules
+
+Load and obey **CLAUDE.md** (v1 · 24 August 2026) before designing, specifying, or building.
+
+That file is the constraint set. Several rules exist because breaking them is `art. 348 c.p.`,
+not a style violation. If this file and CLAUDE.md diverge, CLAUDE.md wins.
+
+- Name the Italian legal frame before specifying a feature. No frame = not ready to build.
+- Three hard-separated lanes (A clinico / B mediazione / C formazione). One occupancy at a time.
+- Distress, symptoms, or "help with how I feel" routes to Lane A. Never auto-route out of A.
+- Refuse §3.2 (wellbeing scores / interpretive assessments outside A; AI emotional support;
+  symptom-based matching; B/C individual emotional case-holding; B/C free-text feelings without
+  triage).
+- Copy on B/C surfaces must pass `scripts/lint-banned-words.py` (§5).
+- Phase 1 gate is **NOT MET**. Say so before Phase 2+ work (§9).
+- Do not resolve CLAUDE.md §11. Do not store immigration status, religion, or ethnicity (§7).
+- Every AZM bridge PR ends with `## R&D FEEDBACK — for Claude` (see AGENTS.md).
+- Never push to main. Open a PR.

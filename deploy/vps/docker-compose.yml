@@ -1,0 +1,32 @@
+# Tamia4Life public site — static HTML behind the VPS Traefik.
+# Join root_default so Traefik (root-traefik-1) can route tamia4life.com.
+#
+# DNS (Hostinger, not parking NS) must point apex + www at this VPS
+# before Let's Encrypt will issue. Until then the container is up and
+# reachable via Host header / --resolve.
+
+services:
+  web:
+    image: nginx:1.27-alpine
+    container_name: tamia4life-web
+    restart: always
+    volumes:
+      - ./html:/usr/share/nginx/html:ro
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    networks:
+      - root_default
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=root_default
+      - traefik.http.routers.tamia4life-pub.rule=Host(`tamia4life.com`) || Host(`www.tamia4life.com`)
+      - traefik.http.routers.tamia4life-pub.entrypoints=websecure
+      - traefik.http.routers.tamia4life-pub.tls=true
+      - traefik.http.routers.tamia4life-pub.tls.certresolver=mytlschallenge
+      - traefik.http.routers.tamia4life-pub.tls.domains[0].main=tamia4life.com
+      - traefik.http.routers.tamia4life-pub.tls.domains[0].sans=www.tamia4life.com
+      - traefik.http.routers.tamia4life-pub.service=tamia4life
+      - traefik.http.services.tamia4life.loadbalancer.server.port=80
+
+networks:
+  root_default:
+    external: true
