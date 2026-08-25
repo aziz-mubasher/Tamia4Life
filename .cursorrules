@@ -1,0 +1,16 @@
+# Tamia4Life — Cursor rules
+
+Load and obey the repo constitution: **CLAUDE.md** (v1 · 24 Aug 2026).
+
+That file is binding. In particular:
+
+- Name the Italian legal frame before specifying a feature. No frame = not ready to build.
+- Three hard-separated lanes (A clinico / B mediazione / C formazione). One occupancy at a time.
+- Distress routes to Lane A. Triage outcomes are immutable and versioned.
+- Do not build wellbeing scores outside A, AI emotional support, symptom-based B/C matching, or B/C individual emotional case-holding.
+- Phase 1 gate is **NOT MET**. Say so before Phase 2+ work.
+- Do not resolve the seven human-only decisions in CLAUDE.md §11.
+- Copy and CMS content must pass the banned-words lint (`scripts/lint-banned-words.py`).
+- Every AZM bridge PR ends with `## R&D FEEDBACK — for Claude` (see AGENTS.md).
+
+If this file and CLAUDE.md ever diverge, CLAUDE.md wins.

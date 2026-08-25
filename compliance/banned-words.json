@@ -1,0 +1,103 @@
+{
+  "version": "1.0.0",
+  "constitution": "CLAUDE.md §10",
+  "updated": "2026-08-24",
+  "note": "Phrases that create apparenza oggettiva di competenza specialistica (Cass. pen. VI n. 16562/2016) when used for the product, Lane B/C, AI, or unverified personnel. Matching is case-insensitive. Locale packs must be signed by a human (CLAUDE.md §11.6) before that locale ships.",
+  "allowlist_path_prefixes": [
+    "CLAUDE.md",
+    "AGENTS.md",
+    ".cursorrules",
+    "compliance/",
+    "scripts/lint-banned-words.py",
+    ".github/workflows/banned-words.yml"
+  ],
+  "phrases": {
+    "it": [
+      "sostegno psicologico",
+      "supporto psicologico",
+      "aiuto psicologico",
+      "consulenza psicologica",
+      "counselling psicologico",
+      "counseling psicologico",
+      "percorso terapeutico",
+      "trattamento clinico",
+      "il tuo psicologo",
+      "la tua psicologa",
+      "il tuo terapeuta",
+      "la tua terapeuta",
+      "benessere mentale",
+      "indice di benessere",
+      "punteggio di benessere",
+      "test di benessere",
+      "score di benessere"
+    ],
+    "en": [
+      "psychological support",
+      "emotional support",
+      "mental health professional",
+      "ai therapist",
+      "ai companion",
+      "ai counsellor",
+      "ai counselor",
+      "your therapist",
+      "your psychologist",
+      "wellbeing score",
+      "wellness score",
+      "wellness index",
+      "wellbeing index",
+      "burnout score",
+      "symptom checker",
+      "symptom-based matching",
+      "baseline self-assessment"
+    ],
+    "ro": [
+      "sprijin psihologic",
+      "suport psihologic",
+      "consiliere psihologica",
+      "consiliere psihologică"
+    ],
+    "ar": [
+      "دعم نفسي",
+      "مساندة نفسية",
+      "علاج نفسي"
+    ]
+  },
+  "tokens": {
+    "it": [
+      "psicoterapia",
+      "psicoterapeuta",
+      "psicoterapeuti",
+      "diagnosi",
+      "diagnosticare",
+      "paziente",
+      "pazienti"
+    ],
+    "en": [
+      "psychotherapy",
+      "psychotherapist",
+      "therapist",
+      "therapists",
+      "diagnosis",
+      "patient",
+      "patients"
+    ],
+    "ro": [
+      "psihoterapie",
+      "psihoterapeut",
+      "diagnostic"
+    ]
+  },
+  "locale_pack_status": {
+    "it": "draft-v1-human-must-sign",
+    "en": "draft-v1-human-must-sign",
+    "ro": "starter-incomplete",
+    "ar": "starter-incomplete",
+    "uk": "missing-do-not-ship",
+    "sq": "missing-do-not-ship",
+    "bn": "missing-do-not-ship",
+    "ur": "missing-do-not-ship",
+    "pa": "missing-do-not-ship",
+    "hi": "missing-do-not-ship",
+    "tl": "missing-do-not-ship"
+  }
+}
