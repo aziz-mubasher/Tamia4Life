@@ -18,3 +18,7 @@ Lead with **integrazione**.
 Public site v1 (discovery instrumentation, not a live offer):
 [docs/azm-deliverables/K-TA-7.1/tamia4life-site.html](docs/azm-deliverables/K-TA-7.1/tamia4life-site.html)
 — open in a browser. No build step.
+
+Intended host: https://tamia4life.com/ (VPS + Traefik). Public DNS must point
+apex/`www` at `82.25.97.164` — see `deploy/vps/README.md`. Until then the
+domain still shows Hostinger parking.
