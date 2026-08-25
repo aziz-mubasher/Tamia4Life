@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tamia4Life</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Inter:wght@400;500;600;700&family=Noto+Sans:wght@400;500;600&family=Noto+Kufi+Arabic:wght@400;500;700&family=Noto+Naskh+Arabic:wght@400;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+Devanagari:wght@400;600&family=Noto+Sans+Bengali:wght@400;600&family=Noto+Sans+Gurmukhi:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   TAMIA4LIFE — public site
+   Built on Design System v0 tokens (canonical source of truth).
+   ============================================================ */
+
+:root{
+  /* brand — from tamia4life.tokens.css */
+  --brand:#0f6d68;
+  --brand-deep:#0a4f4b;
+  --brand-bright:#0d9488;
+  --brand-wash:#e7f0ee;
+  --accent:#e7a13a;
+  --accent-deep:#cf871e;
+  --accent-wash:#f9edd8;
+  --clay:#c56a52;
+  --on-brand:#ffffff;     /* text sitting on a --brand fill */
+  --brand-hover:#0a4f4b;
+  --chip-ink:var(--brand-deep);
+  --eyebrow-ink:#a06510;   /* amber, darkened for small type on paper */
+  --amber-ink:#8f5c0d;
+  --ink-clay:#a04b34;
+  --ink-leaf:#4d6b1f;
+
+  /* growth ramp — seed → canopy (phases only) */
+  --grow-0:#0a4f4b; --grow-1:#0f6d68; --grow-2:#2f8a6e;
+  --grow-3:#7ba33f; --grow-4:#cf871e;
+
+  /* surfaces & ink */
+  --bg:#f3f0ea;
+  --surface:#ffffff;
+  --surface-2:#fbfaf7;
+  --line:#e2ddd3;
+  --line-soft:#ece8df;
+  --text:#1f2e2c;
+  --text-soft:#4a5b58;
+  --text-faint:#7d8c88;
+
+  /* hero is a committed dark world in both themes */
+  --hero-bg:#0a1f1d;
+  --hero-bg-2:#0a4f4b;
+  --hero-text:#eef4f1;
+  --hero-soft:#9dbdb5;
+  --hero-line:rgba(255,255,255,.14);
+
+  --font-display:"Fraunces",Georgia,"Times New Roman",serif;
+  --font-ui:"Inter","Noto Sans","Noto Kufi Arabic","Noto Sans SC",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+
+  --shell:1180px;
+  --gutter:clamp(20px,5vw,64px);
+  --elev-1:0 2px 8px rgba(31,46,44,.06);
+  --elev-2:0 8px 24px rgba(31,46,44,.10);
+}
+
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --brand:#4fb3a3;
+    --brand-deep:#2f8a6e;
+    --brand-bright:#5fc9b6;
+    --brand-wash:#10302c;
+    --accent:#f0b45c;
+    --accent-deep:#e7a13a;
+    --accent-wash:#2b2418;
+    --clay:#d98a70;
+    --on-brand:#06211e;
+    --brand-hover:#5fc9b6;
+    --chip-ink:#7fd6c5;
+  --eyebrow-ink:#f0b45c;
+  --amber-ink:#f0b45c;
+  --ink-clay:#e0a08a;
+  --ink-leaf:#a8d165;
+    --eyebrow-ink:#f0b45c;
+    --amber-ink:#f0b45c;
+    --ink-clay:#e0a08a;
+    --ink-leaf:#a8d165;
+
+    --grow-0:#0f6d68; --grow-1:#2f8a6e; --grow-2:#4fb3a3;
+    --grow-3:#8dbf52; --grow-4:#f0b45c;
+
+    --bg:#0d1614;
+    --surface:#14201e;
+    --surface-2:#101a18;
+    --line:#26332f;
+    --line-soft:#1d2926;
+    --text:#e9eeeb;
+    --text-soft:#a8b8b3;
+    --text-faint:#7f918c;
+
+    --elev-1:0 2px 8px rgba(0,0,0,.34);
+    --elev-2:0 10px 30px rgba(0,0,0,.42);
+  }
+}
+:root[data-theme="dark"]{
+  --brand:#4fb3a3;
+  --brand-deep:#2f8a6e;
+  --brand-bright:#5fc9b6;
+  --brand-wash:#10302c;
+  --accent:#f0b45c;
+  --accent-deep:#e7a13a;
+  --accent-wash:#2b2418;
+  --clay:#d98a70;
+  --on-brand:#06211e;
+  --brand-hover:#5fc9b6;
+  --chip-ink:#7fd6c5;
+  --eyebrow-ink:#f0b45c;
+  --amber-ink:#f0b45c;
+  --ink-clay:#e0a08a;
+  --ink-leaf:#a8d165;
+
+  --grow-0:#0f6d68; --grow-1:#2f8a6e; --grow-2:#4fb3a3;
+  --grow-3:#8dbf52; --grow-4:#f0b45c;
+
+  --bg:#0d1614;
+  --surface:#14201e;
+  --surface-2:#101a18;
+  --line:#26332f;
+  --line-soft:#1d2926;
+  --text:#e9eeeb;
+  --text-soft:#a8b8b3;
+  --text-faint:#7f918c;
+
+  --elev-1:0 2px 8px rgba(0,0,0,.34);
+  --elev-2:0 10px 30px rgba(0,0,0,.42);
+}
+
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font-ui);
+  font-size:16px;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+h1,h2,h3,h4{font-family:var(--font-display);font-weight:600;letter-spacing:-.012em;text-wrap:balance;margin:0;line-height:1.14;}
+p{margin:0;}
+a{color:inherit;}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:3px;}
+
+.shell{max-width:var(--shell);margin:0 auto;padding-inline:var(--gutter);}
+
+/* ---------- reveal ---------- */
+.rv{opacity:0;transform:translateY(14px);transition:opacity .7s cubic-bezier(.2,.7,.3,1),transform .7s cubic-bezier(.2,.7,.3,1);}
+.rv.in{opacity:1;transform:none;}
+@media (prefers-reduced-motion: reduce){
+  .rv{opacity:1;transform:none;transition:none;}
+  *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;}
+}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+.nav{
+  position:sticky;top:0;z-index:60;
+  background:var(--bg);
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:saturate(1.4) blur(10px);
+  border-bottom:1px solid var(--line-soft);
+}
+.nav-in{display:flex;align-items:center;justify-content:space-between;gap:24px;height:66px;}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none;flex:none;}
+.brand svg{width:30px;height:30px;flex:none;}
+.brand b{font-family:var(--font-display);font-size:19px;font-weight:600;letter-spacing:-.01em;}
+.nav-links{display:flex;gap:28px;align-items:center;}
+.nav-links a{
+  text-decoration:none;font-size:13.5px;font-weight:500;color:var(--text-soft);
+  padding-block:4px;border-bottom:1.5px solid transparent;transition:color .15s,border-color .15s;
+}
+.nav-links a:hover{color:var(--text);border-bottom-color:var(--accent);}
+.nav-cta{
+  flex:none;text-decoration:none;font-size:13.5px;font-weight:600;
+  background:var(--brand);color:var(--on-brand);padding:9px 17px;border-radius:999px;
+  transition:background .15s,transform .12s;
+}
+.nav-cta:hover{background:var(--brand-hover);}
+.nav-cta:active{transform:translateY(1px);}
+@media (max-width:900px){.nav-links{display:none;}}
+
+/* ============================================================
+   HERO — committed dark world, both themes
+   ============================================================ */
+.hero{
+  background:
+    radial-gradient(120% 130% at 88% 0%, rgba(231,161,58,.18), transparent 52%),
+    radial-gradient(90% 110% at 0% 100%, rgba(13,148,136,.26), transparent 60%),
+    linear-gradient(168deg, var(--hero-bg-2) 0%, var(--hero-bg) 62%);
+  color:var(--hero-text);
+  border-bottom:1px solid var(--line-soft);
+  position:relative;overflow:hidden;
+}
+.hero-in{
+  display:grid;grid-template-columns:minmax(0,1.06fr) minmax(0,.94fr);
+  gap:clamp(36px,6vw,76px);align-items:center;
+  padding-block:clamp(64px,10vw,112px) clamp(60px,9vw,104px);
+}
+@media (max-width:980px){.hero-in{grid-template-columns:1fr;gap:44px;}}
+
+.eyebrow{
+  font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:700;
+  color:var(--eyebrow-ink);margin:0 0 16px;
+}
+.hero .eyebrow,.cta-card.lead .eyebrow{color:var(--accent);}
+.hero h1{
+  font-size:clamp(38px,5.6vw,62px);line-height:1.04;letter-spacing:-.024em;
+  color:var(--hero-text);margin:0 0 22px;
+}
+.hero h1 em{font-style:italic;font-weight:400;color:var(--accent);}
+.hero-lede{
+  font-size:clamp(16.5px,1.5vw,18.5px);color:var(--hero-soft);
+  max-width:34em;margin:0 0 30px;
+}
+.hero-lede strong{color:var(--hero-text);font-weight:600;}
+
+.btns{display:flex;gap:12px;flex-wrap:wrap;align-items:center;}
+.btn{
+  display:inline-flex;align-items:center;gap:9px;
+  font-family:var(--font-ui);font-size:14.5px;font-weight:600;text-decoration:none;
+  padding:13px 22px;border-radius:999px;border:1.5px solid transparent;
+  transition:background .15s,color .15s,border-color .15s,transform .12s;
+}
+.btn:active{transform:translateY(1px);}
+.btn-accent{background:var(--accent);color:#3a2a08;}
+.btn-accent:hover{background:#f2b658;}
+.btn-quiet{border-color:var(--hero-line);color:var(--hero-text);background:rgba(255,255,255,.03);}
+.btn-quiet:hover{background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.3);}
+.btn-solid{background:var(--brand);color:var(--on-brand);}
+.btn-solid:hover{background:var(--brand-hover);}
+.btn-line{border-color:var(--brand);color:var(--brand);background:transparent;}
+.btn-line:hover{background:var(--brand-wash);}
+
+.hero-note{
+  margin-top:26px;font-size:12.5px;color:var(--hero-soft);
+  display:flex;align-items:flex-start;gap:10px;max-width:52ch;
+}
+.dot{width:7px;height:7px;margin-top:7px;border-radius:50%;background:var(--accent);flex:none;box-shadow:0 0 0 4px rgba(231,161,58,.18);}
+
+/* --- the language wall: the product's thesis, made visible --- */
+.wall{
+  border:1px solid var(--hero-line);border-radius:18px;
+  background:linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.015));
+  padding:22px 6px 22px 22px;position:relative;
+}
+.wall-hd{
+  font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;
+  color:var(--hero-soft);margin:0 0 16px;padding-right:22px;
+}
+.wall-list{list-style:none;margin:0;padding:0 16px 0 0;max-height:min(50vh,378px);overflow-y:auto;scrollbar-width:thin;}
+.wall-list::-webkit-scrollbar{width:5px;}
+.wall-list::-webkit-scrollbar-thumb{background:rgba(255,255,255,.16);border-radius:3px;}
+.wl{
+  padding:11px 0;border-bottom:1px solid rgba(255,255,255,.07);
+  opacity:.42;transition:opacity .5s ease;
+}
+.wl:last-child{border-bottom:none;}
+.wl.on{opacity:1;}
+.wl .lg{
+  font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;
+  color:var(--hero-soft);margin:0 0 3px;transition:color .5s ease;
+}
+.wl.on .lg{color:var(--accent);}
+.wl .ph{font-size:16.5px;line-height:1.45;color:var(--hero-text);margin:0;}
+.wl[dir="rtl"]{text-align:right;}
+.wl[dir="rtl"] .ph{font-family:"Noto Naskh Arabic","Noto Kufi Arabic",var(--font-ui);font-size:18px;}
+.wl.ar .ph{font-family:"Noto Kufi Arabic",var(--font-ui);}
+.wl.cjk .ph{font-family:"Noto Sans SC",var(--font-ui);}
+.wl.dev .ph{font-family:"Noto Sans Devanagari",var(--font-ui);}
+.wl.ben .ph{font-family:"Noto Sans Bengali",var(--font-ui);}
+.wl.gur .ph{font-family:"Noto Sans Gurmukhi",var(--font-ui);}
+.wall-foot{
+  margin:16px 22px 0 0;padding-top:14px;border-top:1px solid var(--hero-line);
+  font-size:12px;color:var(--hero-soft);
+}
+
+/* ============================================================
+   SECTION SCAFFOLD — asymmetric editorial grid
+   ============================================================ */
+section{border-bottom:1px solid var(--line-soft);}
+.band{padding-block:clamp(56px,7.5vw,96px);}
+.grid{display:grid;grid-template-columns:minmax(0,302px) minmax(0,1fr);gap:clamp(28px,5vw,68px);align-items:start;}
+@media (max-width:900px){.grid{grid-template-columns:1fr;gap:26px;}}
+.rail .eyebrow{color:var(--eyebrow-ink);}
+.rail h2{font-size:clamp(24px,2.7vw,30px);margin:0 0 14px;}
+.rail p{font-size:14.5px;color:var(--text-soft);}
+.body-col > p{font-size:17px;color:var(--text-soft);max-width:66ch;}
+.body-col > p + p{margin-top:18px;}
+.body-col strong{color:var(--text);font-weight:600;}
+
+.alt{background:var(--surface-2);}
+
+/* one section deliberately breaks the rail rhythm so the three lanes get full width */
+.grid.stack{grid-template-columns:1fr;gap:clamp(24px,3vw,38px);}
+.grid.stack .rail{max-width:64ch;}
+.grid.stack .rail h2{font-size:clamp(26px,3.1vw,34px);}
+.grid.stack .rail p{font-size:15.5px;max-width:60ch;}
+
+/* ---------- stat strip ---------- */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:32px;}
+.stat{background:var(--surface);padding:20px 22px;}
+.stat b{display:block;font-family:var(--font-display);font-size:31px;font-weight:600;letter-spacing:-.02em;color:var(--brand);font-variant-numeric:tabular-nums;line-height:1.1;}
+.stat span{display:block;font-size:12.5px;color:var(--text-soft);margin-top:5px;}
+.stat i{display:block;font-style:normal;font-size:10.5px;color:var(--text-faint);margin-top:7px;}
+
+/* ---------- lanes ---------- */
+.lanes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;}
+@media (max-width:860px){.lanes{grid-template-columns:1fr;}}
+.lane{
+  background:var(--surface);border:1px solid var(--line);border-radius:16px;
+  padding:24px 24px 22px;position:relative;overflow:hidden;box-shadow:var(--elev-1);
+  display:flex;flex-direction:column;gap:13px;
+}
+.lane::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--lane-c,var(--brand));}
+.lane-tag{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--lane-ink,var(--brand-deep));}
+.lane h3{font-size:20px;}
+.lane p{font-size:14.5px;color:var(--text-soft);}
+.lane dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:12.5px;border-top:1px solid var(--line-soft);padding-top:14px;margin-top:auto;}
+.lane dt{color:var(--text-faint);font-weight:600;letter-spacing:.03em;}
+.lane dd{margin:0;color:var(--text-soft);}
+.state{
+  display:inline-flex;align-items:center;gap:7px;align-self:flex-start;
+  font-size:11px;font-weight:600;padding:4px 11px;border-radius:999px;
+  background:var(--accent-wash);color:var(--amber-ink);
+}
+
+/* ---------- employer / legal callout ---------- */
+.law{
+  border:1px solid var(--line);border-left:3px solid var(--clay);border-radius:0 14px 14px 0;
+  background:var(--surface);padding:22px 24px;margin-top:28px;
+}
+.law .ref{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--ink-clay);margin:0 0 8px;}
+.law p{font-size:15px;color:var(--text-soft);}
+.law p + p{margin-top:12px;}
+.law em{font-style:italic;color:var(--text);}
+
+.ledger{width:100%;border-collapse:collapse;margin-top:26px;font-size:14px;}
+.ledger caption{text-align:left;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--text-faint);padding-bottom:11px;}
+.ledger th{text-align:left;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--text-faint);font-weight:700;padding:0 14px 9px 0;border-bottom:1px solid var(--line);}
+.ledger td{padding:13px 14px 13px 0;border-bottom:1px solid var(--line-soft);color:var(--text-soft);vertical-align:top;}
+.ledger td:first-child{color:var(--text);font-weight:600;width:38%;}
+.scroll-x{overflow-x:auto;}
+
+/* ---------- language chips ---------- */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px;}
+.chip{
+  font-size:13px;font-weight:500;padding:7px 14px;border-radius:999px;
+  background:var(--brand-wash);color:var(--chip-ink);border:1px solid transparent;
+}
+.chip.more{background:transparent;border-color:var(--line);color:var(--text-faint);}
+
+/* ---------- promises (data handling) ---------- */
+.promises{list-style:none;margin:0;padding:0;display:grid;gap:2px;}
+.promises li{
+  display:grid;grid-template-columns:26px 1fr;gap:14px;align-items:start;
+  padding:15px 0;border-bottom:1px solid var(--line-soft);
+}
+.promises li:last-child{border-bottom:none;}
+.promises svg{width:19px;height:19px;margin-top:3px;color:var(--brand);}
+.promises b{display:block;font-size:15px;font-weight:600;margin-bottom:3px;}
+.promises span{font-size:14px;color:var(--text-soft);}
+
+/* ---------- phase timeline: growth ramp encodes real sequence ---------- */
+.ramp{display:flex;border-radius:10px;overflow:hidden;border:1px solid var(--line);margin-bottom:26px;}
+.ramp span{flex:1;height:8px;}
+.phases{list-style:none;margin:0;padding:0;display:grid;gap:0;counter-reset:ph;}
+.phase{
+  display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start;
+  padding:20px 0;border-bottom:1px solid var(--line-soft);
+}
+.phase:last-child{border-bottom:none;}
+.pnum{
+  width:34px;height:34px;border-radius:50%;display:grid;place-items:center;
+  font-size:13px;font-weight:700;color:#fff;font-variant-numeric:tabular-nums;
+  background:var(--pc,var(--brand));flex:none;
+}
+.phase h4{font-size:16.5px;margin-bottom:4px;}
+.phase p{font-size:14.5px;color:var(--text-soft);}
+.phase .when{font-size:12px;color:var(--text-faint);margin-top:6px;font-weight:500;}
+.now{
+  display:inline-block;font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;
+  background:var(--accent);color:#3a2a08;padding:2px 9px;border-radius:999px;margin-left:9px;vertical-align:2px;
+}
+
+/* ---------- calls to action ---------- */
+.cta-pair{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;}
+.cta-card{
+  border:1px solid var(--line);border-radius:18px;padding:30px 30px 28px;
+  background:var(--surface);box-shadow:var(--elev-1);
+  display:flex;flex-direction:column;gap:14px;
+}
+.cta-card.lead{
+  background:linear-gradient(165deg, var(--brand-deep), #0a1f1d);
+  border-color:transparent;color:var(--hero-text);
+}
+.cta-card.lead h3,.cta-card.lead .eyebrow{color:var(--hero-text);}
+.cta-card.lead .eyebrow{color:var(--accent);}
+.cta-card.lead p,.cta-card.lead li{color:var(--hero-soft);}
+.cta-card h3{font-size:22px;}
+.cta-card p{font-size:14.5px;color:var(--text-soft);}
+.cta-card ul{margin:0;padding-left:18px;display:grid;gap:6px;font-size:13.5px;color:var(--text-soft);}
+.cta-card .btns{margin-top:6px;}
+
+/* ---------- footer ---------- */
+.foot{background:var(--surface-2);border-top:1px solid var(--line-soft);padding-block:44px 34px;}
+.foot-grid{display:grid;grid-template-columns:minmax(0,1.4fr) repeat(auto-fit,minmax(150px,1fr));gap:34px;}
+.foot h5{font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--text-faint);margin:0 0 12px;font-family:var(--font-ui);}
+.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:13.5px;}
+.foot a{color:var(--text-soft);text-decoration:none;}
+.foot a:hover{color:var(--brand);}
+.foot .blurb{font-size:14px;color:var(--text-soft);max-width:40ch;margin-top:14px;}
+.safety{
+  margin-top:34px;padding:18px 20px;border-radius:12px;
+  border:1px solid var(--line);background:var(--surface);
+  font-size:13px;color:var(--text-soft);
+}
+.safety b{color:var(--text);}
+.legal{
+  margin-top:22px;padding-top:20px;border-top:1px solid var(--line-soft);
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  font-size:11.5px;color:var(--text-faint);
+}
+</style>
+</head>
+<body>
+<!-- ============================================================ NAV -->
+<nav class="nav">
+  <div class="shell nav-in">
+    <a class="brand" href="#top">
+      <svg viewBox="0 0 64 64" aria-hidden="true">
+        <circle cx="32" cy="47" r="4.2" fill="#e7a13a"/>
+        <path d="M32 47 C 31.2 42 32.8 40 32 36" stroke="#0d9488" stroke-width="3" stroke-linecap="round" fill="none"/>
+        <path d="M32 43 C 30.5 33 25 26 15.5 21.5 C 17.5 31 22.5 38.5 32 43 Z" fill="#0d9488"/>
+        <path d="M32 43 C 33.5 29 41 20 51.5 15 C 49 27 43 37.5 32 43 Z" fill="#0f6d68"/>
+      </svg>
+      <b>Tamia4Life</b>
+    </a>
+    <div class="nav-links">
+      <a href="#gap">The gap</a>
+      <a href="#lanes">What we're building</a>
+      <a href="#employers">For employers</a>
+      <a href="#data">Your information</a>
+      <a href="#where">Where we are</a>
+    </div>
+    <a class="nav-cta" href="#take-part">Take part</a>
+  </div>
+</nav>
+
+<!-- ============================================================ HERO -->
+<header class="hero" id="top">
+  <div class="shell hero-in">
+    <div>
+      <p class="eyebrow">Brescia · Lombardia · in development</p>
+      <h1>Settling into a new country is work. It goes better <em>in your own language.</em></h1>
+      <p class="hero-lede">Tamia4Life is being built as a mother-tongue orientation, mediation and training service for people of foreign origin living and working in Italy — and for the employers whose workforces depend on them. <strong>Non-clinical by design.</strong> Delivered by bilingual facilitators who have made the same journey.</p>
+      <div class="btns">
+        <a class="btn btn-accent" href="#take-part">Take part in the research</a>
+        <a class="btn btn-quiet" href="#employers">If you employ a multilingual team</a>
+      </div>
+      <p class="hero-note"><span class="dot"></span><span>We are not open yet. We are in the listening phase — and we are looking for people to talk to.</span></p>
+    </div>
+
+    <div class="wall">
+      <p class="wall-hd">One service. Every member's own language.</p>
+      <ul class="wall-list" id="wall" aria-label="The same welcome, written in fourteen languages">
+        <li class="wl on"><p class="lg">English</p><p class="ph">Welcome. Let's begin in your language.</p></li>
+        <li class="wl"><p class="lg">Italiano</p><p class="ph">Benvenuto. Iniziamo nella tua lingua.</p></li>
+        <li class="wl"><p class="lg">Română</p><p class="ph">Bine ai venit. Începem în limba ta.</p></li>
+        <li class="wl ar" dir="rtl"><p class="lg">العربية · Arabic</p><p class="ph">أهلاً بك. لنبدأ بلغتك.</p></li>
+        <li class="wl"><p class="lg">Shqip · Albanian</p><p class="ph">Mirë se vjen. Le të fillojmë në gjuhën tënde.</p></li>
+        <li class="wl gur"><p class="lg">ਪੰਜਾਬੀ · Punjabi</p><p class="ph">ਜੀ ਆਇਆਂ ਨੂੰ। ਆਓ ਤੁਹਾਡੀ ਭਾਸ਼ਾ ਵਿੱਚ ਸ਼ੁਰੂ ਕਰੀਏ।</p></li>
+        <li class="wl" dir="rtl"><p class="lg">اردو · Urdu</p><p class="ph">خوش آمدید۔ آئیے آپ کی زبان میں شروع کرتے ہیں۔</p></li>
+        <li class="wl cjk"><p class="lg">中文 · Chinese</p><p class="ph">欢迎。让我们用您的语言开始。</p></li>
+        <li class="wl"><p class="lg">Українська · Ukrainian</p><p class="ph">Ласкаво просимо. Почнімо вашою мовою.</p></li>
+        <li class="wl ben"><p class="lg">বাংলা · Bengali</p><p class="ph">স্বাগতম। চলুন আপনার ভাষায় শুরু করি।</p></li>
+        <li class="wl"><p class="lg">Español</p><p class="ph">Bienvenido. Empecemos en tu idioma.</p></li>
+        <li class="wl"><p class="lg">Français</p><p class="ph">Bienvenue. Commençons dans votre langue.</p></li>
+        <li class="wl dev"><p class="lg">हिन्दी · Hindi</p><p class="ph">स्वागत है। आइए आपकी भाषा में शुरू करें।</p></li>
+        <li class="wl"><p class="lg">Filipino · Tagalog</p><p class="ph">Maligayang pagdating. Magsimula tayo sa iyong wika.</p></li>
+      </ul>
+      <p class="wall-foot">Which languages we actually open with is a decision we are making <em>with</em> communities in Brescia — not for them.</p>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================================ THE GAP -->
+<section id="gap">
+  <div class="shell band grid rv">
+    <div class="rail">
+      <p class="eyebrow">The gap</p>
+      <h2>Between "I'm fine" and "I need a doctor", there is almost nothing.</h2>
+      <p>And what little exists is rarely offered in a language people think in.</p>
+    </div>
+    <div class="body-col">
+      <p>More than five million residents of foreign origin live in Italy. They staff its logistics hubs, its care homes, its farms, its restaurants and its factories. In the province of Brescia the share is among the highest in the country.</p>
+      <p>What they do not have is somewhere ordinary to take the ordinary difficulty of building a life in a second language: <strong>paperwork nobody explains, a school system nobody translates, a workplace where you are competent but cannot say so, a family two thousand kilometres away.</strong> None of that is illness. All of it is heavy.</p>
+      <p>The options that exist sit at the extremes. General wellbeing apps are written for someone else's culture and someone else's week. Health services are reactive, oversubscribed, and — for people who have learned to be careful about who records their name — carry a cost that has nothing to do with money. In between, where most people actually are, there is a gap.</p>
+      <p><strong>Tamia4Life is being designed for the gap.</strong> Orientation, cultural mediation, accompaniment and group learning, in the member's own language, delivered by people who have made the same crossing. Where something belongs with a health professional, we say so and we hand it over — properly, to a named person, not to a leaflet.</p>
+      <div class="stats">
+        <div class="stat"><b>5M+</b><span>residents of foreign origin in Italy</span><i>Order of magnitude — to be re-cited from ISTAT at launch</i></div>
+        <div class="stat"><b>3</b><span>service lanes, kept separate by design</span><i>See "What we're building"</i></div>
+        <div class="stat"><b>0</b><span>records of immigration or legal status</span><i>Never collected. Enforced in the schema, not by policy</i></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ LANES -->
+<section id="lanes" class="alt">
+  <div class="shell band grid stack rv">
+    <div class="rail">
+      <p class="eyebrow">What we're building</p>
+      <h2>Three lanes. A person is in exactly one at a time.</h2>
+      <p>This separation is the architecture of the service, not a disclaimer at the bottom of a page. Italian law reserves certain acts to registered professionals. We would rather build around that line clearly than blur it and hope.</p>
+    </div>
+    <div class="body-col">
+      <div class="lanes">
+
+        <div class="lane" style="--lane-c:var(--clay);--lane-ink:var(--ink-clay)">
+          <p class="lane-tag">Lane A</p>
+          <h3>Percorso clinico</h3>
+          <p>Individual sessions for someone who is struggling. Reserved by law — delivered only by a <strong>psicologo iscritto all'Albo</strong>, under their own registration, never by a facilitator.</p>
+          <p class="state">Not open — opens only with a registered professional in place</p>
+          <dl>
+            <dt>Delivered by</dt><dd>Registered psychologist</dd>
+            <dt>Format</dt><dd>1:1, continuing</dd>
+            <dt>Data</dt><dd>Health data — strictest handling</dd>
+          </dl>
+        </div>
+
+        <div class="lane" style="--lane-c:var(--brand)">
+          <p class="lane-tag">Lane B</p>
+          <h3>Mediazione</h3>
+          <p>Linguistic and cultural mediation. Understanding a letter from the Comune, preparing for a parents' evening, navigating a service, being accompanied to an appointment where the words matter.</p>
+          <p class="state">In design</p>
+          <dl>
+            <dt>Delivered by</dt><dd>Bilingual mediators</dd>
+            <dt>Format</dt><dd>1:1 or family, task-based</dd>
+            <dt>Data</dt><dd>Ordinary personal data</dd>
+          </dl>
+        </div>
+
+        <div class="lane" style="--lane-c:var(--grow-3);--lane-ink:var(--ink-leaf)">
+          <p class="lane-tag">Lane C</p>
+          <h3>Formazione</h3>
+          <p>Group work and training. Adaptation workshops, peer groups by language community, workplace communication, and training for the Italian managers and colleagues on the other side of that conversation.</p>
+          <p class="state">In design</p>
+          <dl>
+            <dt>Delivered by</dt><dd>Trainers, facilitators</dd>
+            <dt>Format</dt><dd>Group, never individual</dd>
+            <dt>Data</dt><dd>Largely aggregate</dd>
+          </dl>
+        </div>
+
+      </div>
+
+      <div class="law">
+        <p class="ref">Why we are strict about this</p>
+        <p>In Italy, acts such as <em>diagnosi</em>, <em>colloquio clinico</em> and <em>sostegno psicologico</em> are reserved to psychologists registered with the Ordine under <em>Legge 56/1989</em>. The Court of Cassation has held that presenting yourself as competent to address a person's inner difficulty — continuously, for a fee — can cross that line <strong>even where no diagnosis and no treatment ever took place</strong>.</p>
+        <p>So Lanes B and C do not offer a version of that with softer words. They offer something genuinely different: practical help with the outside world, and learning done together. When a facilitator meets something that belongs in Lane A, they have one action to escalate it, and using it costs them nothing.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ EMPLOYERS -->
+<section id="employers">
+  <div class="shell band grid rv">
+    <div class="rail">
+      <p class="eyebrow">For employers</p>
+      <h2>You already own this obligation. Most people discharge it with a tick-box.</h2>
+      <p>Brescia's logistics, manufacturing, agriculture, care and hospitality employers run multilingual floors. The gap on those floors is not motivation — it is language and adaptation.</p>
+    </div>
+    <div class="body-col">
+      <p>Under <strong>art. 28 D.lgs 81/2008</strong>, every Italian employer with at least one worker must assess <em>stress lavoro-correlato</em> as part of the DVR. It applies regardless of company size or sector — only the method scales. INAIL's methodology runs in two phases, and where the preliminary phase returns a medium or high result, the deeper phase — questionnaires, semi-structured interviews, focus groups — has to actually be carried out by someone qualified to carry it out.</p>
+      <p>That second phase is where multilingual workforces are routinely underserved, because it is run in Italian, to workers who answer in Italian only as far as their Italian goes. <strong>An assessment your people cannot fully answer is not an assessment.</strong></p>
+
+      <div class="law">
+        <p class="ref">The boundary we will state to every buyer</p>
+        <p>Carrying out the assessment the law already requires is <em>compliance</em>. It is not, by itself, an INAIL OT23-creditable intervention, and we will never sell it as one. What is creditable is the qualified delivery of the deeper phase and the above-minimum interventions that follow it — and those we will describe precisely, with the intervention code the activity is intended to evidence, so your dossier survives contact with INAIL.</p>
+      </div>
+
+      <div class="scroll-x">
+        <table class="ledger">
+          <caption>What an employer engagement is intended to look like</caption>
+          <thead><tr><th scope="col">What you get</th><th scope="col">What it is not</th></tr></thead>
+          <tbody>
+            <tr><td>The deeper assessment phase run in the languages your workforce actually speaks</td><td>A translated questionnaire and hope</td></tr>
+            <tr><td>Adaptation and workplace-communication workshops, by language community</td><td>Individual sessions delivered by a facilitator</td></tr>
+            <tr><td>Training for Italian supervisors on managing across languages</td><td>Cultural-sensitivity theatre with no follow-through</td></tr>
+            <tr><td>Anonymised, aggregate participation and outcome reporting for your file</td><td>Anything at all about a named employee</td></tr>
+            <tr><td>An honest referral when something belongs with a health professional</td><td>Us keeping hold of it because it is billable</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="btns" style="margin-top:30px">
+        <a class="btn btn-solid" href="mailto:hello@tamia4life.it?subject=Employer%20conversation%20%E2%80%94%20Tamia4Life">Book a 30-minute conversation</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ LANGUAGE & PEOPLE -->
+<section id="people" class="alt">
+  <div class="shell band grid rv">
+    <div class="rail">
+      <p class="eyebrow">Language &amp; people</p>
+      <h2>The network is the thing that is hard to copy.</h2>
+      <p>Anyone can build the software. Assembling facilitators who hold both the language and the lived experience — and keeping them — is the work.</p>
+    </div>
+    <div class="body-col">
+      <p>Matching is on <strong>language first, then shared cultural experience</strong> — never on a description of how someone feels. A member always sees why they were matched with a particular facilitator, in plain words, and can change that match without explaining themselves.</p>
+      <p>Facilitators are people who have made the crossing themselves: they know what it is to hold a professional qualification that does not travel, to read a school letter three times, to be the person the whole extended family calls when something official arrives. They are trained, they are paid properly, and their credentials — including Albo registration where the lane requires it — are verified and re-verified, not taken on trust.</p>
+      <p>The languages we open with will be decided by the discovery work now underway in Brescia, not chosen in advance from a spreadsheet. These are the communities the province suggests we start with:</p>
+      <div class="chips">
+        <span class="chip">العربية</span>
+        <span class="chip">اردو</span>
+        <span class="chip">ਪੰਜਾਬੀ</span>
+        <span class="chip">हिन्दी</span>
+        <span class="chip">Română</span>
+        <span class="chip">Shqip</span>
+        <span class="chip">中文</span>
+        <span class="chip">বাংলা</span>
+        <span class="chip">Français · Wolof</span>
+        <span class="chip">Українська</span>
+        <span class="chip">Español</span>
+        <span class="chip">Filipino</span>
+        <span class="chip more">and whichever the interviews tell us we've missed</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ DATA -->
+<section id="data">
+  <div class="shell band grid rv">
+    <div class="rail">
+      <p class="eyebrow">Your information</p>
+      <h2>We are asking a cautious audience to trust us. So the promises are structural.</h2>
+      <p>Every commitment below is enforced in how the system is built, so that keeping it does not depend on anyone remembering to.</p>
+    </div>
+    <div class="body-col">
+      <ul class="promises">
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4.5-3 7.7-7 9-4-1.3-7-4.5-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>
+          <div><b>We never record immigration or legal status</b><span>Not in a field, not in a note, not in a free-text box that invites it. There is nowhere in the system to put it, which is the only version of this promise worth making.</span></div>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+          <div><b>Your employer never sees you</b><span>Employers receive participation and outcome figures in aggregate. No names, no sessions, no individual anything — including the fact that you took part at all, where the group is small enough for that to identify you.</span></div>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h18"/><path d="M12 3v18"/><rect x="3" y="3" width="18" height="18" rx="3"/></svg>
+          <div><b>The lanes are separated in storage, not just on paper</b><span>A Lane C trainer is technically incapable of reading a Lane A record. Access is a boundary in the system, not a rule in a handbook.</span></div>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3.5 9h17M3.5 15h17"/><path d="M12 3c2.5 3 2.5 15 0 18M12 3C9.5 6 9.5 18 12 21"/></svg>
+          <div><b>Data stays in the EU, and we ask for less of it</b><span>EU-hosted infrastructure. Age, time in Italy and employment status recorded as broad bands, never exact values — because no report we owe anyone needs more than that.</span></div>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><path d="M6 7l1 13a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-13"/></svg>
+          <div><b>Deletion means deletion</b><span>A published retention period per lane, automatic expiry, and an erasure request that actually reaches backups and exports — designed so that removing you does not quietly break anything we have already reported.</span></div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ WHERE WE ARE -->
+<section id="where" class="alt">
+  <div class="shell band grid rv">
+    <div class="rail">
+      <p class="eyebrow">Where we are</p>
+      <h2>Honestly: at the beginning, and deliberately so.</h2>
+      <p>We would rather be publicly early than quietly wrong. Everything below is where the venture actually stands today.</p>
+    </div>
+    <div class="body-col">
+      <div class="ramp" aria-hidden="true">
+        <span style="background:var(--grow-0)"></span>
+        <span style="background:var(--grow-1)"></span>
+        <span style="background:var(--grow-2)"></span>
+        <span style="background:var(--grow-3)"></span>
+        <span style="background:var(--grow-4)"></span>
+      </div>
+      <ol class="phases">
+        <li class="phase">
+          <span class="pnum" style="--pc:var(--grow-0)">1</span>
+          <div>
+            <h4>Listening<span class="now">We are here</span></h4>
+            <p>Structured interviews with residents of foreign origin in and around Brescia, and with employers who run multilingual workforces. We are testing whether the difficulty we think exists is the difficulty people actually have — and whether an employer will name a cost and a budget owner for it.</p>
+            <p class="when">Running now · nothing else ships until this is done properly</p>
+          </div>
+        </li>
+        <li class="phase">
+          <span class="pnum" style="--pc:var(--grow-1)">2</span>
+          <div>
+            <h4>Designing the service around what we heard</h4>
+            <p>Triage rules, the three-lane separation, the consent flows and the evidence model — specified and reviewed, including a written legal opinion on the professional boundary and a data protection impact assessment before a single real record exists.</p>
+            <p class="when">Follows Phase 1 · not before</p>
+          </div>
+        </li>
+        <li class="phase">
+          <span class="pnum" style="--pc:var(--grow-2)">3</span>
+          <div>
+            <h4>Constituting the vehicle</h4>
+            <p>Registering as an Italian social enterprise, with a statute naming migrant integration, socio-health prevention and vocational training as its general-interest activities — which is what opens the public and European funding lines this work belongs in.</p>
+            <p class="when">In parallel with Phase 2</p>
+          </div>
+        </li>
+        <li class="phase">
+          <span class="pnum" style="--pc:var(--grow-3);color:#16210f">4</span>
+          <div>
+            <h4>A first cohort, with a psychologist in place</h4>
+            <p>A small pilot with one or two anchor employers and one or two language communities. Lane A opens at this point and not before, because it cannot exist without a registered professional attached to it.</p>
+            <p class="when">Subject to Phases 1–3 clearing</p>
+          </div>
+        </li>
+        <li class="phase">
+          <span class="pnum" style="--pc:var(--grow-4);color:#3a2a08">5</span>
+          <div>
+            <h4>Evidence, then scale</h4>
+            <p>Measured outcomes published in a social report, more language communities, more employers. We grow on evidence we recorded at the time the service was delivered — never on a number reconstructed afterwards to fit an application.</p>
+            <p class="when">Funding windows open March–April 2027</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ TAKE PART -->
+<section id="take-part">
+  <div class="shell band grid rv">
+    <div class="rail">
+      <p class="eyebrow">Take part</p>
+      <h2>The most useful thing you can give us right now is forty minutes.</h2>
+      <p>Not money, not a sign-up. A conversation. This is the phase where being told we are wrong is worth more than being told we are right.</p>
+    </div>
+    <div class="body-col">
+      <div class="cta-pair">
+
+        <div class="cta-card lead">
+          <p class="eyebrow">If you live in Italy and Italian is not your first language</p>
+          <h3>Tell us what settling in has actually cost you</h3>
+          <p>A conversation, in your language, with someone who speaks it. About the practical difficulty of building a life here — the paperwork, the work, the family, the distance.</p>
+          <ul>
+            <li>30–40 minutes, in person in Brescia or online</li>
+            <li>In your language, with a bilingual interviewer</li>
+            <li>We never ask about your immigration or legal status</li>
+            <li>Nothing is recorded unless you say yes, and you can stop at any point</li>
+            <li>No sign-up, no cost, and nothing is being sold to you</li>
+          </ul>
+          <div class="btns">
+            <a class="btn btn-accent" href="mailto:hello@tamia4life.it?subject=I'd%20like%20to%20take%20part%20in%20the%20research">Volunteer for an interview</a>
+          </div>
+        </div>
+
+        <div class="cta-card">
+          <p class="eyebrow">If you employ a multilingual workforce</p>
+          <h3>Tell us what it costs you when language gets in the way</h3>
+          <p>Turnover in the first ninety days, instructions that have to be given twice, a stress assessment your workforce could not fully answer. We want the real number and the person whose budget it comes out of.</p>
+          <ul>
+            <li>30 minutes with whoever owns the problem — HR, HSE, or the plant</li>
+            <li>We will tell you plainly which parts of this are compliance and which are not</li>
+            <li>No proposal at the end of it, because there is nothing yet to propose</li>
+            <li>If a pilot makes sense later, you will already know exactly what you would be buying</li>
+          </ul>
+          <div class="btns">
+            <a class="btn btn-line" href="mailto:hello@tamia4life.it?subject=Employer%20conversation%20%E2%80%94%20Tamia4Life">Book a conversation</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ FOOTER -->
+<footer class="foot">
+  <div class="shell">
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="#top" style="text-decoration:none">
+          <svg viewBox="0 0 64 64" aria-hidden="true">
+            <circle cx="32" cy="47" r="4.2" fill="#e7a13a"/>
+            <path d="M32 47 C 31.2 42 32.8 40 32 36" stroke="#0d9488" stroke-width="3" stroke-linecap="round" fill="none"/>
+            <path d="M32 43 C 30.5 33 25 26 15.5 21.5 C 17.5 31 22.5 38.5 32 43 Z" fill="#0d9488"/>
+            <path d="M32 43 C 33.5 29 41 20 51.5 15 C 49 27 43 37.5 32 43 Z" fill="#0f6d68"/>
+          </svg>
+          <b>Tamia4Life</b>
+        </a>
+        <p class="blurb">Mother-tongue orientation, mediation and training for multicultural Italy. In development in Brescia, Lombardia.</p>
+      </div>
+      <div>
+        <h5>The service</h5>
+        <ul>
+          <li><a href="#gap">The gap</a></li>
+          <li><a href="#lanes">Three lanes</a></li>
+          <li><a href="#people">Language &amp; people</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Organisations</h5>
+        <ul>
+          <li><a href="#employers">For employers</a></li>
+          <li><a href="#where">Where we are</a></li>
+          <li><a href="#take-part">Take part</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="mailto:hello@tamia4life.it">hello@tamia4life.it</a></li>
+          <li><a href="#data">How we handle information</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="safety">
+      <b>If you need medical or psychological care, this is not the place to look for it — yet.</b> Tamia4Life is a non-clinical service and is not a substitute for the health system. If you are unwell or in difficulty, speak to your <em>medico di base</em> or contact your local ASST. In an emergency, call <b>112</b>. Where an individual clinical pathway becomes part of what we offer, it will be delivered by a psychologist registered with the Ordine degli Psicologi, under their own registration, and will say so on the page.
+    </div>
+
+    <div class="legal">
+      <span>Tamia4Life · in development · Provincia di Brescia, Regione Lombardia · legal vehicle not yet constituted</span>
+      <span>Nothing on this page is an offer of a service that is currently available.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* scroll reveal */
+  var rv = document.querySelectorAll('.rv');
+  if (reduce || !('IntersectionObserver' in window)) {
+    rv.forEach(function(el){ el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.06 });
+    rv.forEach(function(el){ io.observe(el); });
+  }
+
+  /* language wall — advance the highlighted language */
+  var wall = document.getElementById('wall');
+  if (wall && !reduce) {
+    var items = Array.prototype.slice.call(wall.querySelectorAll('.wl'));
+    var i = 0, paused = false;
+    wall.addEventListener('mouseenter', function(){ paused = true; });
+    wall.addEventListener('mouseleave', function(){ paused = false; });
+    setInterval(function(){
+      if (paused || document.hidden) return;
+      items[i].classList.remove('on');
+      i = (i + 1) % items.length;
+      items[i].classList.add('on');
+      var t = items[i], list = wall;
+      var top = t.offsetTop - list.clientHeight / 2 + t.clientHeight / 2;
+      list.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+    }, 2400);
+  }
+})();
+</script>
+</body>
+</html>

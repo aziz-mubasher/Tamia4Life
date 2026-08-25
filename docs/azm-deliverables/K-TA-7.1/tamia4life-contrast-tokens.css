@@ -1,0 +1,30 @@
+/* Tamia4Life — contrast tokens added on top of Design System v0
+   Source: public site v1 (25 Aug 2026).
+   Feed these into the design system rather than keeping them site-local.
+   Several v0 brand colours fail WCAG AA at small type on the paper ground. */
+
+:root {
+  --on-brand: #ffffff;   /* text sitting on a --brand fill */
+  --eyebrow-ink: #a06510; /* amber, darkened for small type on paper */
+  --amber-ink: #8f5c0d;
+  --ink-clay: #a04b34;
+  --ink-leaf: #4d6b1f;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --on-brand: #06211e;
+    --eyebrow-ink: #f0b45c;
+    --amber-ink: #f0b45c;
+    --ink-clay: #e0a08a;
+    --ink-leaf: #a8d165;
+  }
+}
+
+:root[data-theme="dark"] {
+  --on-brand: #06211e;
+  --eyebrow-ink: #f0b45c;
+  --amber-ink: #f0b45c;
+  --ink-clay: #e0a08a;
+  --ink-leaf: #a8d165;
+}

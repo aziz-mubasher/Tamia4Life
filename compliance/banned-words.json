@@ -1,16 +1,35 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "constitution": "CLAUDE.md §5",
-  "updated": "2026-08-24",
-  "note": "Lane B/C surfaces only. Lane A may use clinical language if the Albo professional is named (CLAUDE.md §5.3). Matching is case-insensitive. Multilingual locales must add equivalent phrases before that locale ships (§5.4).",
+  "updated": "2026-08-25",
+  "note": "Lane B/C surfaces. Lane A may use clinical language if the Albo professional is named (§5.3). Audited public pages list permitted residual hits in audited_surfaces. Matching is case-insensitive.",
   "allowlist_path_prefixes": [
     "CLAUDE.md",
     "AGENTS.md",
     ".cursorrules",
     "compliance/",
     "scripts/lint-banned-words.py",
-    ".github/workflows/banned-words.yml"
+    ".github/workflows/banned-words.yml",
+    "docs/azm-deliverables/K-TA-7.1/COPY-AUDIT.md"
   ],
+  "audited_surfaces": {
+    "docs/azm-deliverables/K-TA-7.1/tamia4life-site.html": {
+      "audit": "docs/azm-deliverables/K-TA-7.1/COPY-AUDIT.md",
+      "permit_rules": [
+        "token:en:psychologist",
+        "token:en:psychologists",
+        "token:en:psychological",
+        "token:en:stress",
+        "token:en:diagnosis",
+        "token:en:treatment",
+        "token:it:diagnosi",
+        "token:it:psicologico",
+        "token:it:stress",
+        "phrase:it:sostegno psicologico",
+        "phrase:it:colloquio clinico"
+      ]
+    }
+  },
   "phrases": {
     "it": [
       "sostegno psicologico",
@@ -24,9 +43,11 @@
     "en": [
       "psychological support",
       "emotional support",
+      "mental health",
       "wellbeing score",
       "wellbeing scores",
       "wellness score",
+      "burnout prevention",
       "psychological result"
     ],
     "ro": [
@@ -57,18 +78,29 @@
     "en": [
       "therapist",
       "psychotherapy",
+      "therapy",
+      "anxiety",
+      "depression",
+      "trauma",
+      "patient",
+      "cure",
+      "counselling",
+      "counseling",
       "diagnosis",
-      "patient"
+      "treatment",
+      "psychologist",
+      "psychologists",
+      "psychological"
     ]
   },
   "contextual_tokens": {
-    "comment": "stress is banned as something the service treats (§5.1), not in the statutory phrase stress lavoro-correlato. The linter flags the bare token; allowlist legal/spec paths or write around it.",
+    "comment": "stress is banned as something the service treats (§5.1), not in the statutory phrase stress lavoro-correlato. Audited surfaces may permit the token.",
     "it": ["stress"],
     "en": ["stress"]
   },
   "locale_pack_status": {
     "it": "v1-from-constitution-§5.1",
-    "en": "v1-equivalents-§5.4",
+    "en": "v1.2-from-K-TA-7.1-copy-audit",
     "es": "starter-§5.4",
     "ro": "starter-incomplete",
     "ar": "starter-incomplete",

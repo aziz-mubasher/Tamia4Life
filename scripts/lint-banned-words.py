@@ -92,20 +92,29 @@ def iter_files(root: Path) -> list[Path]:
     return files
 
 
+def permitted_rules_for(rel: str, config: dict) -> set[str]:
+    audited = config.get("audited_surfaces") or {}
+    entry = audited.get(rel) or {}
+    return set(entry.get("permit_rules") or [])
+
+
 def lint(root: Path, config: dict) -> list[str]:
     prefixes = config.get("allowlist_path_prefixes") or []
     rules = compile_rules(config)
     hits: list[str] = []
     for path in iter_files(root):
-        rel = str(path.relative_to(root))
+        rel = str(path.relative_to(root)).replace("\\", "/")
         if is_allowlisted(rel, prefixes):
             continue
+        permitted = permitted_rules_for(rel, config)
         try:
             text = path.read_text(encoding="utf-8")
         except UnicodeDecodeError:
             continue
         for i, line in enumerate(text.splitlines(), start=1):
             for label, pattern in rules:
+                if label in permitted:
+                    continue
                 if pattern.search(line):
                     hits.append(f"{rel}:{i}: {label}: {line.strip()[:160]}")
     return hits
@@ -121,6 +130,8 @@ def self_test(config: dict) -> int:
         ("token:it:psicologico", "Servizio psicologico per dipendenti."),
         ("token:it:stress", "Trattiamo lo stress dei lavoratori."),
         ("phrase:en:psychological support", "We offer psychological support."),
+        ("phrase:en:mental health", "A mental health marketplace for immigrants."),
+        ("token:en:therapy", "Book therapy this week."),
     ]
     must_not = [
         ("phrase:en:psychological support", "We sell formation and mediation only."),
