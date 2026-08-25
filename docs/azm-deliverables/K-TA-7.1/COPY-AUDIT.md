@@ -11,6 +11,8 @@ The page UI is English by default, with Italian and Spanish packs applied in-bro
 
 Footer legal bar includes the shared studio credit, exact English, not translated: `Made with ❤️ in Italy by MUNDIDA` → https://www.mundida.com/. Tamia4Life has no legal vehicle yet, so this page does **not** claim P.IVA IT04531990986 as its own.
 
+Public stats cite **IDOS 155,206 foreign residents in the province of Brescia (31 Dec 2024)** — not the uncited national “5M+”. Do not average with ISMU 152,153. Language chips lead with the verified rank: Romania, Albania, India, Pakistan, Morocco.
+
 | Term | Occurrences | Verdict |
 |---|---|---|
 | `psychologist` / `psychologists` | EN pack + Lane A / safety | Permitted — §5.3 Lane A usage, Albo named each time |

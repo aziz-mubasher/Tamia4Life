@@ -1,44 +1,36 @@
 # Customer Discovery Workspace
 
-**Task:** S TA 1.1 · Customer discovery interviews (15–20 users)  
-**Phase:** Phase 1 · Discovery & Problem Validation
+**Task:** S TA 1.1 · Customer discovery interviews  
+**Phase:** Phase 1 · Discovery & Problem Validation  
+**Gate file:** [`assumption-scorecard.md`](assumption-scorecard.md) — **NOT MET. 0 interviews.**
 
-The Phase 1 exit gate is currently **unmet** — zero interviews have been run. No further design or build work should proceed until this gate passes.
+The scorecard is the gate. Fill it during the sprint (31 Aug – 23 Oct 2026), one wave at a time.
+No Phase 2+ artefact until A1–A3 are VALIDATED with residents and A4–A5 show a named, costed
+employer pain, a budget owner and real pilot interest, with a plausible A6 supply signal.
 
-Public recruiting surface (not a live service): [tamia4life.com/#take-part](https://tamia4life.com/#take-part). Volunteers write to `hello@tamia4life.it`. The interviewer then uses this kit. Do not collect immigration or legal status. Do not ask how someone feels.
+Public recruiting (not a live service): [tamia4life.com/#take-part](https://tamia4life.com/#take-part).
+Volunteers write to `hello@tamia4life.it`. Then use the kit. Do not collect immigration or legal
+status. Do not ask how someone feels.
 
-## Canonical interview guide
+## Canonical files
 
-Open the field-ready interview kit in a browser:
+| Path | Role |
+|---|---|
+| [`assumption-scorecard.md`](assumption-scorecard.md) | **The gate.** Score after each wave. |
+| [`../docs/azm-deliverables/S-TA-1.1/Tamia4Life_Discovery_Sprint.html`](../docs/azm-deliverables/S-TA-1.1/Tamia4Life_Discovery_Sprint.html) | Recruitment machine — access routes, sampling rules, name corrections |
+| [`../docs/azm-deliverables/S-TA-1.1/Tamia4Life_Discovery_Interview_Kit.html`](../docs/azm-deliverables/S-TA-1.1/Tamia4Life_Discovery_Interview_Kit.html) | Field scripts. Do not rewrite or restyle. |
+| [`templates/interview-notes-template.md`](templates/interview-notes-template.md) | Copy to `notes/TA-{segment}-{nn}.md` |
+| `notes/` | Per-interview notes (pseudonymous IDs only) |
 
-[`docs/azm-deliverables/S-TA-1.1/Tamia4Life_Discovery_Interview_Kit.html`](../docs/azm-deliverables/S-TA-1.1/Tamia4Life_Discovery_Interview_Kit.html)
+## Sampling (do not skip)
 
-The kit contains screeners, three full interview scripts (end user, employer buyer, facilitator), ethical guardrails, and the A1–A7 assumption framework. **Do not rewrite or restyle it** — it is the canonical reference.
-
-## Workspace layout
-
-| Path | Purpose |
-|------|---------|
-| [`templates/interview-notes-template.md`](templates/interview-notes-template.md) | Blank per-interview note template — copy one file into `notes/` after each interview |
-| [`assumption-scorecard.md`](assumption-scorecard.md) | Aggregate A1–A7 tracker — update after each wave of ~5 interviews per segment |
-| `notes/` | Per-interview notes (one file per interview; not committed until filled) |
-
-## Recruiting priority (Wave 1)
-
-Per S TA 2.B (Community and Language Strategy), Wave 1 recruiting targets **Arabic** and **Romanian** speakers. Widen to Wave 2 communities (Bengali, Urdu, Punjabi) only once the Wave 1 picture is clear.
-
-## Interview targets
-
-| Segment | Target | Duration |
-|---------|--------|----------|
-| End users | 15–25 | 45 min (mother tongue) |
-| Employer buyers | 8–12 | 30–40 min |
-| Facilitators | 5–8 | 30 min |
+A2 cannot be scored VALIDATED if low and low–mid language-distance rows stay empty.
+Wave 1 must include **Romanian** and **Albanian** speakers, not only high-distance communities.
+Sample foreign-origin (including naturalised / second generation), not only sportelli queues.
 
 ## How to run an interview
 
-1. Read the kit — especially the one rule: **never mention Tamia4Life until the interview is over**.
-2. Copy `templates/interview-notes-template.md` to `notes/YYYY-MM-DD-segment-waveN.md`.
-3. Conduct the interview using the appropriate script from the kit.
-4. Fill in notes within one hour while details are fresh.
-5. After each wave (~5 per segment), update `assumption-scorecard.md`.
+1. Read the kit — especially: **never mention Tamia4Life until the interview is over**.
+2. Copy the notes template to `notes/TA-A-01.md` (or B/C/D).
+3. Conduct the interview. Fill notes within one hour.
+4. After each wave (~5 per segment), update the scorecard. Cite at least two IDs and one verbatim.

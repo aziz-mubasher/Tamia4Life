@@ -2,7 +2,7 @@
   "version": "1.2.0",
   "constitution": "CLAUDE.md §5",
   "updated": "2026-08-25",
-  "note": "Lane B/C surfaces. Lane A may use clinical language if the Albo professional is named (§5.3). Audited public pages list permitted residual hits in audited_surfaces. Matching is case-insensitive.",
+  "note": "Lane B/C surfaces. Lane A may use clinical language if the Albo professional is named (§5.3). Audited public pages list permitted residual hits in audited_surfaces. Matching is case-insensitive. Same-line escape: <!-- t4l-allow: phrase:it:sostegno psicologico --> or <!-- t4l-allow-line -->.",
   "allowlist_path_prefixes": [
     "CLAUDE.md",
     "AGENTS.md",

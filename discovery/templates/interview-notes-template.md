@@ -1,14 +1,19 @@
 # Interview Notes
 
-> Copy this file to `notes/YYYY-MM-DD-segment-waveN.md` after each interview.  
-> No names. No immigration status. Fill within one hour of the interview.
+> Copy this file to `notes/TA-{segment}-{nn}.md` after each interview
+> (`TA-A-07` resident · `TA-B-03` employer · `TA-C-02` facilitator · `TA-D-01` institution).
+> No names. No immigration or legal status. Fill within one hour of the interview.
+> After the wave (~5 per segment), update `../assumption-scorecard.md`.
 
 | Field | Notes |
 |-------|-------|
+| **Interview ID** | TA- |
+| **Wave** | 1 · 2 · 3 |
 | **Date / interviewer** | |
-| **Segment** | End user · Employer · Facilitator |
+| **Segment** | Resident · Employer · Facilitator · Institution |
 | **Language used** | Which language the interview was actually conducted in |
-| **Profile** | Community, years in Italy, sector, role — no names, no immigration status |
+| **Language-distance position** | Low · Low–mid · High (see scorecard §2.1) |
+| **Profile** | Community, years in Italy as a band, sector, role — no names, no immigration status |
 | **Pain raised unprompted?** | Yes / No — and at what point in the conversation |
 | **Specific event described** | The concrete story they told, dated if possible |
 | **What they already did** | Searched, paid, asked, avoided — and what it cost them |

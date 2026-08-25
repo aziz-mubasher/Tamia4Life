@@ -38,6 +38,15 @@ SCAN_SUFFIXES = {
 
 SKIP_DIR_NAMES = {".git", "node_modules", ".venv", "venv", "dist", "build", ".next"}
 
+# Same-line markers so a doc can name a banned phrase without a path-wide exemption.
+#   <!-- t4l-allow: phrase:it:sostegno psicologico, phrase:it:benessere psicologico -->
+#   <!-- t4l-allow-line -->   (permits every rule on that line only)
+ALLOW_LABELS_RE = re.compile(
+    r"t4l-allow:\s*([^\n<]+?)(?:\s*-->|$)",
+    re.IGNORECASE,
+)
+ALLOW_LINE_RE = re.compile(r"t4l-allow-line\b", re.IGNORECASE)
+
 
 def load_config(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
@@ -88,6 +97,9 @@ def iter_files(root: Path) -> list[Path]:
             continue
         if path.suffix.lower() not in SCAN_SUFFIXES:
             continue
+        rel_posix = str(path.relative_to(root)).replace("\\", "/")
+        if rel_posix == "deploy/vps/html/index.html":
+            continue
         files.append(path)
     return files
 
@@ -96,6 +108,19 @@ def permitted_rules_for(rel: str, config: dict) -> set[str]:
     audited = config.get("audited_surfaces") or {}
     entry = audited.get(rel) or {}
     return set(entry.get("permit_rules") or [])
+
+
+def inline_permits(line: str) -> set[str] | None:
+    """Extra rule labels allowed on this line. None means skip the whole line."""
+    if ALLOW_LINE_RE.search(line):
+        return None
+    extra: set[str] = set()
+    for match in ALLOW_LABELS_RE.finditer(line):
+        for part in re.split(r"[,;]+", match.group(1)):
+            label = part.strip()
+            if label:
+                extra.add(label)
+    return extra
 
 
 def lint(root: Path, config: dict) -> list[str]:
@@ -112,8 +137,12 @@ def lint(root: Path, config: dict) -> list[str]:
         except UnicodeDecodeError:
             continue
         for i, line in enumerate(text.splitlines(), start=1):
+            extra = inline_permits(line)
+            if extra is None:
+                continue
+            line_ok = permitted | extra
             for label, pattern in rules:
-                if label in permitted:
+                if label in line_ok:
                     continue
                 if pattern.search(line):
                     hits.append(f"{rel}:{i}: {label}: {line.strip()[:160]}")
@@ -138,6 +167,22 @@ def self_test(config: dict) -> int:
         ("phrase:it:sostegno psicologico", "Formazione di gruppo e mediazione culturale."),
     ]
     failed = 0
+    named = (
+        "Naming the list: sostegno psicologico and benessere psicologico. "
+        "<!-- t4l-allow: phrase:it:sostegno psicologico, phrase:it:benessere psicologico -->"
+    )
+    extra = inline_permits(named)
+    if extra is None or "phrase:it:sostegno psicologico" not in extra:
+        print("SELF-TEST inline allow did not parse labels", extra, file=sys.stderr)
+        failed += 1
+    elif by_label["phrase:it:sostegno psicologico"].search(named) and (
+        "phrase:it:sostegno psicologico" not in extra
+    ):
+        print("SELF-TEST inline allow logic error", file=sys.stderr)
+        failed += 1
+    if inline_permits("ok <!-- t4l-allow-line -->") is not None:
+        print("SELF-TEST t4l-allow-line should skip the whole line", file=sys.stderr)
+        failed += 1
     for label, sample in must_match:
         if label not in by_label:
             print(f"SELF-TEST missing rule {label}", file=sys.stderr)

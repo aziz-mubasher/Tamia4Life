@@ -21,8 +21,10 @@ Public site v1 (discovery instrumentation, not a live offer):
 UI locales; light theme on/off (persisted in the browser). Footer credit:
 Made with ❤️ in Italy by [MUNDIDA](https://www.mundida.com/).
 
-Phase 1 gate (S TA 1.1) is **not met**. Field kit:
-[discovery/README.md](discovery/README.md). Public recruiting is `#take-part` on the site.
+Phase 1 gate (S TA 1.1) is **not met**. The gate file is
+[`discovery/assumption-scorecard.md`](discovery/assumption-scorecard.md).
+Sprint plan and kit live under `docs/azm-deliverables/S-TA-1.1/`.
+Public recruiting is `#take-part` on the site.
 
 Intended host: https://tamia4life.com/ (VPS + Traefik). Public DNS must point
 apex/`www` at `82.25.97.164` — see `deploy/vps/README.md`. Until then the
