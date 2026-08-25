@@ -1,8 +1,8 @@
 {
-  "version": "1.0.0",
-  "constitution": "CLAUDE.md §10",
+  "version": "1.1.0",
+  "constitution": "CLAUDE.md §5",
   "updated": "2026-08-24",
-  "note": "Phrases that create apparenza oggettiva di competenza specialistica (Cass. pen. VI n. 16562/2016) when used for the product, Lane B/C, AI, or unverified personnel. Matching is case-insensitive. Locale packs must be signed by a human (CLAUDE.md §11.6) before that locale ships.",
+  "note": "Lane B/C surfaces only. Lane A may use clinical language if the Albo professional is named (CLAUDE.md §5.3). Matching is case-insensitive. Multilingual locales must add equivalent phrases before that locale ships (§5.4).",
   "allowlist_path_prefixes": [
     "CLAUDE.md",
     "AGENTS.md",
@@ -15,81 +15,61 @@
     "it": [
       "sostegno psicologico",
       "supporto psicologico",
-      "aiuto psicologico",
-      "consulenza psicologica",
-      "counselling psicologico",
-      "counseling psicologico",
-      "percorso terapeutico",
-      "trattamento clinico",
-      "il tuo psicologo",
-      "la tua psicologa",
-      "il tuo terapeuta",
-      "la tua terapeuta",
-      "benessere mentale",
-      "indice di benessere",
-      "punteggio di benessere",
-      "test di benessere",
-      "score di benessere"
+      "benessere psicologico",
+      "disagio psichico",
+      "percorso di cura",
+      "colloquio clinico",
+      "test psicodiagnostici"
     ],
     "en": [
       "psychological support",
       "emotional support",
-      "mental health professional",
-      "ai therapist",
-      "ai companion",
-      "ai counsellor",
-      "ai counselor",
-      "your therapist",
-      "your psychologist",
       "wellbeing score",
+      "wellbeing scores",
       "wellness score",
-      "wellness index",
-      "wellbeing index",
-      "burnout score",
-      "symptom checker",
-      "symptom-based matching",
-      "baseline self-assessment"
+      "psychological result"
     ],
     "ro": [
       "sprijin psihologic",
-      "suport psihologic",
-      "consiliere psihologica",
-      "consiliere psihologică"
+      "suport psihologic"
     ],
     "ar": [
       "دعم نفسي",
-      "مساندة نفسية",
-      "علاج نفسي"
+      "مساندة نفسية"
+    ],
+    "es": [
+      "apoyo psicológico",
+      "soporte psicológico"
     ]
   },
   "tokens": {
     "it": [
-      "psicoterapia",
-      "psicoterapeuta",
-      "psicoterapeuti",
-      "diagnosi",
-      "diagnosticare",
+      "psicologico",
+      "terapia",
+      "terapeutico",
+      "ansia",
+      "depressione",
+      "trauma",
+      "cura",
       "paziente",
-      "pazienti"
+      "diagnosi"
     ],
     "en": [
-      "psychotherapy",
-      "psychotherapist",
       "therapist",
-      "therapists",
+      "psychotherapy",
       "diagnosis",
-      "patient",
-      "patients"
-    ],
-    "ro": [
-      "psihoterapie",
-      "psihoterapeut",
-      "diagnostic"
+      "patient"
     ]
   },
+  "contextual_tokens": {
+    "comment": "stress is banned as something the service treats (§5.1), not in the statutory phrase stress lavoro-correlato. The linter flags the bare token; allowlist legal/spec paths or write around it.",
+    "it": ["stress"],
+    "en": ["stress"]
+  },
   "locale_pack_status": {
-    "it": "draft-v1-human-must-sign",
-    "en": "draft-v1-human-must-sign",
+    "it": "v1-from-constitution-§5.1",
+    "en": "v1-equivalents-§5.4",
+    "es": "starter-§5.4",
     "ro": "starter-incomplete",
     "ar": "starter-incomplete",
     "uk": "missing-do-not-ship",

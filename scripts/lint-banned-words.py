@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Lint copy and CMS-ish files for Tamia4Life banned presentation terms.
 
-See CLAUDE.md §10 and compliance/banned-words.json.
+See CLAUDE.md §5 and compliance/banned-words.json.
 The constitution and this tooling are allowlisted — they must name the terms.
 """
 
@@ -59,17 +59,23 @@ def compile_rules(config: dict) -> list[tuple[str, re.Pattern[str]]]:
             if not p:
                 continue
             rules.append((f"phrase:{lang}:{p}", re.compile(re.escape(p), re.IGNORECASE)))
-    for lang, tokens in (config.get("tokens") or {}).items():
-        for token in tokens:
-            t = token.strip()
-            if not t:
+    token_groups = [config.get("tokens") or {}, config.get("contextual_tokens") or {}]
+    for group in token_groups:
+        if not isinstance(group, dict):
+            continue
+        for lang, tokens in group.items():
+            if lang == "comment" or not isinstance(tokens, list):
                 continue
-            rules.append(
-                (
-                    f"token:{lang}:{t}",
-                    re.compile(rf"(?<!\w){re.escape(t)}(?!\w)", re.IGNORECASE),
+            for token in tokens:
+                t = token.strip()
+                if not t:
+                    continue
+                rules.append(
+                    (
+                        f"token:{lang}:{t}",
+                        re.compile(rf"(?<!\w){re.escape(t)}(?!\w)", re.IGNORECASE),
+                    )
                 )
-            )
     return rules
 
 
@@ -111,8 +117,10 @@ def self_test(config: dict) -> int:
     by_label = {label: pat for label, pat in rules}
     must_match = [
         ("phrase:it:sostegno psicologico", "Offriamo sostegno psicologico in 24 ore."),
-        ("phrase:en:wellbeing score", "Your wellbeing score is 72."),
-        ("token:en:therapist", "Meet your therapist today."),
+        ("phrase:it:benessere psicologico", "Un programma di benessere psicologico."),
+        ("token:it:psicologico", "Servizio psicologico per dipendenti."),
+        ("token:it:stress", "Trattiamo lo stress dei lavoratori."),
+        ("phrase:en:psychological support", "We offer psychological support."),
     ]
     must_not = [
         ("phrase:en:psychological support", "We sell formation and mediation only."),
@@ -150,12 +158,12 @@ def main(argv: list[str] | None = None) -> int:
 
     hits = lint(args.root, config)
     if hits:
-        print("Banned presentation terms (CLAUDE.md §10 / Cass. 16562/2016):", file=sys.stderr)
+        print("Banned presentation terms (CLAUDE.md §5 / Cass. 16562/2016):", file=sys.stderr)
         for hit in hits:
             print(hit, file=sys.stderr)
         print(
             f"\n{len(hits)} hit(s). Rewrite the copy or get a human to amend "
-            "compliance/banned-words.json (§11.6).",
+            "compliance/banned-words.json (CLAUDE.md §5.1).",
             file=sys.stderr,
         )
         return 1

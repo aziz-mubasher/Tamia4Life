@@ -1,422 +1,478 @@
-# Tamia4Life — repo constitution
+# CLAUDE.md — Tamia4Life
 
-**v1 · 24 Aug 2026**  
-**Venture:** Tamia4Life (TA) · `aziz-mubasher/Tamia4Life`  
-**Status:** binding on every agent (Claude, Cursor, CI) and every human brief  
-**Supersedes:** any earlier product framing that treats Tamia as undifferentiated “preventive wellness”, a single facilitator marketplace, or a wellbeing-score app.
-
-If this file and another artifact disagree, **this file wins** until a human amends it.
-
----
-
-## How to load this file
-
-This is the venture constitution. Read it before designing, specifying, or building.
-
-| Loader | What to do |
-|---|---|
-| Claude Code / Claude Desktop | This file is `CLAUDE.md` at repo root — it loads automatically. |
-| Cursor Cloud / Cursor Desktop | `AGENTS.md` and `.cursorrules` point here. Follow this file as if it were inlined. |
-| CI | The banned-words list in §10 is enforced by `scripts/lint-banned-words.py` (see `.github/workflows/banned-words.yml`). |
-| Other ventures | This is the pattern to copy. Next: **SV LMS**, then **SV Patente**. Do not clone Tamia’s lanes into those repos — clone the *method* (name the Italian legal frame first). |
-
-**Rule for every design decision:** name the Italian legal frame before specifying the feature. **No frame = not ready to build.**
-
----
-
-## Standing status (read this first)
-
-**Phase 1 gate: NOT MET.**
-
-Customer discovery (S TA 1.1) has not produced validated demand. The assumption scorecard is still `pending` / 0 interviews. Agents must **state this gate status** at the start of any Phase 2+ work, even when a brief says “proceed anyway”. Proceeding does not make the gate met. Only a human may declare the gate met (§11.7).
-
-What may still be built before the gate is listed in §9.
-
----
-
-## Doctrine
-
-Italy’s regulatory density is the **distribution channel**, not the obstacle. Every constraint has an opportunity attached that is only reachable by satisfying the constraint first.
-
-- The reserved-act boundary (art. 348 c.p.; L. 56/1989; the Albo) is why Lane A can sell to ASST/ATS and employer benefit.
-- The *Documento di Valutazione dei Rischi* (art. 28 D.lgs 81/08), including *stress lavoro-correlato*, is why Lane C can sell to employers — and why the honest line with OT23 must be drawn (§4.2).
-- Accoglienza / integrazione (art. 2, letter r, D.lgs 112/2017) is why Lane B can sell to Comuni and FAMI/ISMU projects.
-- Formazione (letter d) is why Lane C can sell into fondi interprofessionali, FSE+, Erasmus+, OT23 D-2.
-- GDPR art. 9 and the DPIA duty are why Lane A is expensive to operate and therefore defensible.
-- The >70% general-interest revenue test is why every euro in the product has a category field (§8).
-
-Do not “simplify away” a constraint to ship faster. The constraint *is* the go-to-market.
-
----
-
-## §1 Three hard-separated lanes
-
-The law does not reserve “helping people feel better”. It reserves **specific acts**. The product is therefore three lanes with different personnel, branding, consent flows, and data handling.
-
-**A user is in exactly one lane at a time. The system records which.**
-
-Cross-lane presence (same person, same day) is a **handover**, not a blend. Handover creates a new lane occupancy; it does not merge the records.
-
-### Lane A — Percorso clinico
+> **Load this before designing, specifying or building anything in this repository.**
+> It is not background reading. It is the constraint set. Several rules here exist because
+> breaking them is a criminal offence in Italy, not a style violation.
+>
+> Cursor: reference this file from `AGENTS.md` / `.cursorrules` so the venture agent loads it too.
 
 | | |
 |---|---|
-| **Legal frame** | Reserved psychological act. Delivered only by a *psicologo iscritto all'Albo* (L. 56/1989). Where distress lives. |
-| **art. 2 D.lgs 112/2017** | Letter **c)** — *prestazioni socio-sanitarie* (and, when the act is sanitaria, letter **b)** — never pretend otherwise). |
-| **Data** | GDPR art. 9 special-category data. Separate store. DPIA signed before any real record (§7). |
-| **Sells to** | Individuals; ASST/ATS; employer benefit (as access to a reserved professional — not as “wellness”). |
-| **Personnel** | Albo-verified *psicologo* / *psicoterapeuta* only. Verification is a production invariant, not a profile badge. |
-| **Consent** | Clinical informed consent, distinct from B/C. |
-| **Branding** | May use reserved professional titles **only** for the named, verified professional. Never for the product, the company, or an AI. |
-
-### Lane B — Mediazione
-
-| | |
-|---|---|
-| **Legal frame** | Not reserved. Cultural mediation, orientation, navigation, accompaniment. |
-| **art. 2 D.lgs 112/2017** | Letter **r)** — *accoglienza umanitaria ed integrazione sociale dei migranti*. |
-| **Data** | Not art. 9 by default. Do not import Lane A data. Do **not** store immigration status (§7). |
-| **Sells to** | Comuni; FAMI / ISMU and equivalent integration projects. |
-| **Personnel** | Cultural mediators. Never presented as psychologists. No continuing individual emotional responsibility. |
-| **Consent** | Service / accompaniment consent. No clinical consent theatre. |
-| **Branding** | Navigation, orientation, accompaniment, *mediazione culturale*. Banned-words list applies in full (§10). |
-
-### Lane C — Formazione
-
-| | |
-|---|---|
-| **Legal frame** | Not reserved. Group, non-individual, psychoeducation and employer training. |
-| **art. 2 D.lgs 112/2017** | Letter **d)** — *educazione, istruzione e formazione professionale* (and cultural-educational activity of social interest). |
-| **Data** | Attendance, learning evidence, employer aggregates. Not art. 9. No individual distress record. |
-| **Sells to** | Employers; fondi interprofessionali; FSE+ catalogue; Erasmus+; OT23 D-2 dossier (as the *incremental* intervention — §4.2). |
-| **Personnel** | Trainers / facilitators. Group setting. No 1:1 emotional case-holding. |
-| **Consent** | Training / catalogue consent. Employer sees aggregates of *this lane only*. |
-| **Branding** | Formation, psychoeducation, organisational training. Not therapy, not “supporto psicologico”. |
-
-### The triage rule
-
-**The moment a person presents distress, the journey routes to Lane A.**
-
-The triage outcome is an **immutable, timestamped record** that names:
-
-1. UTC timestamp  
-2. **Rule version** that fired (e.g. `triage.v1`)  
-3. Lane occupancy after the fire (`A`)  
-4. Actor (`system` / named human)  
-5. The presentation class that fired the rule (not a diagnosis; not a free-text clinical note)
-
-That record is the venture’s defence if the boundary is ever questioned. It is append-only. A later “correction” is a new record, not an edit.
-
-Agents must not invent a softer on-ramp that keeps a distressed person in B or C “until they are ready”. Distress is the route, not a preference.
-
-### Occupancy invariant (engineering)
-
-When a data model exists, these are not optional:
-
-- `lane_occupancy ∈ {A, B, C}` — exactly one, on every session, booking, message thread, and note.
-- A person may have a history of occupancies. They do not have a blended current lane.
-- Facilitator / professional records carry `eligible_lanes` constrained by credential. A Lane B mediator has `eligible_lanes = {B}` or `{B, C}` — never `A` without Albo verification.
-- Matching inside a lane never reads another lane’s clinical or distress data.
+| **Venture** | Tamia4Life |
+| **Venture id (bridge)** | `tamia` |
+| **Venture code** | `TA` |
+| **Repo** | `aziz-mubasher/Tamia4Life` |
+| **Startup board** | `tamia` · https://www.azizmubasher.net/startup/tamia |
+| **Kaizen board** | `kaizen-tamia` · https://www.azizmubasher.net/kaizen/tamia |
+| **Current phase** | **Phase 1 — Discovery & Problem Validation. GATE NOT MET.** See §9. |
+| **Jurisdiction** | Italy · Regione Lombardia · provincia di Brescia |
+| **Doc version** | v1 · 24 August 2026 |
 
 ---
 
-## §2 The venture restated in art. 2 D.lgs 112/2017 language
+## 0. Read this first — the five things that govern everything
 
-Tamia4Life is an activity of general interest under **D.lgs 3 luglio 2017, n. 112, art. 2**, exercised in a combination of three letters — and only those three, until a human adds a letter:
+1. **Tamia4Life is a regulated-adjacent service, not a wellness app.** Italian law reserves
+   psychological acts to the Albo. Get this wrong and it is `art. 348 c.p.`, not a takedown notice.
+2. **The compliance boundary is the product architecture.** Three service lanes, hard-separated.
+   Every user journey routes into exactly one. See §3.
+3. **Words are legally operative.** A page that implies clinical competence is evidence against you
+   even if the service behind it is lawful. See §5.
+4. **The evidence model is not reporting — it is the product.** Funders and the venture want the
+   same data. Build it in from the first schema. See §6.
+5. **Phase 1's gate is not met.** No discovery interviews have been run. Nothing in Phase 2+ ships
+   until §9 clears — and that is not a delay, because the earliest funding deadline is March 2027.
 
-| Letter | Statutory object (short) | Tamia lane | Typical buyer |
+---
+
+## 1. Doctrine — adopt the system, do not fight it
+
+Italy has a dense, specific, and mostly coherent body of law about who may do what to whom, and a
+large amount of public money attached to it. The instinct of most founders is to treat that as
+friction and route around it. **That instinct is wrong here, and expensively so.**
+
+The system is not an obstacle to Tamia4Life. It is the distribution channel. Every constraint below
+has a corresponding opportunity attached to it, and the opportunity is only reachable by satisfying
+the constraint first:
+
+| The constraint | What it unlocks once satisfied |
+|---|---|
+| Psychological acts are reserved to the Albo | A psychologist on staff makes the clinical lane sellable to ASST, ATS and employers who will not buy from an unlicensed provider |
+| An impresa sociale must draw >70% of revenue from *attività di interesse generale* | RUNTS registration → FSE+ Terzo Settore (€7M open now), FAMI partner status, Fondazione Bresciana, AMIF |
+| `art. 28 D.lgs 81/2008` obliges every employer to assess work-related stress | Turns the first B2B conversation from a wellbeing pitch into a compliance gap the buyer already owns |
+| INAIL OT23 D-2 specifies a psychologist-delivered, in-person, all-staff intervention | A recurring, legally anchored B2B product worth up to 28% off the client's insurance premium |
+| GDPR art. 9 makes health data special-category | A documented lawful basis and a real DPIA are exactly what a public commissioner audits before contracting |
+
+**The rule for every design decision in this repo:** name the Italian legal frame the feature sits
+inside *before* specifying the feature. If no frame can be named, the feature is not ready to build.
+
+---
+
+## 2. What Tamia4Life is, in the vocabulary the system recognises
+
+**Plain description.** A mother-tongue, culturally-matched, explicitly **non-clinical** emotional
+wellness and adaptation service for multicultural communities in Italy. Two-sided: foreign-origin
+residents who carry the strain, and employers with multicultural workforces who pay to relieve it.
+Delivered by bilingual facilitators. Positioned in the space between *"I'm fine"* and
+*"I need a psychiatrist"*.
+
+**The same thing, in statutory language.** Under `art. 2 D.lgs 112/2017` (*attività di interesse
+generale*), the venture sits across three letters and the statute should name all three:
+
+- **r)** *accoglienza umanitaria ed integrazione sociale dei migranti* — the anchor
+- **c)** *prestazioni socio-sanitarie*, expressly including *promozione della salute e prevenzione*
+- **d)** *educazione, istruzione e formazione professionale*
+
+**Why this matters and is not cosmetic.** There is public money in Italy and Europe for migrant
+integration at every level of government. There is almost none for "wellness". The service is
+identical either way. Lead with **integrazione**, always.
+
+**Candidate ATECO:** `88.99` (altre attività di assistenza sociale non residenziale) or `85.59.20`
+(formazione professionale) depending on which lane dominates revenue. ⚠️ Not yet decided — this
+choice drives the INPS gestione, the IVA treatment and the >70% ratio. See §11.
+
+---
+
+## 3. Service architecture — three lanes, hard-separated
+
+**This is the single most important section for anyone writing code.**
+
+The law does not reserve "helping people feel better". It reserves specific acts. So the product is
+built as three lanes with different personnel, different branding, different consent flows and
+different data handling. **A user is in exactly one lane at any moment, and the system records
+which.**
+
+| | **Lane A — Percorso clinico** | **Lane B — Mediazione** | **Lane C — Formazione** |
 |---|---|---|---|
-| **r)** | Accoglienza umanitaria ed integrazione sociale dei migranti | **B** Mediazione | Comuni, FAMI/ISMU |
-| **c)** | Prestazioni socio-sanitarie | **A** Percorso clinico | Individual, ASST/ATS, employer benefit |
-| **d)** | Educazione, istruzione e formazione professionale | **C** Formazione | Employers, fondi, FSE+, Erasmus+, OT23 D-2 |
+| **Who delivers** | **Psicologo iscritto all'Albo** (employed or in convenzione) — no exceptions | Mediatore linguistico-culturale, peer facilitator | Trainer, facilitator, mediator |
+| **What it is** | Individual support where distress, symptoms or emotional suffering are present | Orientation, navigating services, interpreting, accompaniment, practical adaptation | Group workshops, psychoeducation, employer training, e-learning |
+| **Format** | 1:1, continuing relationship | 1:1 or family, task-oriented | Group, non-individual |
+| **Legal frame** | `L. 56/1989` — reserved. Lawful only because a registered professional delivers it | Not reserved | Not reserved |
+| **Data** | GDPR **art. 9 special category** — strictest handling | Ordinary personal data | Ordinary, largely aggregate |
+| **Sells to** | Individuals, ASST/ATS convenzioni, employer EAP-style benefit | Comuni, FAMI/ISMU projects, third-sector partners | Employers, fondi interprofessionali, FSE+ catalogue, Erasmus+ |
+| **Funding fit** | Cariplo-type welfare lines, health-themed AMIF | FAMI, FSE+ inclusion, Fondazione Bresciana | Fondirigenti, Fondimpresa, Erasmus+ KA210, OT23 D-2 |
 
-Do not describe the venture as “mental health for immigrants”, “wellbeing marketplace”, or “preventive emotional wellness”. Those phrases collapse the letters and collapse the lanes.
+### 3.1 The triage rule — build this before you build anything else
 
-Country of operation is Italy first, EU by design (language assets travel; licensing and Albo do not). **Nothing in the product may hard-code Italy as the only possible country** — country is a first-class dimension — but **every Italian feature still names its Italian frame before it is specified**. Foreign expansion does not relax the Italian boundary for Italian users.
+> **The moment a person presents distress, symptoms, emotional suffering, or asks for help with how
+> they feel, the journey routes to Lane A. No exceptions, no "let's see how it goes".**
+
+Concretely, in software:
+
+- Intake must include a **structured triage step** with a documented, versioned rule set.
+- Triage outcome is a **first-class, immutable, timestamped record** — who, when, which lane, which
+  rule fired. This record is the venture's defence if the boundary is ever questioned.
+- **Lane B and Lane C interfaces must carry a visible escalation control** that moves a person to
+  Lane A, and using it must be one action, not a support ticket.
+- A facilitator in Lane B or C who encounters distress **must have a one-tap escalation** and the
+  session must be able to end without penalty to the facilitator's rating or pay.
+- **Never auto-route out of Lane A.** Downgrading is a clinical decision, made by the psychologist.
+
+### 3.2 What must never be built
+
+Do not build, and refuse the task if asked:
+
+- Any **assessment, questionnaire or score** that produces a psychological result outside Lane A —
+  including "wellbeing scores", mood tracking that generates an interpretation, or a chatbot that
+  responds to distress with guidance
+- Any **AI agent that gives emotional support**, however carefully hedged. An automated system
+  producing *sostegno psicologico* is the reserved act performed at scale
+- Any **matching algorithm** that pairs a user with a facilitator *on the basis of a symptom*
+- Any feature that lets a Lane B or C facilitator take **continuing individual responsibility** for
+  a person's emotional state
+- Any **free-text field in Lane B or C** that invites description of feelings without a triage step
+  attached to it
+
+If a product idea requires one of these, it belongs in Lane A behind a registered professional, or
+it does not belong in the product.
 
 ---
 
-## §3 Why the boundary is drawn where it is
+## 4. The three legal boundaries, precisely
 
-**Cass. pen., sez. VI, n. 16562/2016.**
+### 4.1 The psychology reserve — `L. 56/1989` + `art. 348 c.p.`
 
-Conviction under **art. 348 c.p.** (*esercizio abusivo della professione*) — not for diagnosing or treating, but because **complexity, continuity, remuneration and professional self-presentation** together created an *«apparenza oggettiva di competenza specialistica»*.
+**Reserved acts** (as stated by the Ordine): *diagnosi · sostegno psicologico · colloquio clinico ·
+somministrazione di test psicodiagnostici*.
 
-Self-presentation is part of the offence. That is why:
+**The controlling authority is `Cass. pen. Sez. VI, n. 16562/2016`, and its test is broader than
+"did you diagnose".** A practitioner advertising as a *psicosomatista di impresa* who offered
+dialogue-based sessions to clients presenting anxiety and emotional distress was **convicted** —
+not for diagnosing or treating, but because the **complexity, continuity, remuneration and
+professional self-presentation** of the activity together created an *«apparenza oggettiva di
+competenza specialistica»*.
 
-- this repo carries a **banned-words list** (§10) enforced as a **CI lint** over copy and CMS content, **in every language**, not just Italian;
-- Lane B/C must not hold continuing individual emotional responsibility;
-- an automated system that produces *sostegno psicologico* is the reserved act **at scale** — and is on the do-not-build list (§5);
-- branding, job titles, in-app chrome, and facilitator cards are compliance surfaces, not marketing surfaces.
+Read that again: **holding yourself out as competent to address psychological distress, for a fee,
+on a continuing basis, is itself sufficient.** Self-presentation is part of the offence, which is
+why §5 exists.
 
-The four Cassazione factors are a design checklist. A feature that adds complexity + continuity + pay + specialist tone, even with a disclaimer, is not safe because of the disclaimer.
+Note also: **there is no protected title of *counselor* in Italy.** Counselling is not a regulated
+profession. That is precisely why the Ordine polices the boundary through the criminal route rather
+than a disciplinary one — there is no disciplinary body to use.
+
+⚠️ **Confidence note:** the 2016 ruling and the Ordine's operational position are confirmed. No
+later ruling and no 2024–2026 CNOP circular restating the line was found. **A written opinion from a
+lawyer with penal-professional experience is required before launch** and is listed in §11.
+
+### 4.2 Work-related stress — `art. 28 D.lgs 81/2008`
+
+Every Italian employer with at least one worker must assess *stress lavoro-correlato* in the DVR.
+The 2010 Commissione Consultiva circular confirmed it applies **regardless of size or sector** —
+only the method scales. Omitted or incomplete assessment is prosecuted as a DVR defect.
+
+INAIL's methodology is two-phase, run by a *gruppo di gestione* (datore di lavoro, RSPP, medico
+competente, RLS) with an occupational psychologist recommended: a preliminary objective phase on
+verifiable indicators, then a **deeper phase — questionnaire, semi-structured interviews, focus
+groups — triggered at medium or high risk.** The 2025 update added an integrated checklist for
+remote work and *tecnostress*.
+
+**Why this is in an engineering document.** Most prospects have discharged this obligation with a
+tick-box checklist. The deeper phase is a service someone has to deliver, and it is Lane A + Lane C
+work. It reframes the first employer meeting entirely.
+
+**The boundary to state honestly to every buyer:** performing the mandatory assessment is compliance,
+**not** an OT23-creditable intervention. You sell the qualified delivery of the deeper phase and the
+above-minimum interventions that follow — never the legal minimum dressed up as a funded product.
+
+### 4.3 The reimbursement wall — Bonus psicologo
+
+The national *Bonus psicologo* requires the professional to be enrolled in the **elenco degli
+psicoterapeuti** and to have notified adherence to CNOP, and the sessions must be **psicoterapia**.
+
+**A non-clinical, preventive, mediator- or coach-delivered service is categorically outside it.**
+Tamia4Life cannot accept it as payment, cannot advertise against it, and must not position adjacent
+to it in a way that implies eligibility.
+
+This is a deliberate strategic choice with a real cost: the non-clinical positioning forecloses
+Italy's only national reimbursement mechanism for psychological support. Made with open eyes, it is
+defensible. Discovered late, it is a hole in the revenue model.
+
+Where individual Lane A professionals *are* registered psicoterapeuti, they may serve bonus clients
+— **under their own Albo identity, delivering psicoterapia**. That is a different product from the
+one described in this repo, and the platform must not blur the two.
 
 ---
 
-## §4 Go-to-market frames
+## 5. Naming, copy and interface rules
 
-### §4.1 Lane A buyers
+Under `Cass. 16562/2016`, **self-presentation is evidence**. These rules are not brand guidelines.
 
-- **Individual** — pays for a *percorso clinico* with a named Albo professional.
-- **ASST / ATS** — public purchaser of socio-sanitary / clinical capacity, in language, under public-contract rules. Not a “wellness vendor”.
-- **Employer benefit** — the employer buys **access to Lane A**, never visibility into Lane A content. Aggregates, if any, come from Lane C or from separately consented, non-identifying operational stats — never from clinical notes.
+### 5.1 Banned on Lane B and Lane C surfaces
 
-### §4.2 art. 28 D.lgs 81/08 — the B2B door opener
+Never use, in any service name, page title, meta description, button, ad, or facilitator bio outside
+Lane A:
 
-**Frame:** the employer’s duty to assess **all** risks, including *rischio stress lavoro-correlato*, in the DVR.
+`sostegno psicologico` · `supporto psicologico` · `benessere psicologico` · `psicologico` (as a
+descriptor of what the service provides) · `terapia` · `terapeutico` · `ansia` · `depressione` ·
+`stress` (as something the service treats) · `trauma` · `disagio psichico` · `cura` · `paziente` ·
+`diagnosi` · `percorso di cura`
 
-That duty is why HR and RSPP will take the meeting. It is not, by itself, a Tamia product.
+### 5.2 Use instead
 
-**Honest boundary:** the mandatory assessment is **compliance**, not an OT23-creditable intervention. Doing what art. 28 already requires does not earn INAIL OT23 credit.
+`orientamento` · `mediazione linguistico-culturale` · `accompagnamento` · `percorso di adattamento` ·
+`inserimento` · `formazione` · `laboratorio` · `gruppo di confronto` · `partecipante` · `beneficiario`
 
-Tamia’s B2B offer on this door is:
+### 5.3 Lane A copy rules
 
-1. Help the organisation **see** the duty (conversation, not a Tamia-branded “risk score” of individuals).
-2. Sell **Lane C** as the incremental organisational / formative intervention that *can* sit in an **OT23 D-2** dossier — because it goes beyond the mandatory assessment.
-3. Sell **Lane A access** as the reserved path when a worker presents distress — never as a scored population of “at-risk employees”.
+Lane A may and **should** use clinical language — but every such page must state, visibly and near
+the offer, that the service is delivered by *psicologi iscritti all'Albo*, with the professional's
+registration details available. Vagueness here is worse than silence.
 
-Agents must not write sales copy that claims “we fulfil your DVR” or “this module is OT23-eligible” without a human (§11). Catalogue language may *prepare* a dossier; it may not certify INAIL acceptance.
+### 5.4 Implementation requirements
 
-### §4.3 Bonus psicologo — deliberate, costly, defensible foreclosure
+- The banned list lives in the repo as a **lint rule over copy files and CMS content**, running in
+  CI. Add it to the pipeline before the first public page ships.
+- Multilingual copy must be checked **in every language**, not just Italian. A translation that
+  reintroduces "psychological support" in Urdu or Spanish carries the same exposure.
+- Marketing assets (ads, social, video scripts) go through the same check. The Veo/Kling prompt
+  packages used elsewhere in the portfolio are in scope.
 
-Tamia **does not** integrate, broker, invoice, or market through the *Bonus psicologo* (or successor CNOP / MEF session-reimbursement schemes).
+---
 
-This is a foreclosure, not an oversight.
+## 6. Evidence and data model — build it once, report forever
 
-| Why costly | Why defensible |
+Every funder in the map asks for the same things: quantified need, a defined cohort, baseline,
+outcome, attendance, cost per beneficiary. **The venture wants exactly the same data to know whether
+the service works.** They are one requirement, not two.
+
+**Design principle: reporting is an export, never a retrofit.**
+
+### 6.1 Minimum first-class entities
+
+Capture from the first schema, not "later":
+
+- **Beneficiary** — pseudonymous id; language of delivery; broad cohort markers only (age band,
+  years in Italy band, employment status band, comune). **Never** immigration or legal status.
+  **Never** free-text identity description.
+- **Lane assignment** — immutable, timestamped, with the triage rule version that produced it.
+- **Session** — lane, delivery mode (in person / synchronous remote), duration, language,
+  facilitator role class, attendance state, funding stream attribution.
+- **Facilitator** — role class (`psicologo_albo` / `mediatore` / `formatore`), languages,
+  credential verification state and expiry, Albo registration number where applicable.
+- **Outcome instrument** — a validated pre/post measure with instrument name and version.
+  ⚠️ **Instrument choice is a Lane A clinical decision, not an engineering one.** Do not pick one.
+- **Employer engagement** — organisation, sector ATECO, workforce size band, intervention type,
+  and — where relevant — the **OT23 intervention code** the activity is intended to evidence.
+- **Consent** — versioned consent artefact per lane, with withdrawal timestamp and effect.
+
+### 6.2 Reporting exports to design against
+
+Build these as first-class outputs, not ad-hoc queries:
+
+- **FSE+ / Regione Lombardia** — participants, hours, attendance, cohort composition, costi standard
+- **FAMI / ISMU-type projects** — beneficiaries by nationality band and language, service type, hours
+- **Erasmus+ KA210** — lump-sum activity evidence: what happened, when, with whom, produced what
+- **OT23 dossier** — per employer per calendar year, the intervention record the client files with
+  INAIL by 28 February
+- **Bilancio sociale** — mandatory for an impresa sociale regardless of size; it needs impact
+  numbers, not prose
+
+### 6.3 The rule that keeps this honest
+
+> No funding claim may be made from data the platform did not record at the time the service was
+> delivered. If a report needs a number, the number must have an entity behind it.
+
+---
+
+## 7. GDPR and data protection — non-negotiable
+
+Lane A processes **art. 9 special-category health data**. This is the highest-risk data in the
+portfolio and the audience is a population with reason to distrust data collection.
+
+- **A DPIA is mandatory** before Lane A processes a single real record. Not optional, not later.
+- **EU-hosted infrastructure only.** No transfer outside the EEA without a documented mechanism.
+- **Lane separation extends to storage.** Lane A data must be logically separated with its own
+  access-control boundary. A Lane C trainer must be technically incapable of reading Lane A records.
+- **Never store**: immigration or legal status, religion, ethnicity, or any free-text field that
+  invites them. The discovery guide already commits to this with participants — the schema must
+  enforce it, not rely on discipline.
+- **Data minimisation on cohort markers**: bands, never exact values. Exact date of birth, exact
+  address and exact income are not needed for any report listed in §6.2.
+- **Retention policy per lane**, published, with automated deletion.
+- **Right to erasure must actually work**, including in backups and exports, and must not break
+  aggregate reporting — design the aggregates to survive individual deletion.
+- Interpreters and mediators handling personal data need **written appointments as authorised
+  persons** under `art. 29 GDPR`, not just an NDA.
+
+---
+
+## 8. Legal form — and why it is an engineering constraint
+
+The vehicle is not yet constituted. Two candidates, and the choice changes the product:
+
+| | **Cooperativa sociale tipo A** | **S.r.l. impresa sociale** |
+|---|---|---|
+| Minimum people | **3 soci** | 2 soci (a single natural-person member is **barred**) |
+| Formation | €1.500–2.500 | €3.000–4.500 |
+| **Organo di controllo** | Only above ordinary thresholds | **ALWAYS mandatory, any size — €2.000–3.500/yr** |
+| Tassa CC.GG. €309,87/yr | **Exempt** | Due |
+| External audit | Revisione ministeriale ~€429/biennium | Revisione legale only above thresholds |
+| Annual cost delta | — | **+€2.400–3.800/yr** |
+| Governance | One head one vote, open door, ministerial inspection | Ordinary S.r.l. control, transferable quote |
+| Impresa sociale status | **Di diritto** — automatic | By qualification |
+
+**Both are ETS. Both reach FSE+ Terzo Settore, FAMI partner status, Fondazione Bresciana.** The coop
+is materially cheaper and, given a named team of five and a genuinely collective mission, deserves
+the serious look. The S.r.l. wins only if control or an investor cap table matters.
+
+**The engineering consequences either way:**
+
+- **>70% of revenue must come from *attività di interesse generale*.** The B2B employer work must be
+  drafted and *invoiced* under letters d) and r) — not as generic consulting. **Revenue
+  categorisation is a product data field**, not an accounting afterthought. Build it now.
+- **Bilancio sociale is mandatory regardless of size** and must be published on the venture's own
+  website. That is a build item, not a PDF upload.
+- **Worker and user involvement mechanisms** must be in the statute and, above thresholds, in
+  governance. If the platform is where facilitators and beneficiaries are heard, that mechanism is
+  partly a software feature.
+
+---
+
+## 9. Phase gate — current status and what is blocked
+
+**Phase 1 — Discovery & Problem Validation. GATE NOT MET.**
+
+The Customer Discovery Interview Guide exists (`S TA 1.1`). **Zero interviews have been run.**
+
+This venture has already failed this gate once: a design system, two prototypes, a matching-engine
+spec and an MVP backlog were produced while Phase 1 had no discovery behind them, and nobody caught
+it until a repo survey surfaced it. **Do not repeat it.**
+
+### 9.1 The gate
+
+Exit `1.1` when **A1–A3** are validated with end users **and** **A4–A5** show at least a few
+employers with a named, costed pain, an identified budget owner and real pilot interest — with a
+plausible supply signal on **A6**.
+
+### 9.2 Standing obligation for Claude and Cursor
+
+> Before producing any Phase 2+ artefact, **state whether the Phase 1 gate is met.** If it is not,
+> say so and name what is missing — **even when told to proceed.** "Proceed" is an instruction about
+> direction, not permission to skip validation.
+
+### 9.3 Why this costs nothing
+
+The earliest realistic funding deadline is **Erasmus+ KA210 around 5 March 2027**, and the FSE+
+Terzo Settore avviso runs to **23 April 2027**. There is room to run the interviews first.
+
+And the interviews *are* the funding work: A1–A5 validated produces quantified pain, a named buyer,
+an identified budget owner and baseline evidence of need — which is the substance of every
+application. Running discovery is not a delay before the grant work. It **is** the grant work.
+
+### 9.4 What may be built now, before the gate
+
+- This document, and the compliance lint rule (§5.4)
+- The triage rule set as a **specification and decision record** — not as shipped software
+- The data model as a **schema proposal** for review — not as a migration
+- Discovery instrumentation: interview scheduling, note capture, consent capture, synthesis tooling
+- Nothing user-facing that delivers the service
+
+---
+
+## 10. Board conventions for TA
+
+Per the AZM Venture Collaboration Context v2.
+
+- **Startup:** `S TA {phase}.{n}` — leading number is the phase (1–6). The board **accepts new
+  codes**; a letter suffix (`2.B`) is valid for newly added tasks.
+- **Kaizen:** `K TA {system}.{item}` — leading number is the **business system**, not a category
+  index. **Task segment must be numeric.** The Kaizen board **only matches codes that already
+  exist** — do not invent one; attach to an existing `N.N`.
+- **Every Kaizen task needs both axes**: one business category (Sales / Marketing / Operations /
+  Financial — never blank, never a fifth) and one DMAIC letter (D/M/A/I/C/R).
+- ⚠️ The bridge has **no `kaizenCategory` parameter**. Declare the category in the brief text and
+  instruct Cursor to apply it.
+- `taskName` must be the **exact activity title from the board**, plain text, no HTML entities.
+  An invented descriptive name returns `hits: 0`.
+
+**Likely homes for this venture's work:** `7.x` Digital Ecosystem (7.1 Website, 7.2 Client /
+Stakeholder Portal, 7.3 AI Agent) · `6.x` SOPs · `5.x` Training & Capability · `8.x` Sales ·
+`9.x` Finance.
+
+---
+
+## 11. Open decisions that require a human
+
+Claude and Cursor must **not** resolve these. Escalate to Aziz.
+
+| # | Decision | Why it is blocking |
+|---|---|---|
+| 1 | **Legal vehicle** — cooperativa sociale tipo A vs S.r.l. impresa sociale | Drives cost, governance, the >70% ratio and the revenue-categorisation schema (§8) |
+| 2 | **Lawyer's written opinion on the L.56/1989 boundary** | The lane architecture is designed against `Cass. 16562/2016`; a penal-professional lawyer must confirm the line before launch (§4.1) |
+| 3 | **Named psicologo iscritto all'Albo** — employed or in convenzione | Lane A cannot exist without one. **Structure this relationship first, not last** |
+| 4 | **ATECO code** | Drives INPS gestione (a €4.611,64/yr swing), IVA treatment and the general-interest ratio (§2) |
+| 5 | **Outcome instrument** for §6.1 | A clinical decision. Engineering must not choose a psychometric instrument |
+| 6 | **DPIA sign-off** | Required before Lane A touches a real record (§7) |
+| 7 | **Io Volo** — fold in as a module, or keep separate? | If folded in, it inherits this constraint set and the lane rules apply to it unchanged |
+
+---
+
+## 12. Working rules for agents in this repo
+
+**Claude — R&D.** Designs, specifies, writes briefs. Does not write production code. Does not merge.
+Every brief must name the legal frame (§1) and the lane (§3) the work sits in. Before Phase 2+ work,
+state the gate status (§9.2).
+
+**Cursor — production floor.** Builds what R&D specified, opens a PR, never pushes to main.
+**Refuse and escalate** any task that would build something in §3.2, breach §5.1, or store data
+excluded by §7 — even if the brief asks for it. A brief that contradicts this file is a defect in
+the brief; say so rather than implementing it.
+
+**Aziz — plant manager and QA.** Decides what goes on the boards, what gets built, what gets merged,
+and every item in §11.
+
+### 12.1 R&D feedback — required on every PR
+
+Claude has **no access to this repository**. It designs blind unless you report back. Append to
+every PR description a section titled `## R&D FEEDBACK — for Claude` covering: brief adherence
+(done as specified / deviated and why / skipped and why) · where the brief failed you (ambiguous —
+state your guess; missing; over-specified; factually wrong) · repo reality check (actual stack,
+conventions, what already exists, constraints) · effort signal · blocked / needs a human · what the
+next brief should account for.
+
+Be blunt. *"The brief said X but this repo uses Y"* is worth more than *"went well"*.
+
+### 12.2 Preservation rules
+
+- Styled HTML deliverables are committed **as-is, UTF-8, never converted to markdown** — especially
+  where they carry non-Latin scripts, which corrupt on re-encode.
+- **Configure the commodity, build the moat.** Auth, payments, video, scheduling, CMS — rent them.
+  Engineering effort goes to the triage layer, the lane separation, and the evidence model. Those
+  are the moat, because they are what a competitor cannot copy without doing this legal work.
+
+---
+
+## 13. Sources and confidence
+
+| Item | Confidence |
 |---|---|
-| Leaves a public subsidy on the table. | The bonus is a reserved-act reimbursement channel Tamia does not control. |
-| Competitors can advertise “bonus accepted”. | Caps, stop-start funding, and political redesign would make Lane A a billing front-end. |
-| | It would train the market to see Tamia as the bonus product, not a durable three-lane enterprise. |
-| | It would pressure copy, UX, and data toward a single clinical reimbursement shape. |
+| `L. 56/1989` reserved acts; `art. 348 c.p.` exposure | **High** — statute + Ordine operational position |
+| `Cass. pen. VI n. 16562/2016` holding and breadth of test | **High** on the ruling; **medium** on how a court would apply it to a lane-separated digital service. **Lawyer opinion required** |
+| `art. 28 D.lgs 81/2008` stress obligation, all employers | **High** — statute + 2010 Commissione Consultiva circular |
+| INAIL OT23 2027 model, D-1 / D-2 interventions, 28% band | **High** — checked against the model text |
+| Bonus psicologo psicoterapeuta requirement | **High** |
+| Impresa sociale vs cooperativa sociale cost delta | **High** on the structure; **medium** on the euro figures — get three preventivi |
+| Impresa sociale tax regime operative from 1 Jan 2026 | **High** — EC comfort letter 7 Mar 2025, AdE Circolare 1/2026 |
+| FSE+ Terzo Settore avviso open to 23 Apr 2027 | **High** |
+| Erasmus+ KA210 ~5 March 2027 deadline | **Medium** — the 2027 Programme Guide is not yet published; inferred from a stable pattern |
 
-Reversing this foreclosure is a **human-only** decision (§11.3). Agents must not “just add Stripe metadata for the bonus” or accept a brief that treats the bonus as a Phase-3 convenience.
-
----
-
-## §5 Explicit do-not-build list
-
-Do not build, prototype as-if-real, or leave in a merged spec as a future epic:
-
-1. **Any wellbeing score, index, RAG, or interpretive assessment outside Lane A.** No “resilience check-in” that interprets the person. No employer-facing individual heatmap. No burnout / anxiety / depression scorer in B or C.
-2. **Any AI agent that gives emotional support.** An automated system producing *sostegno psicologico* is the reserved act at scale — including chatbots, “companions”, “listening” agents, and LLM wrappers that reflect feelings back as care. AI may translate, schedule, navigate (Lane B), or teach a **group** curriculum (Lane C) without addressing the person as a case.
-3. **Symptom-based facilitator matching.** Matching on language, culture, logistics, and (inside Lane A only) declared clinical specialty of an Albo professional is in scope. Matching on symptoms, PHQ-like answers, or inferred distress **to a Lane B/C facilitator** is not.
-4. **Continuing individual emotional responsibility** held by a Lane B or Lane C facilitator. No caseload of “my people” in B/C. No weekly 1:1 “how are you holding up?” as a product loop in those lanes.
-5. **Blended branding** — one product surface that looks like a clinic for everyone.
-6. **Immigration-status fields** — *permesso*, visa class, asylum, irregularity (§7).
-7. **Bonus psicologo** rails (§4.3).
-8. **OT23 / DVR certification** claimed by software (§4.2, §11).
-
-Earlier artifacts on unmerged PR branches (Roadmap v2 “preventive wellness”, Matching Engine “baseline self-assessment”, employer “wellbeing insights”, Prototype check-in index, Kaizen service line “Wellness & Lifestyle Coaching”) are **pre-constitution**. They are historical. They are not a licence to build those things.
+**Full funding map:** the AZM dossier *Nove Ventures, Un Fascicolo* — ten sections covering every
+measure, cost, permit and provider. Do not duplicate its content here; link to it and keep this file
+about **how Tamia4Life is built**.
 
 ---
 
-## §6 Evidence model
-
-Reporting is an **export**, never a retrofit.
-
-If a funder, employer, or *bilancio sociale* needs a number, that number was designed as a field at capture time — or it does not exist. Do not mine chat logs, clinical notes, or free text after the fact to invent indicators.
-
-Exports are designed for, and labelled as, one of:
-
-| Export | Typical lane | What it may contain |
-|---|---|---|
-| **FSE+** | C | Enrolment, attendance, hours, completion, anagraphic fields the call requires — not distress. |
-| **FAMI** | B | Project outputs (orientation sessions, accompaniment events, language of delivery). No immigration status. No art. 9. |
-| **Erasmus+ KA210** | C | Partnership learning / small-scale partnership evidence. Group, educational. |
-| **OT23 dossier** | C (incremental) | Organisational / formative intervention description. Not the DVR itself. Not individual names. |
-| **Bilancio sociale** | A+B+C as categories | Revenue by art. 2 letter, users/participants by lane, no clinical content. |
-
-Lane A clinical content is **not an export** to funders or employers. Lane A operational counts (sessions delivered by Albo professionals) may be exported only in form the DPIA and the contract allow.
-
-Every new capture field must name: **which export it feeds**, **which lane it belongs to**, and **which legal frame requires it**. Fields with no export and no frame are not added “for later”.
-
----
-
-## §7 GDPR
-
-- **DPIA is mandatory before Lane A touches a real record.** A draft DPIA is not a DPIA. Sign-off is human (§11.4). Until then: no production Lane A, no imported clinical lists, no “just a pilot spreadsheet”.
-- **Lane separation extends to storage.** Separate schemas / buckets / encryption contexts. A shared Postgres with a `lane` column is not separation if a Lane B role can `SELECT` Lane A rows. Least privilege by lane.
-- **Art. 9 data lives only in Lane A.** Distress presentation that fired triage is a routing fact (the immutable record), not a clinical file. Do not copy it into B/C CRM.
-- **Never store immigration status.** Not as a column, tag, note type, or “hidden admin field”. This is **schema-enforced**, not discipline-enforced: the migration that adds `permesso_di_soggiorno`, `status_giuridico`, `asylum`, `regularisation`, or equivalents **fails CI / review**. Language, nationality of cultural identification, and self-described context (“new to Italy”, “raising a family”) are not permesso class — and must not be used as a proxy for legal status.
-- Consent is **per lane**. Employer legal basis for Lane C aggregates does not unlock Lane A.
-- Retention schedules differ by lane. Do not apply a single “user deleted” that forgets the triage defence record without a human legal decision.
-- Hosting: EU. No “the model is in the US but we anonymise” for Lane A.
-
----
-
-## §8 Legal vehicle and the >70% ratio
-
-Two live options; **agents must not choose** (§11.1):
-
-| Vehicle | What it buys | What it costs |
-|---|---|---|
-| **Cooperativa sociale** (L. 381/91), typically tipo A | Familiar to Comuni and socio-sanitary purchasers; mutualistic governance | Capital and governance less flexible; 3% *fondo mutualistico*; cooperative constraints |
-| **S.r.l. impresa sociale** (D.lgs 112/2017) | Capital flexibility; statutory *impresa sociale* brand | Asset lock; *bilancio sociale*; **general-interest activities in via principale** |
-
-**Engineering consequence (either vehicle, especially impresa sociale):**
-
-> **Revenue categorisation is a product data field** because of the **>70% general-interest ratio**.
-
-Every chargeable object (session, seat, catalogue course, project invoice line) carries:
-
-```
-revenue_category ∈ {
-  general_interest_c,   // art. 2 c) — Lane A socio-sanitary
-  general_interest_d,   // art. 2 d) — Lane C formazione
-  general_interest_r,   // art. 2 r) — Lane B mediazione / integrazione
-  other                 // must remain the minority
-}
-```
-
-The ratio is computed from product data, not reconstructed in March by an accountant guessing from Stripe descriptions. `other` includes merch, pure software licences with no general-interest activity, and anything a lawyer has not mapped to a letter.
-
-Agents must not add a paid feature without proposing a `revenue_category`. If the category would be `other`, say so explicitly — that is a ratio risk, not a nicety.
-
----
-
-## §9 Phase 1 gate
-
-**The gate is NOT MET.** Restate this before Phase 2+ work.
-
-Canonical gate (Startup board Phase 1 · Discovery & Problem Validation; S TA 1.1):
-
-- Demand validated across the intended buyers, not a pitch-deck consensus.
-- At least a few employers with a **costed** pain and a letter of intent.
-- A plausible facilitator / professional **supply** signal (including, for Lane A, Albo-eligible professionals — not only mediators).
-- The space the lanes occupy is real to interviewees — including that distress routes to A.
-
-Surprises still emerging ⇒ do not close the gate.
-
-### What may be built before the gate
-
-Allowed, because they do not pretend the gate is met and they do not touch real Lane A records:
-
-- This constitution, `AGENTS.md`, `.cursorrules`, banned-words lint and CI.
-- Discovery interviews, notes, assumption scorecards (S TA 1.1).
-- Community / language strategy, design system, **non-production** prototypes and brand work.
-- Roadmaps, ADRs, board alignment — if they **name the legal frame** and do not smuggle do-not-build items back in.
-- Paper schemas: occupancy, consent, triage record, `revenue_category`, no-immigration-status.
-- **Unsigned** DPIA and legal memos.
-- Facilitator **sourcing research** (conversations, not production credentialling of *psicologi*).
-
-### What may not be built before the gate
-
-- Production app with real users.
-- Real Lane A records or any art. 9 data.
-- Employer contracts that promise reserved acts the venture cannot yet deliver.
-- Anything on the §5 do-not-build list.
-- Shipping a matching engine, check-in index, or AI companion “to learn”.
-- Declaring the gate met in a README, PR, or board because a brief was impatient.
-
-A brief that says “build the MVP anyway” is still bound by this section. Build only from the allowed list, and say the gate is unmet at the top of the PR.
-
----
-
-## §10 Copy, branding, banned words
-
-Copy is a Cassazione surface. The lint runs on **every language** in the repo: UI strings, HTML prototypes, Markdown, CMS fixtures, emails, store listings.
-
-Canonical machine list: [`compliance/banned-words.json`](compliance/banned-words.json).  
-Runner: [`scripts/lint-banned-words.py`](scripts/lint-banned-words.py).
-
-### What the list is for
-
-Terms that create *apparenza oggettiva di competenza specialistica* when used for the **product**, **Lane B/C**, **AI**, or **unverified personnel**. Lane A may name a **specific Albo professional’s reserved title** in a context the allowlist and a human have approved. The default is deny.
-
-### Starter categories (not exhaustive — the JSON is)
-
-**Italian — reserved act / specialist appearance**
-
-- *sostegno psicologico*, *supporto psicologico*, *aiuto psicologico*, *consulenza psicologica*
-- *psicoterapia*, *psicoterapeuta*, *terapia* / *terapeuta* as product or B/C title
-- *diagnosi*, *diagnosticare*, *trattamento clinico*, *paziente* (use *utente* / *partecipante* / *persona*)
-- *il tuo psicologo* / *la tua psicologa* as product chrome
-- *benessere mentale* + score / test / indice / interpretazione
-
-**English — same function**
-
-- psychological support, emotional support (as a product promise), AI therapist / AI companion
-- therapist, psychotherapy, diagnosis, treatment, patient (as product nouns)
-- wellbeing score, wellness index, burnout score, symptom checker
-- mental health professional (for B/C or the company)
-
-**Other languages:** Arabic, Romanian, Ukrainian, Albanian, Bengali, Urdu, Punjabi, Hindi, Tagalog — and every future locale — get **equivalent** phrases in the JSON **before** that locale ships. A locale without a banned-phrase set **does not ship**. Machine translation of the Italian list is a draft; a human signs the locale pack (§11.6).
-
-### Required voice (safe defaults)
-
-| Instead of | Use |
-|---|---|
-| Supporto psicologico | Percorso clinico (A) / mediazione (B) / formazione (C) |
-| Therapist / coach del benessere | *Psicologo iscritto all'Albo* (A, named) / mediatore (B) / formatore (C) |
-| Patient | Utente, partecipante, persona, membro |
-| Wellbeing score | Nothing — or, in A only, a tool the *psicologo* chose, not a product index |
-| AI that listens | AI that translates, schedules, or navigates |
-
-Disclaimers do not rehab a banned phrase. “Not a substitute for therapy” next to a chatbot that does *sostegno* is still *apparenza*.
-
----
-
-## §11 Seven decisions that require a human
-
-Agents **must not** resolve these. Surface them and stop.
-
-| # | Decision | Why it is not an agent’s |
-|---|---|---|
-| **1** | **Legal vehicle** — cooperativa sociale vs S.r.l. impresa sociale (or a holding structure). | Governance, asset lock, and purchaser perception. Engineering follows; it does not choose. |
-| **2** | **Lane A go-live** — first Albo psychologist engaged, insurance, clinical governance, production DPIA-bound records. | Reserved-act exposure. |
-| **3** | **Bonus psicologo foreclosure** — any reversal or “temporary” integration. | Already decided in §4.3. |
-| **4** | **DPIA sign-off** (and any later material change to Lane A processing). | A draft is not a signature. |
-| **5** | **Triage rule version** — publishing a new `triage.vN` that the immutable record will name. | The defence record is only as good as the rule a human owned. |
-| **6** | **Banned-words / locale-pack amendments** — adding or removing phrases, or declaring a locale pack complete. | Self-presentation is part of art. 348 c.p. |
-| **7** | **Phase 1 gate declaration** — stating the gate is met. | Agents only report evidence and the standing “NOT MET” until a human flips it. |
-
-Related calls that inherit the same stop rule: certifying OT23 eligibility; storing anything adjacent to immigration status “because the Comune asked”; granting a mediator `eligible_lanes` including `A`; putting clinical export fields on a FAMI/FSE+ file.
-
----
-
-## §12 Agent operating protocol
-
-1. **State Phase 1 gate status** before Phase 2+ work.
-2. **Name the legal frame** (lane + art. 2 letter + any special law) in the PR or spec. No frame → do not implement the feature.
-3. **Refuse §5 items** even if a prototype, roadmap, or older brief asks for them. Say which clause blocked it.
-4. **Escalate §11** instead of picking a default.
-5. **Every paid surface** proposes `revenue_category`.
-6. **Every copy change** must pass banned-words CI in the language of the copy.
-7. **R&D feedback** — every AZM bridge / Claude Desktop handoff PR ends with `## R&D FEEDBACK — for Claude` (see `AGENTS.md`). Claude cannot see this repo; the feedback is how the next constitution-quality brief gets written.
-8. **Do not merge pre-constitution artifacts onto `main` unchanged** if they violate §5 or §10. Rewrite or quarantine.
-
----
-
-## §13 Repo reality (so briefs stop inventing a stack)
-
-As of v1 of this constitution:
-
-- **`main` is a docs/planning repo.** Application code, `package.json`, CI (beyond this lint), and i18n libraries **do not exist** until someone lands them.
-- Substantive historical work lives on **unmerged PRs**: discovery (`discovery/`), Phase-2 HTML pack, language strategy, design system v0.1, roadmap v2, quality survey. Treat them as inputs, not as canon, where they conflict with this file.
-- Deliverable convention: `docs/azm-deliverables/<TASK-CODE>/`.
-- Tokens, when they exist, are `--t4l-*`. Typography branches on `lang`, never on `dir`. Urdu is Nastaliq, not Arabic Naskh. Chinese is out (S TA 2.B).
-- Wave 1 languages: **Arabic + Romanian**. Language ≠ nationality.
-
----
-
-## §14 Replication note (other eight ventures)
-
-Copy the **method**, not the lanes:
-
-1. Doctrine in one paragraph: the constraint *is* the channel.
-2. Hard-separated product lanes that the law actually distinguishes.
-3. The venture restated in the statute that will appear on the *bilancio* / accreditamento / licence.
-4. Explicit do-not-build list.
-5. Evidence as export, not retrofit.
-6. Data rules that are schema-enforced.
-7. Entity / revenue consequences as product fields.
-8. Phase-gate honesty.
-9. Banned presentation terms + CI.
-10. A short human-only list.
-
-**Next constitutions:** SV LMS (Accordo Stato-Regioni + accreditamento + white-label decision), then SV Patente (art. 123 c.11-bis boundary), then the rest.
-
----
-
-*End of Tamia4Life constitution v1. Amendments are human (§11.6 for words; otherwise a dated v2 signed in this file’s header).*
+*This file is an engineering constraint document derived from research, not legal advice. Items 2
+and 6 in §11 require professional sign-off before launch. Revise this file whenever a §11 decision
+is made, and record the decision — and its rationale — as a board task so it survives the
+conversation.*
