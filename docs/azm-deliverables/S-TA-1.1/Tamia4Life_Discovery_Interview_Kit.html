@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tamia4Life — Customer Discovery Interview Kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1f2e2c; --ink-soft:#4a5b58; --ink-faint:#7d8c88;
+    --paper:#f3f0ea; --card:#fff; --line:#e2ddd3; --line-soft:#ece8df;
+    --teal:#0f6d68; --teal-deep:#0a4f4b; --teal-bright:#0d9488; --teal-wash:#e7f0ee;
+    --amber:#e7a13a; --amber-deep:#cf871e; --amber-wash:#f9edd8; --clay:#c56a52;
+    --g2:#2f8a6e; --danger:#b4442f;
+    --user:#0f6d68; --employer:#cf871e; --facil:#2f8a6e;
+    --font-d:"Fraunces",Georgia,serif;
+    --font-ui:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{background:var(--paper);color:var(--ink);font-family:var(--font-ui);line-height:1.5;
+    -webkit-font-smoothing:antialiased;padding:44px 24px 60px;}
+  .sheet{max-width:1080px;margin:0 auto;background:var(--card);border:1px solid var(--line);
+    border-radius:22px;box-shadow:0 18px 54px rgba(31,46,44,.10);overflow:hidden;}
+
+  .head{padding:38px 46px 30px;border-bottom:1px solid var(--line-soft);
+    background:radial-gradient(120% 140% at 100% 0%, rgba(231,161,58,.10), transparent 55%),linear-gradient(180deg,#fbfaf7,#fff);
+    display:flex;justify-content:space-between;align-items:flex-start;gap:26px;flex-wrap:wrap;}
+  .brand{display:flex;align-items:center;gap:15px;}
+  .mark{width:52px;height:52px;flex:none;}
+  .kicker{font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--teal);font-weight:700;margin:0 0 3px;}
+  .brand-txt h1{font-family:var(--font-d);font-size:28px;font-weight:600;margin:0;letter-spacing:-.01em;}
+  .head-right{text-align:right;max-width:400px;}
+  .head-right .lead{font-family:var(--font-d);font-size:15px;font-style:italic;color:var(--teal-deep);margin:0 0 6px;line-height:1.4;}
+  .head-right p{font-size:12.5px;color:var(--ink-soft);margin:0;line-height:1.5;}
+  .head-right b{color:var(--clay);font-weight:600;}
+
+  .sec{padding:32px 46px;border-bottom:1px solid var(--line-soft);}
+  .sec:last-child{border-bottom:none;}
+  .eyebrow{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--amber-deep);font-weight:700;margin:0 0 6px;}
+  .sec h2{font-family:var(--font-d);font-size:22px;font-weight:600;margin:0 0 4px;letter-spacing:-.01em;}
+  .sec .sub{font-size:13px;color:var(--ink-soft);margin:0 0 20px;max-width:780px;}
+
+  .rule{display:flex;gap:14px;align-items:flex-start;background:var(--teal-wash);border-radius:14px;padding:16px 18px;margin-bottom:20px;}
+  .rule svg{flex:none;margin-top:2px;}
+  .rule p{margin:0;font-size:14px;color:var(--teal-deep);line-height:1.5;}
+  .rule b{font-weight:700;}
+
+  /* mom test do/dont */
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .box{border-radius:14px;padding:15px 18px;}
+  .box.no{background:#fbf5f3;border-left:3px solid var(--danger);}
+  .box.yes{background:#f4f9f6;border-left:3px solid var(--g2);}
+  .box h4{font-family:var(--font-d);font-size:14.5px;font-weight:600;margin:0 0 9px;}
+  .box.no h4{color:var(--danger);} .box.yes h4{color:var(--g2);}
+  .box ul{margin:0;padding:0;list-style:none;display:grid;gap:7px;}
+  .box li{font-size:12.3px;color:var(--ink);line-height:1.45;padding-left:16px;position:relative;}
+  .box li::before{position:absolute;left:0;top:0;font-weight:700;}
+  .box.no li::before{content:"✗";color:var(--danger);}
+  .box.yes li::before{content:"✓";color:var(--g2);}
+  .box li em{color:var(--ink-faint);font-size:11.5px;}
+
+  /* assumption cards */
+  .assum{display:grid;grid-template-columns:repeat(2,1fr);gap:11px;}
+  .ac{border:1px solid var(--line-soft);border-radius:12px;padding:13px 15px;border-left:3px solid var(--sc);}
+  .ac .aid{font-family:var(--font-d);font-size:12px;font-weight:700;color:var(--sc);letter-spacing:.06em;}
+  .ac .at{font-size:13px;font-weight:600;margin:3px 0 4px;}
+  .ac .ad{font-size:11.6px;color:var(--ink-soft);margin:0;line-height:1.45;}
+  .ac .seg{font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:var(--ink-faint);margin-top:6px;}
+  .sharp{background:var(--amber-wash);border-radius:999px;font-size:9px;font-weight:700;color:var(--amber-deep);padding:2px 8px;letter-spacing:.05em;margin-left:6px;}
+
+  /* segment blocks */
+  .segblk{border:1px solid var(--line-soft);border-radius:16px;overflow:hidden;margin-bottom:18px;}
+  .segblk .sh{padding:13px 18px;color:#fff;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+  .segblk .sh h3{font-family:var(--font-d);font-size:17px;font-weight:600;margin:0;}
+  .segblk .sh .cnt{margin-left:auto;font-size:11.5px;opacity:.9;}
+  .segblk .sb{padding:18px;}
+  .segblk.user .sh{background:var(--user);}
+  .segblk.employer .sh{background:var(--employer);}
+  .segblk.facil .sh{background:var(--facil);}
+
+  .blk{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-faint);font-weight:700;margin:0 0 9px;}
+  .screener{background:#fbfaf7;border-radius:10px;padding:12px 15px;margin-bottom:16px;}
+  .screener ul{margin:0;padding:0;list-style:none;display:grid;gap:5px;}
+  .screener li{font-size:12.2px;padding-left:16px;position:relative;line-height:1.4;}
+  .screener li::before{content:"";position:absolute;left:0;top:6px;width:6px;height:6px;border-radius:2px;transform:rotate(45deg);background:var(--sc);}
+
+  .qgroup{margin-bottom:15px;}
+  .qgroup .gt{font-size:12px;font-weight:700;color:var(--teal-deep);margin:0 0 7px;display:flex;align-items:center;gap:8px;}
+  .qgroup .tests{font-size:9.5px;font-weight:700;letter-spacing:.06em;background:var(--teal-wash);color:var(--teal-deep);padding:2px 8px;border-radius:999px;}
+  .qgroup ol{margin:0;padding-left:20px;display:grid;gap:6px;}
+  .qgroup li{font-size:12.6px;color:var(--ink);line-height:1.5;}
+  .qgroup li .probe{display:block;font-size:11.4px;color:var(--ink-faint);font-style:italic;margin-top:2px;}
+
+  .listen{background:var(--amber-wash);border-left:3px solid var(--amber-deep);border-radius:0 10px 10px 0;padding:11px 15px;margin-top:12px;}
+  .listen .ll{font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--amber-deep);margin:0 0 6px;}
+  .listen p{font-size:12.2px;color:var(--ink);margin:0;line-height:1.45;}
+  .listen b{color:var(--teal-deep);}
+
+  /* note template */
+  .tmpl{background:#fbfaf7;border:1px solid var(--line-soft);border-radius:14px;padding:18px 20px;}
+  .tmpl .row{display:grid;grid-template-columns:150px 1fr;gap:12px;padding:8px 0;border-bottom:1px solid var(--line-soft);align-items:start;}
+  .tmpl .row:last-child{border-bottom:none;}
+  .tmpl .fl{font-size:11.5px;font-weight:700;color:var(--teal-deep);}
+  .tmpl .fv{font-size:12px;color:var(--ink-faint);font-style:italic;line-height:1.45;}
+
+  /* scorecard */
+  table.sc{width:100%;border-collapse:collapse;font-size:12.3px;}
+  table.sc thead th{text-align:left;font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-faint);font-weight:700;padding:0 11px 9px;border-bottom:1.5px solid var(--line);}
+  table.sc tbody td{padding:10px 11px;border-bottom:1px solid var(--line-soft);vertical-align:top;line-height:1.4;}
+  table.sc tbody tr:last-child td{border-bottom:none;}
+  table.sc .a{font-weight:700;color:var(--teal-deep);white-space:nowrap;}
+  .state{display:inline-block;font-size:9.5px;font-weight:700;padding:3px 9px;border-radius:999px;}
+  .state.v{background:#e5f0e0;color:#4c7326;}
+  .state.m{background:var(--amber-wash);color:var(--amber-deep);}
+  .state.x{background:#f6e0da;color:var(--danger);}
+  .state.n{background:#eef0ee;color:var(--ink-faint);}
+
+  /* ethics */
+  .eth{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+  .ec{background:#fbf5f3;border-left:3px solid var(--clay);border-radius:0 12px 12px 0;padding:13px 16px;}
+  .ec .et{font-family:var(--font-d);font-size:14px;font-weight:600;color:var(--clay);margin:0 0 4px;}
+  .ec p{font-size:11.8px;color:var(--ink-soft);margin:0;line-height:1.45;}
+
+  /* gate */
+  .gate{background:var(--teal-wash);border-radius:14px;padding:18px 20px;}
+  .gate h3{font-family:var(--font-d);font-size:16px;font-weight:600;margin:0 0 10px;color:var(--teal-deep);}
+  .gate ul{margin:0 0 12px;padding:0;list-style:none;display:grid;gap:8px;}
+  .gate li{position:relative;padding-left:24px;font-size:13px;color:var(--ink);line-height:1.45;}
+  .gate li svg{position:absolute;left:0;top:2px;}
+  .gate li b{color:var(--teal-deep);}
+  .forks{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:4px;}
+  .fork{background:#fff;border-radius:10px;padding:12px 15px;}
+  .fork .ft{font-size:11.5px;font-weight:700;color:var(--danger);margin:0 0 4px;}
+  .fork p{font-size:11.8px;color:var(--ink-soft);margin:0;line-height:1.45;}
+
+  .foot{padding:22px 46px 30px;background:#fbfaf7;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+  .foot .note{font-size:11px;color:var(--ink-faint);font-style:italic;max-width:660px;line-height:1.5;}
+  .foot .tag2{font-size:11px;color:var(--ink-faint);font-weight:500;}
+
+  @media (max-width:760px){
+    body{padding:20px 12px 40px;}
+    .head,.sec,.foot{padding-left:22px;padding-right:22px;}
+    .two,.assum,.eth,.forks{grid-template-columns:1fr;}
+    .tmpl .row{grid-template-columns:1fr;gap:3px;}
+    .head-right{text-align:left;}
+  }
+  @media print{
+    body{background:#fff;padding:0;}
+    .sheet{box-shadow:none;border:none;border-radius:0;max-width:none;}
+    .segblk,.ac,.ec,.tmpl{break-inside:avoid;}
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <!-- HEADER -->
+  <div class="head">
+    <div class="brand">
+      <svg class="mark" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-label="Tamia4Life mark">
+        <circle cx="32" cy="47" r="4.2" fill="#e7a13a"/>
+        <path d="M32 47 C 31.2 42 32.8 40 32 36" stroke="#0f6d68" stroke-width="3" stroke-linecap="round" fill="none"/>
+        <path d="M32 43 C 30.5 33 25 26 15.5 21.5 C 17.5 31 22.5 38.5 32 43 Z" fill="#0d9488"/>
+        <path d="M32 43 C 33.5 29 41 20 51.5 15 C 49 27 43 37.5 32 43 Z" fill="#0f6d68"/>
+        <path d="M32 43 C 35 34 41 25 48 18.5" stroke="#ccfbf1" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+        <path d="M32 43 C 29.5 35 25 29 19 24" stroke="#ccfbf1" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+      </svg>
+      <div class="brand-txt">
+        <p class="kicker">S TA 1.1 · Phase 1 · Discovery &amp; Problem Validation</p>
+        <h1>Customer Discovery Interview Kit</h1>
+      </div>
+    </div>
+    <div class="head-right">
+      <p class="lead">Learn whether the problem is real — before building the answer.</p>
+      <p>Screeners, scripts, note template and the A1–A7 scorecard. <b>Zero interviews run so far.</b> This is the gate everything else waits behind.</p>
+    </div>
+  </div>
+
+  <!-- THE ONE RULE -->
+  <div class="sec">
+    <p class="eyebrow">How to interview</p>
+    <h2>The one rule</h2>
+    <div class="rule">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#0a4f4b" stroke-width="1.7"/><path d="M12 8v5M12 16h.01" stroke="#0a4f4b" stroke-width="1.9" stroke-linecap="round"/></svg>
+      <p><b>Never mention Tamia4Life until the interview is over.</b> The moment you describe the idea, people start being polite, and politeness is worthless data. Ask about their life and what they have already done — not about your product.</p>
+    </div>
+    <div class="two">
+      <div class="box no">
+        <h4>Do not ask</h4>
+        <ul>
+          <li>“Would you use a service like this?” <em>— hypothetical, always yes</em></li>
+          <li>“Do you think this is a good idea?” <em>— asks for a compliment</em></li>
+          <li>“How much would you pay for it?” <em>— invented number</em></li>
+          <li>“Is it hard being far from home?” <em>— leading; you've supplied the answer</em></li>
+          <li>“Would your company buy this?” <em>— no one can answer for procurement</em></li>
+        </ul>
+      </div>
+      <div class="box yes">
+        <h4>Ask instead</h4>
+        <ul>
+          <li>“Tell me about the last time that happened.” <em>— a specific past event</em></li>
+          <li>“What did you actually do about it?” <em>— behaviour, not intention</em></li>
+          <li>“Who else have you talked to about it?” <em>— reveals real weight</em></li>
+          <li>“What did that cost you — money, time, sleep?” <em>— quantifies the pain</em></li>
+          <li>“Walk me through how the last purchase like this got approved.” <em>— the real buying process</em></li>
+        </ul>
+      </div>
+    </div>
+    <div class="listen" style="margin-top:16px">
+      <p class="ll">The signal that matters most</p>
+      <p><b>Does the pain surface unprompted?</b> If you have to introduce the topic of emotional strain, language, or isolation before they mention it, that is a weak signal — record it honestly. The strongest evidence is a problem they raise themselves, and have already spent money, time or effort trying to solve.</p>
+    </div>
+  </div>
+
+  <!-- ASSUMPTIONS -->
+  <div class="sec">
+    <p class="eyebrow">What we are testing</p>
+    <h2>The seven load-bearing assumptions</h2>
+    <p class="sub">Every question in this kit maps to one of these. <b>A2 and A4 are the sharpest knives</b> — if either fails, the venture as designed does not work. Weight your listening toward them.</p>
+    <div class="assum">
+      <div class="ac" style="--sc:var(--user)"><span class="aid">A1</span><p class="at">Real recurring emotional strain</p><p class="ad">Members experience ongoing strain from adaptation, isolation or dual-life pressure — not a one-off bad week.</p><p class="seg">End user</p></div>
+      <div class="ac" style="--sc:var(--user)"><span class="aid">A2 <span class="sharp">Sharpest</span></span><p class="at">Language &amp; culture are the barrier</p><p class="ad">What blocks them from getting help is being understood — not cost, time or stigma alone.</p><p class="seg">End user</p></div>
+      <div class="ac" style="--sc:var(--user)"><span class="aid">A3</span><p class="at">Costly, and already acted on</p><p class="ad">The strain has a real cost and they have already tried something — searched, paid, asked, avoided.</p><p class="seg">End user</p></div>
+      <div class="ac" style="--sc:var(--employer)"><span class="aid">A4 <span class="sharp">Sharpest</span></span><p class="at">Owned, quantified employer pain</p><p class="ad">An employer has a named people-problem with a number attached — turnover, absence, ramp time — and someone owns it.</p><p class="seg">Employer</p></div>
+      <div class="ac" style="--sc:var(--employer)"><span class="aid">A5</span><p class="at">Budget, buyer, buying process</p><p class="ad">A real wellbeing or inclusion budget exists, with a named decision-maker and a path to purchase.</p><p class="seg">Employer</p></div>
+      <div class="ac" style="--sc:var(--facil)"><span class="aid">A6</span><p class="at">Facilitators are recruitable</p><p class="ad">Culturally-matched facilitators exist in the Wave 1 languages and will work at viable rates.</p><p class="seg">Facilitator</p></div>
+      <div class="ac" style="--sc:var(--clay)"><span class="aid">A7</span><p class="at">The middle space is legitimate</p><p class="ad">There is a real space between “I'm fine” and “I need a psychiatrist” that people recognise and would step into.</p><p class="seg">All segments</p></div>
+    </div>
+  </div>
+
+  <!-- END USER -->
+  <div class="sec">
+    <p class="eyebrow">Script 1 of 3</p>
+    <h2>End user interview</h2>
+    <p class="sub">45 minutes. Conducted <b>in their mother tongue</b> wherever possible — Wave 1 recruiting is Arabic and Romanian speakers first, since those are the launch languages.</p>
+
+    <div class="segblk user" style="--sc:var(--user)">
+      <div class="sh"><h3>End users</h3><span class="cnt">Target: 15–25 · waves of ~5, synthesise between waves</span></div>
+      <div class="sb">
+        <p class="blk">Screener — recruit if</p>
+        <div class="screener">
+          <ul>
+            <li>Born outside Italy, or raised in a household where Italian was not the first language</li>
+            <li>Currently living and working or studying in Italy</li>
+            <li>Arrived within the last 10 years <em>(prioritise 1–5 years)</em></li>
+            <li>Speaks Arabic or Romanian as a mother tongue <em>(Wave 1 focus; widen later)</em></li>
+            <li><b>Exclude</b> friends and family — they will be kind, and kindness is not data</li>
+          </ul>
+        </div>
+
+        <div class="qgroup">
+          <p class="gt">Opening — build ground, no pitch <span class="tests">warm-up</span></p>
+          <ol>
+            <li>Tell me how you came to be in Italy.</li>
+            <li>What does a normal week look like for you right now?</li>
+            <li>What's been the hardest part of the last year? <span class="probe">Stay silent after this. Do not suggest categories. What they name first is the finding.</span></li>
+          </ol>
+        </div>
+
+        <div class="qgroup">
+          <p class="gt">Life and strain <span class="tests">tests A1 · A7</span></p>
+          <ol start="4">
+            <li>When you're carrying something heavy — stress, worry, homesickness — what do you usually do with it?</li>
+            <li>Tell me about the last time you felt that way. What was happening? <span class="probe">Get a specific, dated event. Not a general pattern.</span></li>
+            <li>How often does that come around?</li>
+            <li>Who in your life knows about it?</li>
+            <li>Is there anything you'd never talk about with family back home? <span class="probe">Probes the dual-life pressure without leading.</span></li>
+          </ol>
+        </div>
+
+        <div class="qgroup">
+          <p class="gt">What they've already tried <span class="tests">tests A3 — the strongest evidence</span></p>
+          <ol start="9">
+            <li>Have you ever looked for help with any of that? Tell me what you did.</li>
+            <li>What did you search for? Where did you look? <span class="probe">Exact words matter — they reveal how people frame their own problem.</span></li>
+            <li>What happened? Did you go through with it?</li>
+            <li>If you stopped or never started — what got in the way?</li>
+            <li>Have you ever paid for anything related to this? How much? <span class="probe">Past spending is the single best predictor of future spending.</span></li>
+          </ol>
+        </div>
+
+        <div class="qgroup">
+          <p class="gt">Language and culture <span class="tests">tests A2 — sharpest knife</span></p>
+          <ol start="14">
+            <li>When you talk about something personal, which language do you use?</li>
+            <li>Have you ever tried to explain something personal in Italian or English? How did that go?</li>
+            <li>Was there anything you couldn't say — or that came out wrong? <span class="probe">Push gently for a concrete example. This is the heart of A2.</span></li>
+            <li>If someone offered you support from a person who spoke your language and had lived what you've lived — how would that be different, if at all? <span class="probe">The one near-hypothetical worth asking. Watch their face, not just the words.</span></li>
+          </ol>
+        </div>
+
+        <div class="qgroup">
+          <p class="gt">Work and energy <span class="tests">tests the productivity throughline</span></p>
+          <ol start="18">
+            <li>Has any of this ever affected your work or study? Tell me about a specific time.</li>
+            <li>Has your employer ever offered anything for wellbeing? Did you use it? Why or why not?</li>
+          </ol>
+        </div>
+
+        <div class="qgroup">
+          <p class="gt">Close</p>
+          <ol start="20">
+            <li>Is there anything I should have asked and didn't?</li>
+            <li>Who else should I talk to?</li>
+          </ol>
+        </div>
+
+        <div class="listen">
+          <p class="ll">Listen for</p>
+          <p>The pain named <b>before you introduce it</b> · a specific dated event, not a generalisation · money or time already spent · an example of something they <b>could not say</b> in a second language · an employer benefit that went unused because it didn't fit them.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EMPLOYER -->
+  <div class="sec">
+    <p class="eyebrow">Script 2 of 3</p>
+    <h2>Employer buyer interview</h2>
+    <p class="sub">30–40 minutes. Target HR, People, D&amp;I or Operations leads at employers with <b>multicultural workforces</b> — logistics, manufacturing, food processing, facilities, large care cooperatives. This is where the revenue is, and A4/A5 are where the venture most plausibly fails.</p>
+
+    <div class="segblk employer" style="--sc:var(--employer)">
+      <div class="sh"><h3>Employer buyers</h3><span class="cnt">Target: 8–12</span></div>
+      <div class="sb">
+        <p class="blk">Screener — recruit if</p>
+        <div class="screener">
+          <ul>
+            <li>Employer has a significant share of foreign-born workers <em>(ideally in Wave 1 language communities)</em></li>
+            <li>50+ employees, with an actual HR or People function</li>
+            <li>Contact influences or owns wellbeing, welfare, D&amp;I or retention</li>
+            <li>Based in Italy — prioritise the North, where ~58% of foreign residents live</li>
+          </ul>
+        </div>
+
+        <div class="qgroup">
+          <p class="gt">Their world <span class="tests">warm-up</span></p>
+          <ol>
+            <li>Tell me about your workforce — who works here, and how has that changed?</li>
+            <li>What are your biggest people problems right now? <span class="probe">Open. Do not seed "wellbeing" or "integration". What they say first is the finding.</span></li>
+          </ol>
+        </div>
+
+        <div class="qgroup">
+          <p class="gt">The pain, quantified <span class="tests">tests A4 — sharpest knife</span></p>
+          <ol start="3">
+            <li>What's your turnover like? Does it differ between groups of workers?</li>
+            <li>How long does someone take to become fully productive? Does that vary?</li>
+            <li>What does it cost you when someone leaves in the first year? <span class="probe">Push for a number. If they don't have one, that itself is a finding about A4.</span></li>
+            <li>Absence, conflict, engagement scores — do any of those break down differently across your workforce?</li>
+            <li>Who owns that problem internally? <span class="probe">If nobody owns it, there is no buyer. Critical.</span></li>
+            <li>Have you tried anything to fix it? What happened?</li>
+          </ol>
+        </div>
+
+        <div class="qgroup">
+          <p class="gt">Budget and buying <span class="tests">tests A5</span></p>
+          <ol start="9">
+            <li>What do you currently spend on wellbeing, welfare or training? <span class="probe">Italy's welfare aziendale regime is tax-advantaged — ask whether they use it.</span></li>
+            <li>Walk me through how the last thing like that got bought. Who signed it off? <span class="probe">The real buying process, from a real past purchase.</span></li>
+            <li>When does your budget cycle run?</li>
+            <li>What would make this a priority this year rather than next?</li>
+            <li>What would stop it happening, even if you personally wanted it?</li>
+          </ol>
+        </div>
+
+        <div class="qgroup">
+          <p class="gt">Privacy and trust</p>
+          <ol start="14">
+            <li>If you offered something like this, what would you want to see back? <span class="probe">Tests whether aggregate-only reporting is acceptable, or whether they expect individual data we will never provide.</span></li>
+            <li>Have your workers ever declined to use a benefit? Do you know why?</li>
+          </ol>
+        </div>
+
+        <div class="qgroup">
+          <p class="gt">Close — the commitment ask</p>
+          <ol start="16">
+            <li>If we ran a pilot with a small group of your workers, would you want to be involved? <span class="probe">Then ask for something real: a follow-up meeting with the budget owner, or a letter of intent. Enthusiasm without a next step is a no.</span></li>
+          </ol>
+        </div>
+
+        <div class="listen">
+          <p class="ll">Listen for</p>
+          <p>A <b>number attached</b> to the pain · a <b>named owner</b> of the problem · a real past purchase you can trace · budget cycle timing · and above all, willingness to <b>commit something</b> — time, a meeting, an LOI. Warm words with no next step means A5 has failed, however friendly the conversation.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FACILITATOR -->
+  <div class="sec">
+    <p class="eyebrow">Script 3 of 3</p>
+    <h2>Facilitator interview</h2>
+    <p class="sub">30 minutes. Lighter pass this round — supply matters, but demand is the gate. Recruit in Wave 1 languages: Arabic and Romanian.</p>
+
+    <div class="segblk facil" style="--sc:var(--facil)">
+      <div class="sh"><h3>Facilitators</h3><span class="cnt">Target: 5–8</span></div>
+      <div class="sb">
+        <p class="blk">Screener — recruit if</p>
+        <div class="screener">
+          <ul>
+            <li>Native or near-native in a Wave 1 language <em>(Arabic or Romanian)</em></li>
+            <li>Has lived the migration or adaptation experience themselves</li>
+            <li>Background in coaching, counselling, social work, community work, mediation or teaching</li>
+            <li>Currently in Italy, or able to work with members in Italian time zones</li>
+          </ul>
+        </div>
+
+        <div class="qgroup">
+          <p class="gt">Background <span class="tests">tests A6</span></p>
+          <ol>
+            <li>Tell me about the work you do now.</li>
+            <li>How did you come to work with people from your own community?</li>
+            <li>What kinds of things do people bring to you?</li>
+          </ol>
+        </div>
+
+        <div class="qgroup">
+          <p class="gt">The work itself <span class="tests">tests A7</span></p>
+          <ol start="4">
+            <li>Do people come to you before things get serious, or after? <span class="probe">Directly tests whether the preventive middle space is real in practice.</span></li>
+            <li>Where do you draw the line between support and clinical care?</li>
+            <li>What do you do when someone needs more than you can give?</li>
+          </ol>
+        </div>
+
+        <div class="qgroup">
+          <p class="gt">Viability <span class="tests">tests A6</span></p>
+          <ol start="7">
+            <li>How do you currently get paid for this kind of work?</li>
+            <li>What would a session need to pay for it to be worth your time?</li>
+            <li>How many hours a week could you realistically offer?</li>
+            <li>What would make you say no to a platform like this? <span class="probe">Invites honest objections rather than agreement.</span></li>
+            <li>Do you know others doing similar work in your community? How many? <span class="probe">Tests whether supply can scale beyond individuals.</span></li>
+          </ol>
+        </div>
+
+        <div class="listen">
+          <p class="ll">Listen for</p>
+          <p>A viable <b>rate expectation</b> · realistic available hours · evidence that people <b>do</b> come before crisis (A7) · a healthy instinct about the clinical boundary · and whether there is a <b>pool</b> of similar people, or just this one exceptional individual.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOTE TEMPLATE -->
+  <div class="sec">
+    <p class="eyebrow">Capture</p>
+    <h2>Per-interview note template</h2>
+    <p class="sub">Fill this in within an hour of each interview, while it's fresh. Verbatim quotes are worth more than summaries — you will need their exact words later, both for the scorecard and for product copy.</p>
+    <div class="tmpl">
+      <div class="row"><span class="fl">Date / interviewer</span><span class="fv">—</span></div>
+      <div class="row"><span class="fl">Segment</span><span class="fv">End user · Employer · Facilitator</span></div>
+      <div class="row"><span class="fl">Language used</span><span class="fv">Which language the interview was actually conducted in</span></div>
+      <div class="row"><span class="fl">Profile</span><span class="fv">Community, years in Italy, sector, role — no names, no immigration status</span></div>
+      <div class="row"><span class="fl">Pain raised unprompted?</span><span class="fv">Yes / No — and at what point in the conversation</span></div>
+      <div class="row"><span class="fl">Specific event described</span><span class="fv">The concrete story they told, dated if possible</span></div>
+      <div class="row"><span class="fl">What they already did</span><span class="fv">Searched, paid, asked, avoided — and what it cost them</span></div>
+      <div class="row"><span class="fl">Verbatim quotes</span><span class="fv">2–4 exact sentences. Their words, not your paraphrase</span></div>
+      <div class="row"><span class="fl">Assumption evidence</span><span class="fv">A1–A7: which were supported, which contradicted, which never came up</span></div>
+      <div class="row"><span class="fl">Surprises</span><span class="fv">Anything that contradicted what we expected — the most valuable line here</span></div>
+      <div class="row"><span class="fl">Commitment given</span><span class="fv">Follow-up, intro, LOI, pilot interest — or nothing</span></div>
+      <div class="row"><span class="fl">Next step</span><span class="fv">—</span></div>
+    </div>
+  </div>
+
+  <!-- SCORECARD -->
+  <div class="sec">
+    <p class="eyebrow">Aggregate</p>
+    <h2>A1–A7 assumption scorecard</h2>
+    <p class="sub">Update after each wave of ~5 interviews per segment. Stop interviewing when the answers stop surprising you — that is saturation, and it usually arrives sooner than expected.</p>
+    <table class="sc">
+      <thead><tr><th>#</th><th>Assumption</th><th>Evidence required to call it validated</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td class="a">A1</td><td>Recurring emotional strain</td><td>Most end users describe a <em>recurring</em> pattern with a specific recent instance</td><td><span class="state n">Not started</span></td></tr>
+        <tr><td class="a">A2</td><td>Language/culture is the barrier</td><td>Multiple concrete examples of something they could not express in a second language</td><td><span class="state n">Not started</span></td></tr>
+        <tr><td class="a">A3</td><td>Costly and already acted on</td><td>Evidence of prior searching, spending or effort — not just stated intent</td><td><span class="state n">Not started</span></td></tr>
+        <tr><td class="a">A4</td><td>Quantified employer pain</td><td>At least a few employers give a <em>number</em> and a <em>named owner</em></td><td><span class="state n">Not started</span></td></tr>
+        <tr><td class="a">A5</td><td>Budget, buyer, process</td><td>A traceable past purchase, a named signer, and a budget cycle</td><td><span class="state n">Not started</span></td></tr>
+        <tr><td class="a">A6</td><td>Facilitators recruitable</td><td>5–8 viable candidates in Wave 1 languages at workable rates</td><td><span class="state n">Not started</span></td></tr>
+        <tr><td class="a">A7</td><td>The middle space is real</td><td>Both members and facilitators recognise pre-clinical support as legitimate</td><td><span class="state n">Not started</span></td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:11.5px;color:var(--ink-faint);margin:12px 0 0;font-style:italic">States: <span class="state n">Not started</span> <span class="state m">Mixed</span> <span class="state v">Validated</span> <span class="state x">Invalidated</span> — record honestly. An invalidated assumption found now is worth more than a product built on it.</p>
+  </div>
+
+  <!-- ETHICS -->
+  <div class="sec">
+    <p class="eyebrow">Non-negotiable</p>
+    <h2>Ethical guardrails</h2>
+    <div class="eth">
+      <div class="ec"><p class="et">This is not therapy</p><p>Do not diagnose, do not probe trauma. If someone becomes distressed, stop the interview, stay with them warmly, and signpost real support. The interview is never more important than the person.</p></div>
+      <div class="ec"><p class="et">Never ask about legal status</p><p>Do not collect or record immigration or residency status under any circumstances. It is irrelevant to the research and dangerous to hold.</p></div>
+      <div class="ec"><p class="et">Mother tongue where possible</p><p>Interviewing in a second language about emotional strain distorts the very thing being studied. Use interpreters from the community where needed.</p></div>
+      <div class="ec"><p class="et">Consent is revocable</p><p>Informed, voluntary, and withdrawable at any time — including after the interview. No names in notes. No recordings without explicit permission.</p></div>
+    </div>
+  </div>
+
+  <!-- GATE -->
+  <div class="sec">
+    <p class="eyebrow">Phase 1 exit</p>
+    <h2>When discovery is done</h2>
+    <div class="gate">
+      <h3>Proceed to Phase 2 only when all of these hold:</h3>
+      <ul>
+        <li><svg width="15" height="15" viewBox="0 0 12 12"><path d="M2 6.5L5 9.5L10 3" stroke="#0a4f4b" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><b>A1–A3 validated</b> with end users — the strain is real, language is the barrier, and they have already acted.</li>
+        <li><svg width="15" height="15" viewBox="0 0 12 12"><path d="M2 6.5L5 9.5L10 3" stroke="#0a4f4b" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><b>A4–A5 supported</b> by at least a few employers with a costed pain, a budget owner, and genuine pilot interest.</li>
+        <li><svg width="15" height="15" viewBox="0 0 12 12"><path d="M2 6.5L5 9.5L10 3" stroke="#0a4f4b" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>At least one <b>signed letter of intent</b> from a pilot employer.</li>
+        <li><svg width="15" height="15" viewBox="0 0 12 12"><path d="M2 6.5L5 9.5L10 3" stroke="#0a4f4b" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><b>A6 plausible</b> — 5–10 vetted facilitators ready in Wave 1 languages.</li>
+      </ul>
+      <div class="forks">
+        <div class="fork"><p class="ft">If demand validates but no buyer appears</p><p>Iterate the business model. Do <b>not</b> start building. A product with users and no payer is not a venture.</p></div>
+        <div class="fork"><p class="ft">If the pain does not surface unprompted</p><p>Pause and reframe the problem. The premise itself needs rework before any design continues.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span class="note">Recruiting priority follows the Community &amp; Language Strategy (S TA 2.B): Wave 1 is Arabic and Romanian, the two launch languages. Widen to Wave 2 communities only after the Wave 1 picture is clear.</span>
+    <span class="tag2">Tamia4Life · AZM Venture Portfolio</span>
+  </div>
+
+</div>
+</body>
+</html>

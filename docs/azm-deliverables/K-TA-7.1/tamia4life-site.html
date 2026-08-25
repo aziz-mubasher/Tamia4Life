@@ -491,6 +491,16 @@ section{border-bottom:1px solid var(--line-soft);}
   display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
   font-size:11.5px;color:var(--text-faint);
 }
+.legal .mundida-credit a{color:var(--text-soft);text-decoration:underline;text-underline-offset:2px;}
+.legal .mundida-credit a:hover{color:var(--brand);}
+.foot .lang-switch{margin-top:2px;}
+.gate-strip{
+  margin-top:22px;padding:16px 18px;border-radius:12px;
+  border:1px solid var(--line);background:var(--accent-wash);
+  font-size:14px;color:var(--text-soft);
+}
+.gate-strip b{color:var(--text);}
+.gate-strip .ref{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--amber-ink);margin:0 0 6px;}
 </style>
 </head>
 <body>
@@ -818,6 +828,10 @@ section{border-bottom:1px solid var(--line-soft);}
       <p class="eyebrow" data-i18n="part.eyebrow">Take part</p>
       <h2 data-i18n="part.h2">The most useful thing you can give us right now is forty minutes.</h2>
       <p data-i18n="part.rail">Not money, not a sign-up. A conversation. This is the phase where being told we are wrong is worth more than being told we are right.</p>
+      <div class="gate-strip">
+        <p class="ref" data-i18n="gate.ref">Phase 1 gate · S TA 1.1</p>
+        <p data-i18n-html="gate.body"><b>Not met.</b> Zero interviews have been run. The next work is 15–20 conversations with residents of foreign origin and a handful with employers who run multilingual floors. Nothing else ships until that is done.</p>
+      </div>
     </div>
     <div class="body-col">
       <div class="cta-pair">
@@ -894,8 +908,17 @@ section{border-bottom:1px solid var(--line-soft);}
         <h5 data-i18n="foot.contact">Contact</h5>
         <ul>
           <li><a href="mailto:hello@tamia4life.it">hello@tamia4life.it</a></li>
+          <li><a href="https://wa.me/393277764333" target="_blank" rel="noopener">WhatsApp</a></li>
           <li><a href="#data" data-i18n="foot.data">How we handle information</a></li>
         </ul>
+      </div>
+      <div>
+        <h5 data-i18n="foot.langs">Languages</h5>
+        <div class="lang-switch" role="group" data-i18n-aria="ui.langGroup" aria-label="Language">
+          <button type="button" data-lang-set="en" aria-pressed="true">EN</button>
+          <button type="button" data-lang-set="it" aria-pressed="false">IT</button>
+          <button type="button" data-lang-set="es" aria-pressed="false">ES</button>
+        </div>
       </div>
     </div>
 
@@ -904,7 +927,10 @@ section{border-bottom:1px solid var(--line-soft);}
     </div>
 
     <div class="legal">
-      <span data-i18n="foot.legal">Tamia4Life · in development · Provincia di Brescia, Regione Lombardia · legal vehicle not yet constituted</span>
+      <span>
+        <span data-i18n="foot.legal">Tamia4Life · in development · Provincia di Brescia, Regione Lombardia · legal vehicle not yet constituted</span>
+        <span class="mundida-credit"> · Made with ❤️ in Italy by <a href="https://www.mundida.com/">MUNDIDA</a></span>
+      </span>
       <span data-i18n="foot.offer">Nothing on this page is an offer of a service that is currently available.</span>
     </div>
   </div>
@@ -1075,7 +1101,10 @@ section{border-bottom:1px solid var(--line-soft);}
       "foot.lanes": "Three lanes",
       "foot.orgs": "Organisations",
       "foot.contact": "Contact",
+      "foot.langs": "Languages",
       "foot.data": "How we handle information",
+      "gate.ref": "Phase 1 gate · S TA 1.1",
+      "gate.body": "<b>Not met.</b> Zero interviews have been run. The next work is 15–20 conversations with residents of foreign origin and a handful with employers who run multilingual floors. Nothing else ships until that is done.",
       "foot.safety": "<b>If you need medical or psychological care, this is not the place to look for it — yet.</b> Tamia4Life is a non-clinical service and is not a substitute for the health system. If you are unwell or in difficulty, speak to your <em>medico di base</em> or contact your local ASST. In an emergency, call <b>112</b>. Where an individual clinical pathway becomes part of what we offer, it will be delivered by a psychologist registered with the Ordine degli Psicologi, under their own registration, and will say so on the page.",
       "foot.legal": "Tamia4Life · in development · Provincia di Brescia, Regione Lombardia · legal vehicle not yet constituted",
       "foot.offer": "Nothing on this page is an offer of a service that is currently available.",
@@ -1225,7 +1254,10 @@ section{border-bottom:1px solid var(--line-soft);}
       "foot.lanes": "Tre corsie",
       "foot.orgs": "Organizzazioni",
       "foot.contact": "Contatti",
+      "foot.langs": "Lingue",
       "foot.data": "Come trattiamo i dati",
+      "gate.ref": "Gate Fase 1 · S TA 1.1",
+      "gate.body": "<b>Non superato.</b> Non è stata fatta nessuna intervista. Il prossimo lavoro sono 15–20 conversazioni con residenti di origine straniera e alcune con datori di lavoro che gestiscono turni multilingue. Nient'altro viene pubblicato finché questo non è fatto.",
       "foot.safety": "<b>Se hai bisogno di un medico o di uno psicologo, questo non è il posto dove cercarlo — per ora.</b> Tamia4Life è un servizio non clinico e non sostituisce il sistema sanitario. Se non stai bene o sei in difficoltà, parla con il tuo <em>medico di base</em> o contatta la tua ASST. In emergenza, chiama il <b>112</b>. Quando un percorso clinico individuale farà parte di ciò che offriamo, sarà erogato da uno psicologo iscritto all'Ordine degli Psicologi, sotto la propria iscrizione, e lo dirà sulla pagina.",
       "foot.legal": "Tamia4Life · in sviluppo · Provincia di Brescia, Regione Lombardia · veicolo giuridico non ancora costituito",
       "foot.offer": "Nulla in questa pagina è l'offerta di un servizio oggi disponibile.",
@@ -1375,7 +1407,10 @@ section{border-bottom:1px solid var(--line-soft);}
       "foot.lanes": "Tres carriles",
       "foot.orgs": "Organizaciones",
       "foot.contact": "Contacto",
+      "foot.langs": "Idiomas",
       "foot.data": "Cómo tratamos la información",
+      "gate.ref": "Gate Fase 1 · S TA 1.1",
+      "gate.body": "<b>No superada.</b> No se ha hecho ninguna entrevista. El siguiente trabajo son 15–20 conversaciones con residentes de origen extranjero y unas cuantas con empleadores que gestionan turnos multilingües. No se publica nada más hasta que esto esté hecho.",
       "foot.safety": "<b>Si necesitas un médico o un psicólogo, este no es el sitio donde buscarlo — todavía.</b> Tamia4Life es un servicio no clínico y no sustituye al sistema sanitario. Si no te encuentras bien o estás en dificultad, habla con tu <em>medico di base</em> o contacta tu ASST local. En una emergencia, llama al <b>112</b>. Cuando un itinerario clínico individual forme parte de lo que ofrecemos, lo prestará un psicólogo inscrito en el Ordine degli Psicologi, bajo su propia colegiación, y así constará en la página.",
       "foot.legal": "Tamia4Life · en desarrollo · Provincia di Brescia, Regione Lombardia · vehículo jurídico aún no constituido",
       "foot.offer": "Nada en esta página es la oferta de un servicio disponible hoy.",

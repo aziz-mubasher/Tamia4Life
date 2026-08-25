@@ -10,7 +10,9 @@
     "compliance/",
     "scripts/lint-banned-words.py",
     ".github/workflows/banned-words.yml",
-    "docs/azm-deliverables/K-TA-7.1/COPY-AUDIT.md"
+    "docs/azm-deliverables/K-TA-7.1/COPY-AUDIT.md",
+    "docs/azm-deliverables/S-TA-1.1/",
+    "discovery/"
   ],
   "audited_surfaces": {
     "docs/azm-deliverables/K-TA-7.1/tamia4life-site.html": {

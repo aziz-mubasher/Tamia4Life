@@ -9,6 +9,8 @@ R&D decision: **CLAUDE.md §5 wins over the Business Plan Summary register.**
 
 The page UI is English by default, with Italian and Spanish packs applied in-browser (`data-i18n` / `t4l-lang`). The language wall (fourteen welcome lines) is unchanged and is not a UI locale.
 
+Footer legal bar includes the shared studio credit, exact English, not translated: `Made with ❤️ in Italy by MUNDIDA` → https://www.mundida.com/. Tamia4Life has no legal vehicle yet, so this page does **not** claim P.IVA IT04531990986 as its own.
+
 | Term | Occurrences | Verdict |
 |---|---|---|
 | `psychologist` / `psychologists` | EN pack + Lane A / safety | Permitted — §5.3 Lane A usage, Albo named each time |

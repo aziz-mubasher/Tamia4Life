@@ -18,7 +18,11 @@ Lead with **integrazione**.
 Public site v1 (discovery instrumentation, not a live offer):
 [docs/azm-deliverables/K-TA-7.1/tamia4life-site.html](docs/azm-deliverables/K-TA-7.1/tamia4life-site.html)
 — open in a browser. No build step. English default; Italian and Spanish
-UI locales; light theme on/off (persisted in the browser).
+UI locales; light theme on/off (persisted in the browser). Footer credit:
+Made with ❤️ in Italy by [MUNDIDA](https://www.mundida.com/).
+
+Phase 1 gate (S TA 1.1) is **not met**. Field kit:
+[discovery/README.md](discovery/README.md). Public recruiting is `#take-part` on the site.
 
 Intended host: https://tamia4life.com/ (VPS + Traefik). Public DNS must point
 apex/`www` at `82.25.97.164` — see `deploy/vps/README.md`. Until then the
