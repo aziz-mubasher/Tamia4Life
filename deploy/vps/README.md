@@ -20,10 +20,11 @@ In Hostinger: switch the domain off parking DNS onto normal Hostinger DNS (or Cl
 From the repo root (or this folder after rsync to `/opt/tamia4life` on the VPS):
 
 ```bash
-mkdir -p deploy/vps/html
-cp docs/azm-deliverables/K-TA-7.1/tamia4life-site.html deploy/vps/html/index.html
+deploy/vps/sync-html.sh
 cd deploy/vps
 docker compose up -d
 ```
+
+`sync-html.sh` copies the canonical HTML plus `favicon.svg`, `favicon.ico`, and `apple-touch-icon.png` into `html/`.
 
 Do not add a form to this page. Mailbox `hello@tamia4life.it` is still a placeholder.
