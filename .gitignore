@@ -1,2 +1,5 @@
-# Generated nginx copy — canonical file is docs/azm-deliverables/K-TA-7.1/tamia4life-site.html
+# Generated nginx copy — canonical files live in docs/azm-deliverables/K-TA-7.1/
 deploy/vps/html/index.html
+deploy/vps/html/favicon.svg
+deploy/vps/html/favicon.ico
+deploy/vps/html/apple-touch-icon.png
