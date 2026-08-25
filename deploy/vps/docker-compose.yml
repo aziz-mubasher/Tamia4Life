@@ -18,11 +18,13 @@ services:
     labels:
       - traefik.enable=true
       - traefik.docker.network=root_default
-      - traefik.http.routers.tamia4life.rule=Host(`tamia4life.com`) || Host(`www.tamia4life.com`)
-      - traefik.http.routers.tamia4life.entrypoints=websecure
-      - traefik.http.routers.tamia4life.tls=true
-      - traefik.http.routers.tamia4life.tls.certresolver=mytlschallenge
-      - traefik.http.routers.tamia4life.service=tamia4life
+      - traefik.http.routers.tamia4life-pub.rule=Host(`tamia4life.com`) || Host(`www.tamia4life.com`)
+      - traefik.http.routers.tamia4life-pub.entrypoints=websecure
+      - traefik.http.routers.tamia4life-pub.tls=true
+      - traefik.http.routers.tamia4life-pub.tls.certresolver=mytlschallenge
+      - traefik.http.routers.tamia4life-pub.tls.domains[0].main=tamia4life.com
+      - traefik.http.routers.tamia4life-pub.tls.domains[0].sans=www.tamia4life.com
+      - traefik.http.routers.tamia4life-pub.service=tamia4life
       - traefik.http.services.tamia4life.loadbalancer.server.port=80
 
 networks:
